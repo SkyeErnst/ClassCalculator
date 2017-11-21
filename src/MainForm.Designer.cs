@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
+            this.numAssignmentsLabel = new System.Windows.Forms.Label();
             this.assignmentNameLabel = new System.Windows.Forms.Label();
             this.gradeLabel = new System.Windows.Forms.Label();
             this.percentOfTotalGradeLabel = new System.Windows.Forms.Label();
@@ -40,26 +40,29 @@
             this.gradeRangeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
+            this.generateFormButton = new System.Windows.Forms.Button();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
-            // label1
+            // numAssignmentsLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(11, 28);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(179, 20);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Number of Assignments";
+            this.numAssignmentsLabel.AutoSize = true;
+            this.numAssignmentsLabel.Location = new System.Drawing.Point(15, 25);
+            this.numAssignmentsLabel.Name = "numAssignmentsLabel";
+            this.numAssignmentsLabel.Size = new System.Drawing.Size(179, 20);
+            this.numAssignmentsLabel.TabIndex = 1;
+            this.numAssignmentsLabel.Text = "Number of Assignments";
+            this.numAssignmentsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // assignmentNameLabel
             // 
             this.assignmentNameLabel.AutoSize = true;
-            this.assignmentNameLabel.Location = new System.Drawing.Point(12, 129);
+            this.assignmentNameLabel.Location = new System.Drawing.Point(15, 129);
             this.assignmentNameLabel.Name = "assignmentNameLabel";
             this.assignmentNameLabel.Size = new System.Drawing.Size(139, 20);
             this.assignmentNameLabel.TabIndex = 3;
             this.assignmentNameLabel.Text = "Assignment Name";
+            this.assignmentNameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // gradeLabel
             // 
@@ -69,21 +72,23 @@
             this.gradeLabel.Size = new System.Drawing.Size(54, 20);
             this.gradeLabel.TabIndex = 4;
             this.gradeLabel.Text = "Grade";
+            this.gradeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // percentOfTotalGradeLabel
             // 
             this.percentOfTotalGradeLabel.AutoSize = true;
-            this.percentOfTotalGradeLabel.Location = new System.Drawing.Point(314, 129);
+            this.percentOfTotalGradeLabel.Location = new System.Drawing.Point(315, 129);
             this.percentOfTotalGradeLabel.Name = "percentOfTotalGradeLabel";
             this.percentOfTotalGradeLabel.Size = new System.Drawing.Size(170, 20);
             this.percentOfTotalGradeLabel.TabIndex = 5;
             this.percentOfTotalGradeLabel.Text = "Percent of Total Grade";
+            this.percentOfTotalGradeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // assignmentNumberInput
             // 
             this.assignmentNumberInput.AsciiOnly = true;
             this.assignmentNumberInput.BeepOnError = true;
-            this.assignmentNumberInput.Location = new System.Drawing.Point(219, 27);
+            this.assignmentNumberInput.Location = new System.Drawing.Point(210, 25);
             this.assignmentNumberInput.Mask = "000";
             this.assignmentNumberInput.Name = "assignmentNumberInput";
             this.assignmentNumberInput.Size = new System.Drawing.Size(34, 26);
@@ -144,16 +149,28 @@
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "menuStrip1";
             // 
+            // generateFormButton
+            // 
+            this.generateFormButton.Location = new System.Drawing.Point(260, 25);
+            this.generateFormButton.Name = "generateFormButton";
+            this.generateFormButton.Size = new System.Drawing.Size(128, 29);
+            this.generateFormButton.TabIndex = 7;
+            this.generateFormButton.Text = "Generate Form";
+            this.generateFormButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.generateFormButton.UseVisualStyleBackColor = true;
+            this.generateFormButton.Click += new System.EventHandler(this.generateButtonClick);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1264, 681);
+            this.Controls.Add(this.generateFormButton);
             this.Controls.Add(this.assignmentNumberInput);
             this.Controls.Add(this.percentOfTotalGradeLabel);
             this.Controls.Add(this.gradeLabel);
             this.Controls.Add(this.assignmentNameLabel);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.numAssignmentsLabel);
             this.Controls.Add(this.menuStrip);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MainMenuStrip = this.menuStrip;
@@ -168,7 +185,7 @@
         }
 
         #endregion
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label numAssignmentsLabel;
         private System.Windows.Forms.Label assignmentNameLabel;
         private System.Windows.Forms.Label gradeLabel;
         private System.Windows.Forms.Label percentOfTotalGradeLabel;
@@ -180,6 +197,7 @@
         private System.Windows.Forms.ToolStripMenuItem gradeRangeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem1;
         private System.Windows.Forms.MenuStrip menuStrip;
+        private System.Windows.Forms.Button generateFormButton;
     }
 }
 
