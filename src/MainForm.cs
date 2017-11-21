@@ -50,13 +50,25 @@ namespace ClassCalculater
                 this.Controls.Add(textBoxes[i]);
             }
 
+            int yOffset = 20; //This is how far down each control will be from eachother
+            int loopCount = 0;
             Point[] xStart;
             xStart = new Point[3];
             xStart[0] = assignmentNameLabel.Location;
+            xStart[1] = gradeLabel.Location;
+            xStart[2] = percentOfTotalGradeLabel.Location;
 
             for (int i = 0; i < numberOfAssignments; i++)
             {
-                
+                if (2 == loopCount)
+                {
+                    yOffset += 20;
+                    loopCount = 0;
+                }
+
+                textBoxes[i].Location = xStart[loopCount];
+
+                loopCount++;
             }
 
         }
