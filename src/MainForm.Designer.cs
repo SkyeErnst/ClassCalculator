@@ -41,6 +41,14 @@
             this.editToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.generateFormButton = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.calcGradeButton = new System.Windows.Forms.Button();
+            this.letterGradeLabel = new System.Windows.Forms.Label();
+            this.numberGradeLabel = new System.Windows.Forms.Label();
+            this.letterGrade = new System.Windows.Forms.Label();
+            this.numberGrade = new System.Windows.Forms.Label();
+            this.unweightedAverageLabel = new System.Windows.Forms.Label();
+            this.unweightedAverage = new System.Windows.Forms.Label();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -67,7 +75,7 @@
             // gradeLabel
             // 
             this.gradeLabel.AutoSize = true;
-            this.gradeLabel.Location = new System.Drawing.Point(215, 129);
+            this.gradeLabel.Location = new System.Drawing.Point(190, 129);
             this.gradeLabel.Name = "gradeLabel";
             this.gradeLabel.Size = new System.Drawing.Size(54, 20);
             this.gradeLabel.TabIndex = 4;
@@ -77,7 +85,7 @@
             // percentOfTotalGradeLabel
             // 
             this.percentOfTotalGradeLabel.AutoSize = true;
-            this.percentOfTotalGradeLabel.Location = new System.Drawing.Point(315, 129);
+            this.percentOfTotalGradeLabel.Location = new System.Drawing.Point(331, 129);
             this.percentOfTotalGradeLabel.Name = "percentOfTotalGradeLabel";
             this.percentOfTotalGradeLabel.Size = new System.Drawing.Size(170, 20);
             this.percentOfTotalGradeLabel.TabIndex = 5;
@@ -153,18 +161,101 @@
             // 
             this.generateFormButton.Location = new System.Drawing.Point(260, 25);
             this.generateFormButton.Name = "generateFormButton";
-            this.generateFormButton.Size = new System.Drawing.Size(128, 29);
+            this.generateFormButton.Size = new System.Drawing.Size(128, 30);
             this.generateFormButton.TabIndex = 7;
             this.generateFormButton.Text = "Generate Form";
             this.generateFormButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.generateFormButton.UseVisualStyleBackColor = true;
             this.generateFormButton.Click += new System.EventHandler(this.generateButtonClick);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(394, 25);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(107, 30);
+            this.button1.TabIndex = 8;
+            this.button1.Text = "Clear Form";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.ClearFormClick);
+            // 
+            // calcGradeButton
+            // 
+            this.calcGradeButton.Location = new System.Drawing.Point(593, 120);
+            this.calcGradeButton.Name = "calcGradeButton";
+            this.calcGradeButton.Size = new System.Drawing.Size(140, 30);
+            this.calcGradeButton.TabIndex = 9;
+            this.calcGradeButton.Text = "Calculate Grade";
+            this.calcGradeButton.UseVisualStyleBackColor = true;
+            this.calcGradeButton.Click += new System.EventHandler(this.CalcGradeButtonClick);
+            // 
+            // letterGradeLabel
+            // 
+            this.letterGradeLabel.AutoSize = true;
+            this.letterGradeLabel.Location = new System.Drawing.Point(633, 176);
+            this.letterGradeLabel.Name = "letterGradeLabel";
+            this.letterGradeLabel.Size = new System.Drawing.Size(100, 20);
+            this.letterGradeLabel.TabIndex = 10;
+            this.letterGradeLabel.Text = "Letter Grade";
+            // 
+            // numberGradeLabel
+            // 
+            this.numberGradeLabel.AutoSize = true;
+            this.numberGradeLabel.Location = new System.Drawing.Point(836, 176);
+            this.numberGradeLabel.Name = "numberGradeLabel";
+            this.numberGradeLabel.Size = new System.Drawing.Size(114, 20);
+            this.numberGradeLabel.TabIndex = 11;
+            this.numberGradeLabel.Text = "Number Grade";
+            // 
+            // letterGrade
+            // 
+            this.letterGrade.AutoSize = true;
+            this.letterGrade.Location = new System.Drawing.Point(589, 196);
+            this.letterGrade.Name = "letterGrade";
+            this.letterGrade.Size = new System.Drawing.Size(169, 20);
+            this.letterGrade.TabIndex = 12;
+            this.letterGrade.Text = "Waiting for Generation";
+            // 
+            // numberGrade
+            // 
+            this.numberGrade.AutoSize = true;
+            this.numberGrade.Location = new System.Drawing.Point(809, 196);
+            this.numberGrade.Name = "numberGrade";
+            this.numberGrade.Size = new System.Drawing.Size(169, 20);
+            this.numberGrade.TabIndex = 14;
+            this.numberGrade.Text = "Waiting for Generation";
+            // 
+            // unweightedAverageLabel
+            // 
+            this.unweightedAverageLabel.AutoSize = true;
+            this.unweightedAverageLabel.Location = new System.Drawing.Point(1051, 176);
+            this.unweightedAverageLabel.Name = "unweightedAverageLabel";
+            this.unweightedAverageLabel.Size = new System.Drawing.Size(157, 20);
+            this.unweightedAverageLabel.TabIndex = 15;
+            this.unweightedAverageLabel.Text = "Unweighted Average";
+            // 
+            // unweightedAverage
+            // 
+            this.unweightedAverage.AutoSize = true;
+            this.unweightedAverage.Location = new System.Drawing.Point(1051, 196);
+            this.unweightedAverage.Name = "unweightedAverage";
+            this.unweightedAverage.Size = new System.Drawing.Size(169, 20);
+            this.unweightedAverage.TabIndex = 16;
+            this.unweightedAverage.Text = "Waiting for Generation";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1264, 681);
+            this.Controls.Add(this.unweightedAverage);
+            this.Controls.Add(this.unweightedAverageLabel);
+            this.Controls.Add(this.numberGrade);
+            this.Controls.Add(this.letterGrade);
+            this.Controls.Add(this.numberGradeLabel);
+            this.Controls.Add(this.letterGradeLabel);
+            this.Controls.Add(this.calcGradeButton);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.generateFormButton);
             this.Controls.Add(this.assignmentNumberInput);
             this.Controls.Add(this.percentOfTotalGradeLabel);
@@ -198,6 +289,14 @@
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem1;
         private System.Windows.Forms.MenuStrip menuStrip;
         private System.Windows.Forms.Button generateFormButton;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button calcGradeButton;
+        private System.Windows.Forms.Label letterGradeLabel;
+        private System.Windows.Forms.Label numberGradeLabel;
+        private System.Windows.Forms.Label letterGrade;
+        private System.Windows.Forms.Label numberGrade;
+        private System.Windows.Forms.Label unweightedAverageLabel;
+        private System.Windows.Forms.Label unweightedAverage;
     }
 }
 
