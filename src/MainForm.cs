@@ -42,7 +42,6 @@ namespace ClassCalculater
             {
                 hasGenerated = true;
             }
-            
 
             try
             {
@@ -79,7 +78,7 @@ namespace ClassCalculater
                 {
                     Point tempPoint1 = xStart[j];
                     tempPoint1.Y += yOffset;
-                    textBoxes[j + lineNumber].Location = tempPoint1; 
+                    textBoxes[j + lineNumber].Location = tempPoint1;
                 }
                 lineNumber += 3;
 
@@ -101,7 +100,7 @@ namespace ClassCalculater
         }
 
         private void CalcGradeButtonClick(object sender, EventArgs e)
-        { 
+        {
             string[] nameArray = new string[numberOfAssignments];
             float[] gradeArray = new float[numberOfAssignments];
             float[] percentArray = new float[numberOfAssignments];
@@ -113,6 +112,7 @@ namespace ClassCalculater
             float unweightedTotal = 0;
             float percentSum = 0.0f;
 
+            // Loads information from the text box array into seperate arrays
             for (int i = 0; i < textBoxes.Length; i++)
             {
                 if (i % 3 == 0)
@@ -132,17 +132,13 @@ namespace ClassCalculater
                 }
             }
 
-            
-
+            // Sums grades to display the unweighted grade
             for (int i = 0; i < gradeArray.Length; i++)
             {
                 unweightedTotal += gradeArray[i];
             }
-
             unweightedTotal = unweightedTotal / numberOfAssignments;
-
             unweightedAverage.Text = unweightedTotal.ToString();
-
 
             for (int i = 0; i < percentArray.Length; i++)
             {
@@ -151,7 +147,7 @@ namespace ClassCalculater
 
             if (1.0f < percentSum)
             {
-                MessageBox.Show("Sum of percents is greater than 1. Make sure you typed in the percents correctly.");
+                MessageBox.Show("Sum of weights is greater than 1. Make sure you typed in the percents correctly.");
             }
 
             // see http://members.logical.net/~marshall/uab/howtocalculategrade.html

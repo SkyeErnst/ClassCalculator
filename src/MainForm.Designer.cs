@@ -75,7 +75,7 @@
             // gradeLabel
             // 
             this.gradeLabel.AutoSize = true;
-            this.gradeLabel.Location = new System.Drawing.Point(190, 129);
+            this.gradeLabel.Location = new System.Drawing.Point(206, 130);
             this.gradeLabel.Name = "gradeLabel";
             this.gradeLabel.Size = new System.Drawing.Size(54, 20);
             this.gradeLabel.TabIndex = 4;
@@ -85,11 +85,11 @@
             // percentOfTotalGradeLabel
             // 
             this.percentOfTotalGradeLabel.AutoSize = true;
-            this.percentOfTotalGradeLabel.Location = new System.Drawing.Point(331, 129);
+            this.percentOfTotalGradeLabel.Location = new System.Drawing.Point(352, 129);
             this.percentOfTotalGradeLabel.Name = "percentOfTotalGradeLabel";
-            this.percentOfTotalGradeLabel.Size = new System.Drawing.Size(170, 20);
+            this.percentOfTotalGradeLabel.Size = new System.Drawing.Size(59, 20);
             this.percentOfTotalGradeLabel.TabIndex = 5;
-            this.percentOfTotalGradeLabel.Text = "Percent of Total Grade";
+            this.percentOfTotalGradeLabel.Text = "Weight";
             this.percentOfTotalGradeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // assignmentNumberInput
