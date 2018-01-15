@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Globalization;
 
 namespace ClassCalculater
 {
@@ -16,14 +11,16 @@ namespace ClassCalculater
         #region public fields
 
         public int numberOfAssignments;
-        public TextBox[] textBoxes;
 
         #endregion
 
         #region private fields
 
+        private TextBox[] textBoxes;
         private bool hasGenerated;
+        private static bool debugMode = true;
         private const string DEFAULT_TEXT = "Waiting For Generation";
+
         #endregion
 
         public MainForm()
@@ -35,14 +32,21 @@ namespace ClassCalculater
         {
             if (true == hasGenerated)
             {
-                Console.WriteLine("Clear created content before asking for new content to be generated.");
+                if(true == debugMode)
+                {
+                    Console.WriteLine("Clear created content before asking for new content to be generated.");
+                }
+                else
+                {
+                    MessageBox.Show("Clear created content before asking for new content to be generated.");
+                }
+                
                 return;
             }
             else
             {
                 hasGenerated = true;
             }
-            
 
             try
             {
@@ -79,7 +83,7 @@ namespace ClassCalculater
                 {
                     Point tempPoint1 = xStart[j];
                     tempPoint1.Y += yOffset;
-                    textBoxes[j + lineNumber].Location = tempPoint1; 
+                    textBoxes[j + lineNumber].Location = tempPoint1;
                 }
                 lineNumber += 3;
 
@@ -101,7 +105,7 @@ namespace ClassCalculater
         }
 
         private void CalcGradeButtonClick(object sender, EventArgs e)
-        { 
+        {
             string[] nameArray = new string[numberOfAssignments];
             float[] gradeArray = new float[numberOfAssignments];
             float[] percentArray = new float[numberOfAssignments];
@@ -112,10 +116,8 @@ namespace ClassCalculater
 
             float unweightedTotal = 0;
             float percentSum = 0.0f;
-            float weightedGrade = 0.0f;
 
-            // Seperate the data in the textboxes array into seperate arrays
-            // for easier traversal
+            // Loads information from the text box array into seperate arrays
             for (int i = 0; i < textBoxes.Length; i++)
             {
                 if (i % 3 == 0)
@@ -135,35 +137,26 @@ namespace ClassCalculater
                 }
             }
 
-            
-
+            // Sums grades to display the unweighted grade
             for (int i = 0; i < gradeArray.Length; i++)
             {
                 unweightedTotal += gradeArray[i];
             }
-
             unweightedTotal = unweightedTotal / numberOfAssignments;
+            unweightedAverage.Text = unweightedTotal.ToString(CultureInfo.CurrentCulture);
 
-            // Ensure that the sum of the weights is not greater than 1,
-            // warning if it is
             for (int i = 0; i < percentArray.Length; i++)
             {
                 percentSum += percentArray[i];
             }
+
             if (1.0f < percentSum)
             {
-                MessageBox.Show("Sum of percents is greater than 1. Make sure you typed in the percents correctly.");
+                MessageBox.Show("Sum of weights is greater than 1. Make sure you typed in the percents correctly.");
             }
 
             // see http://members.logical.net/~marshall/uab/howtocalculategrade.html
             // for next steps for algorithum
-
-            for (int i = 0; i < gradeArray.Length; i++)
-            {
-                weightedGrade += gradeArray[i] * percentArray[i];
-            }
-
-            Console.WriteLine("Weighted grade = " + weightedGrade);
         }
     }
 }
