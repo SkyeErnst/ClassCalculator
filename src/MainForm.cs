@@ -173,19 +173,19 @@ namespace ClassCalculater
                 }
 
                 // Finds the letter grade
-                if (69 <= weightedGrade && 60 >= weightedGrade)
+                if (69 >= weightedGrade && 60 <= weightedGrade)
                 {
                     letterGrade.Text = ("D");
                 }
-                else if (80 <= weightedGrade && 70 >= weightedGrade)
+                else if (80 >= weightedGrade && 70 <= weightedGrade)
                 {
                     letterGrade.Text = ("C");
                 }
-                else if (89 <= weightedGrade && 80 >= weightedGrade)
+                else if (89 >= weightedGrade && 80 <= weightedGrade)
                 {
                     letterGrade.Text = ("B");
                 }
-                else if (100 <= weightedGrade && 90 >= weightedGrade)
+                else if (100 >= weightedGrade && 90 <= weightedGrade)
                 {
                     letterGrade.Text = ("A");
                 }
