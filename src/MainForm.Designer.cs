@@ -99,7 +99,7 @@
             this.assignmentNumberInput.AsciiOnly = true;
             this.assignmentNumberInput.BeepOnError = true;
             this.assignmentNumberInput.Location = new System.Drawing.Point(210, 25);
-            this.assignmentNumberInput.Mask = "000";
+            this.assignmentNumberInput.Mask = "00";
             this.assignmentNumberInput.Name = "assignmentNumberInput";
             this.assignmentNumberInput.Size = new System.Drawing.Size(34, 26);
             this.assignmentNumberInput.TabIndex = 6;

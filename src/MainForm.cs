@@ -172,6 +172,28 @@ namespace ClassCalculater
                     weightedAveragePartial.Text = weightedGrade.ToString(CultureInfo.CurrentCulture);
                 }
 
+                // Finds the letter grade
+                if (69 <= weightedGrade && 60 >= weightedGrade)
+                {
+                    letterGrade.Text = ("D");
+                }
+                else if (80 <= weightedGrade && 70 >= weightedGrade)
+                {
+                    letterGrade.Text = ("C");
+                }
+                else if (89 <= weightedGrade && 80 >= weightedGrade)
+                {
+                    letterGrade.Text = ("B");
+                }
+                else if (100 <= weightedGrade && 90 >= weightedGrade)
+                {
+                    letterGrade.Text = ("A");
+                }
+                else
+                {
+                    letterGrade.Text = ("F");
+                }
+
                 Console.WriteLine("Weighted grade = " + weightedGrade);
             }
         }
