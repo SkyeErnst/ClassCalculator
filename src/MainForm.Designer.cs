@@ -46,9 +46,11 @@
             this.letterGradeLabel = new System.Windows.Forms.Label();
             this.numberGradeLabel = new System.Windows.Forms.Label();
             this.letterGrade = new System.Windows.Forms.Label();
-            this.numberGrade = new System.Windows.Forms.Label();
+            this.weightedNumberGrade = new System.Windows.Forms.Label();
             this.unweightedAverageLabel = new System.Windows.Forms.Label();
             this.unweightedAverage = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -191,7 +193,7 @@
             // letterGradeLabel
             // 
             this.letterGradeLabel.AutoSize = true;
-            this.letterGradeLabel.Location = new System.Drawing.Point(633, 176);
+            this.letterGradeLabel.Location = new System.Drawing.Point(618, 175);
             this.letterGradeLabel.Name = "letterGradeLabel";
             this.letterGradeLabel.Size = new System.Drawing.Size(100, 20);
             this.letterGradeLabel.TabIndex = 10;
@@ -209,25 +211,25 @@
             // letterGrade
             // 
             this.letterGrade.AutoSize = true;
-            this.letterGrade.Location = new System.Drawing.Point(589, 196);
+            this.letterGrade.Location = new System.Drawing.Point(590, 195);
             this.letterGrade.Name = "letterGrade";
             this.letterGrade.Size = new System.Drawing.Size(169, 20);
             this.letterGrade.TabIndex = 12;
             this.letterGrade.Text = "Waiting for Generation";
             // 
-            // numberGrade
+            // weightedNumberGrade
             // 
-            this.numberGrade.AutoSize = true;
-            this.numberGrade.Location = new System.Drawing.Point(809, 196);
-            this.numberGrade.Name = "numberGrade";
-            this.numberGrade.Size = new System.Drawing.Size(169, 20);
-            this.numberGrade.TabIndex = 14;
-            this.numberGrade.Text = "Waiting for Generation";
+            this.weightedNumberGrade.AutoSize = true;
+            this.weightedNumberGrade.Location = new System.Drawing.Point(810, 195);
+            this.weightedNumberGrade.Name = "weightedNumberGrade";
+            this.weightedNumberGrade.Size = new System.Drawing.Size(169, 20);
+            this.weightedNumberGrade.TabIndex = 14;
+            this.weightedNumberGrade.Text = "Waiting for Generation";
             // 
             // unweightedAverageLabel
             // 
             this.unweightedAverageLabel.AutoSize = true;
-            this.unweightedAverageLabel.Location = new System.Drawing.Point(1051, 176);
+            this.unweightedAverageLabel.Location = new System.Drawing.Point(1050, 175);
             this.unweightedAverageLabel.Name = "unweightedAverageLabel";
             this.unweightedAverageLabel.Size = new System.Drawing.Size(157, 20);
             this.unweightedAverageLabel.TabIndex = 15;
@@ -236,11 +238,29 @@
             // unweightedAverage
             // 
             this.unweightedAverage.AutoSize = true;
-            this.unweightedAverage.Location = new System.Drawing.Point(1051, 196);
+            this.unweightedAverage.Location = new System.Drawing.Point(1051, 195);
             this.unweightedAverage.Name = "unweightedAverage";
             this.unweightedAverage.Size = new System.Drawing.Size(169, 20);
             this.unweightedAverage.TabIndex = 16;
             this.unweightedAverage.Text = "Waiting for Generation";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(1051, 240);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(51, 20);
+            this.label1.TabIndex = 17;
+            this.label1.Text = "label1";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(1051, 220);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(192, 20);
+            this.label2.TabIndex = 18;
+            this.label2.Text = "Weighted Average So Far";
             // 
             // MainForm
             // 
@@ -248,9 +268,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1264, 681);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.unweightedAverage);
             this.Controls.Add(this.unweightedAverageLabel);
-            this.Controls.Add(this.numberGrade);
+            this.Controls.Add(this.weightedNumberGrade);
             this.Controls.Add(this.letterGrade);
             this.Controls.Add(this.numberGradeLabel);
             this.Controls.Add(this.letterGradeLabel);
@@ -294,9 +316,11 @@
         private System.Windows.Forms.Label letterGradeLabel;
         private System.Windows.Forms.Label numberGradeLabel;
         private System.Windows.Forms.Label letterGrade;
-        private System.Windows.Forms.Label numberGrade;
+        private System.Windows.Forms.Label weightedNumberGrade;
         private System.Windows.Forms.Label unweightedAverageLabel;
         private System.Windows.Forms.Label unweightedAverage;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
     }
 }
 

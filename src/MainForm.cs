@@ -91,7 +91,7 @@ namespace ClassCalculater
                 hasGenerated = false;
             }
             letterGrade.Text = DEFAULT_TEXT;
-            numberGrade.Text = DEFAULT_TEXT;
+            weightedNumberGrade.Text = DEFAULT_TEXT;
             unweightedAverage.Text = DEFAULT_TEXT;
         }
 
@@ -131,7 +131,7 @@ namespace ClassCalculater
             }
 
             
-
+            // Suming the unweighted total
             for (int i = 0; i < gradeArray.Length; i++)
             {
                 unweightedTotal += gradeArray[i];
@@ -146,20 +146,24 @@ namespace ClassCalculater
             {
                 percentSum += percentArray[i];
             }
-            if (1.0f < percentSum)
+            if (1.0f < percentSum || 1.0f > percentSum)
             {
-                MessageBox.Show("Sum of percents is greater than 1. Make sure you typed in the percents correctly.");
+                MessageBox.Show("Sum of percents is not equal to 1. The sum currently equals " + percentSum + 
+                    "\n be sure that all weights were typed in correctly");
             }
-
-            // see http://members.logical.net/~marshall/uab/howtocalculategrade.html
-            // for next steps for algorithum
-
-            for (int i = 0; i < gradeArray.Length; i++)
+            else
             {
-                weightedGrade += gradeArray[i] * percentArray[i];
-            }
+                // see http://members.logical.net/~marshall/uab/howtocalculategrade.html
+                // for next steps for algorithum
 
-            Console.WriteLine("Weighted grade = " + weightedGrade);
+                for (int i = 0; i < gradeArray.Length; i++)
+                {
+                    weightedGrade += gradeArray[i] * percentArray[i];
+                    weightedNumberGrade.Text = weightedGrade.ToString(CultureInfo.CurrentCulture);
+                }
+
+                Console.WriteLine("Weighted grade = " + weightedGrade);
+            }
         }
     }
 }
