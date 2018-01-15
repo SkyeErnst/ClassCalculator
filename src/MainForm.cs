@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Globalization;
 
 namespace ClassCalculater
 {
@@ -16,14 +11,16 @@ namespace ClassCalculater
         #region public fields
 
         public int numberOfAssignments;
-        public TextBox[] textBoxes;
 
         #endregion
 
         #region private fields
 
+        private TextBox[] textBoxes;
         private bool hasGenerated;
+        private static bool debugMode = true;
         private const string DEFAULT_TEXT = "Waiting For Generation";
+
         #endregion
 
         public MainForm()
@@ -35,7 +32,15 @@ namespace ClassCalculater
         {
             if (true == hasGenerated)
             {
-                Console.WriteLine("Clear created content before asking for new content to be generated.");
+                if(true == debugMode)
+                {
+                    Console.WriteLine("Clear created content before asking for new content to be generated.");
+                }
+                else
+                {
+                    MessageBox.Show("Clear created content before asking for new content to be generated.");
+                }
+                
                 return;
             }
             else
@@ -138,7 +143,7 @@ namespace ClassCalculater
                 unweightedTotal += gradeArray[i];
             }
             unweightedTotal = unweightedTotal / numberOfAssignments;
-            unweightedAverage.Text = unweightedTotal.ToString();
+            unweightedAverage.Text = unweightedTotal.ToString(CultureInfo.CurrentCulture);
 
             for (int i = 0; i < percentArray.Length; i++)
             {
