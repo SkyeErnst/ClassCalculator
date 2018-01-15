@@ -49,8 +49,8 @@
             this.weightedNumberGrade = new System.Windows.Forms.Label();
             this.unweightedAverageLabel = new System.Windows.Forms.Label();
             this.unweightedAverage = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.weightedAveragePartial = new System.Windows.Forms.Label();
+            this.weightedAveragePartialLabel = new System.Windows.Forms.Label();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -229,7 +229,7 @@
             // unweightedAverageLabel
             // 
             this.unweightedAverageLabel.AutoSize = true;
-            this.unweightedAverageLabel.Location = new System.Drawing.Point(1050, 175);
+            this.unweightedAverageLabel.Location = new System.Drawing.Point(1051, 175);
             this.unweightedAverageLabel.Name = "unweightedAverageLabel";
             this.unweightedAverageLabel.Size = new System.Drawing.Size(157, 20);
             this.unweightedAverageLabel.TabIndex = 15;
@@ -238,29 +238,29 @@
             // unweightedAverage
             // 
             this.unweightedAverage.AutoSize = true;
-            this.unweightedAverage.Location = new System.Drawing.Point(1051, 195);
+            this.unweightedAverage.Location = new System.Drawing.Point(1061, 195);
             this.unweightedAverage.Name = "unweightedAverage";
             this.unweightedAverage.Size = new System.Drawing.Size(169, 20);
             this.unweightedAverage.TabIndex = 16;
             this.unweightedAverage.Text = "Waiting for Generation";
             // 
-            // label1
+            // weightedAveragePartial
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(1051, 240);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(51, 20);
-            this.label1.TabIndex = 17;
-            this.label1.Text = "label1";
+            this.weightedAveragePartial.AutoSize = true;
+            this.weightedAveragePartial.Location = new System.Drawing.Point(1061, 240);
+            this.weightedAveragePartial.Name = "weightedAveragePartial";
+            this.weightedAveragePartial.Size = new System.Drawing.Size(169, 20);
+            this.weightedAveragePartial.TabIndex = 17;
+            this.weightedAveragePartial.Text = "Waiting for Generation";
             // 
-            // label2
+            // weightedAveragePartialLabel
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(1051, 220);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(192, 20);
-            this.label2.TabIndex = 18;
-            this.label2.Text = "Weighted Average So Far";
+            this.weightedAveragePartialLabel.AutoSize = true;
+            this.weightedAveragePartialLabel.Location = new System.Drawing.Point(1051, 220);
+            this.weightedAveragePartialLabel.Name = "weightedAveragePartialLabel";
+            this.weightedAveragePartialLabel.Size = new System.Drawing.Size(192, 20);
+            this.weightedAveragePartialLabel.TabIndex = 18;
+            this.weightedAveragePartialLabel.Text = "Weighted Average So Far";
             // 
             // MainForm
             // 
@@ -268,8 +268,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1264, 681);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.weightedAveragePartialLabel);
+            this.Controls.Add(this.weightedAveragePartial);
             this.Controls.Add(this.unweightedAverage);
             this.Controls.Add(this.unweightedAverageLabel);
             this.Controls.Add(this.weightedNumberGrade);
@@ -319,8 +319,8 @@
         private System.Windows.Forms.Label weightedNumberGrade;
         private System.Windows.Forms.Label unweightedAverageLabel;
         private System.Windows.Forms.Label unweightedAverage;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label weightedAveragePartial;
+        private System.Windows.Forms.Label weightedAveragePartialLabel;
     }
 }
 

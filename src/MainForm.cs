@@ -140,26 +140,36 @@ namespace ClassCalculater
             unweightedTotal = unweightedTotal / numberOfAssignments;
             unweightedAverage.Text = unweightedTotal.ToString(CultureInfo.CurrentCulture);
 
-            // Ensure that the sum of the weights is not greater than 1,
-            // warning if it is
+            // Ensure that the sum of the weights is not greater than 1, warning if it is
+            // If it is not, calculate the weighted grade and partial grade.
             for (int i = 0; i < percentArray.Length; i++)
             {
                 percentSum += percentArray[i];
             }
-            if (1.0f < percentSum || 1.0f > percentSum)
+            if (1.0f < percentSum)
             {
-                MessageBox.Show("Sum of percents is not equal to 1. The sum currently equals " + percentSum + 
-                    "\n be sure that all weights were typed in correctly");
+                MessageBox.Show("Sum of weights is more than 1.0. Ensure that weights are entered correctly");
             }
             else
             {
                 // see http://members.logical.net/~marshall/uab/howtocalculategrade.html
                 // for next steps for algorithum
 
-                for (int i = 0; i < gradeArray.Length; i++)
+                for(int i = 0; i < gradeArray.Length; i++)
                 {
                     weightedGrade += gradeArray[i] * percentArray[i];
                     weightedNumberGrade.Text = weightedGrade.ToString(CultureInfo.CurrentCulture);
+                }
+
+                if(1.0f > percentSum)
+                {
+                    MessageBox.Show("sum of weights is less than 1.0. If this is not intentional, check " +
+                        "entered weights for accuracy.");
+                    weightedAveragePartial.Text = (weightedGrade / (percentSum)).ToString(CultureInfo.CurrentCulture);
+                }
+                else
+                {
+                    weightedAveragePartial.Text = weightedGrade.ToString(CultureInfo.CurrentCulture);
                 }
 
                 Console.WriteLine("Weighted grade = " + weightedGrade);
