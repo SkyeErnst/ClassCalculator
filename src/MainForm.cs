@@ -75,7 +75,7 @@ namespace ClassCalculater
         {
             if (true == hasGenerated)
             {
-                Console.WriteLine("Clear created content before asking for new content to be generated.");
+                MessageBox.Show("You must clear created content before asking for new content to be generated.");
                 return;
             }
 
