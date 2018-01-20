@@ -33,19 +33,15 @@ namespace ClassCalculater
                 Console.WriteLine("Clear created content before asking for new content to be generated.");
                 return;
             }
-            else
-            {
-                hasGenerated = true;
-            }
-            
 
             try
             {
                 numberOfAssignments = Int32.Parse(assignmentNumberInput.Text);
+                hasGenerated = true;
             }
             catch (Exception)
             {
-                Console.WriteLine("There is likely a type mismatch. Please ensure only ints are fed into input box");
+                Console.WriteLine("Either a type mismatch has occured, or the input textbox is empty");
             }
 
             int totalBoxes = numberOfAssignments * 3;
@@ -88,8 +84,8 @@ namespace ClassCalculater
             {
                 this.Controls.Remove(tB);
                 textBoxes = null;
-                hasGenerated = false;
             }
+            hasGenerated = false;
             letterGrade.Text = DEFAULT_TEXT;
             weightedNumberGrade.Text = DEFAULT_TEXT;
             unweightedAverage.Text = DEFAULT_TEXT;
