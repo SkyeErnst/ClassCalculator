@@ -45,11 +45,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="src\InputControl.cs">
-      <SubType>UserControl</SubType>
+    <Compile Include="src\LetterGradeRangeEditForm.cs">
+      <SubType>Form</SubType>
     </Compile>
-    <Compile Include="src\InputControl.Designer.cs">
-      <DependentUpon>InputControl.cs</DependentUpon>
+    <Compile Include="src\LetterGradeRangeEditForm.Designer.cs">
+      <DependentUpon>LetterGradeRangeEditForm.cs</DependentUpon>
     </Compile>
     <Compile Include="src\MainForm.cs">
       <SubType>Form</SubType>
@@ -59,8 +59,8 @@
     </Compile>
     <Compile Include="src\MainProgram.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="src\InputControl.resx">
-      <DependentUpon>InputControl.cs</DependentUpon>
+    <EmbeddedResource Include="src\LetterGradeRangeEditForm.resx">
+      <DependentUpon>LetterGradeRangeEditForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="src\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

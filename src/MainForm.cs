@@ -7,10 +7,22 @@ namespace ClassCalculater
 {
     public partial class MainForm : Form
     {
+        #region Public Properties
+        public static int AMax { get; set; }
+        public static int AMin { get; set; }
+        public static int BMax { get; set; }
+        public static int BMin { get; set; }
+        public static int CMax { get; set; }
+        public static int CMin { get; set; }
+        public static int DMax { get; set; }
+        public static int DMin { get; set; }
+        public static int FPoint { get; set; }
+        #endregion
 
         #region public fields
 
         public int numberOfAssignments;
+
         public TextBox[] textBoxes;
 
         #endregion
@@ -18,58 +30,89 @@ namespace ClassCalculater
         #region private fields
 
         private bool hasGenerated;
+
         private const string DEFAULT_TEXT = "Waiting For Generation";
+
         #endregion
 
         public MainForm()
         {
             InitializeComponent();
+
+
+            AMax = 100;
+            AMin = 90;
+            BMax = 89;
+            BMin = 80;
+            CMax = 79;
+            CMin = 70;
+            DMax = 69;
+            DMin = 60;
+            FPoint = DMin - 1;
+
+            UpdateRanges();
         }
 
-        private void generateButtonClick(object sender, EventArgs e)
+        public void UpdateRanges()
+        {
+            aMaxLabel.Text = AMax.ToString(CultureInfo.CurrentCulture);
+            aMinLabel.Text = AMin.ToString(CultureInfo.CurrentCulture);
+
+            bMaxLabel.Text = BMax.ToString(CultureInfo.CurrentCulture);
+            bMinLabel.Text = BMin.ToString(CultureInfo.CurrentCulture);
+
+            cMaxLabel.Text = CMax.ToString(CultureInfo.CurrentCulture);
+            cMinLabel.Text = CMin.ToString(CultureInfo.CurrentCulture);
+
+            dMaxLabel.Text = DMax.ToString(CultureInfo.CurrentCulture);
+            dMinLabel.Text = DMin.ToString(CultureInfo.CurrentCulture);
+
+            fPointLabel.Text = FPoint.ToString(CultureInfo.CurrentCulture);
+
+        }
+
+        private void GenerateButtonClick(object sender, EventArgs e)
         {
             if (true == hasGenerated)
             {
                 Console.WriteLine("Clear created content before asking for new content to be generated.");
                 return;
             }
-            else
-            {
-                hasGenerated = true;
-            }
-            
 
             try
             {
                 numberOfAssignments = Int32.Parse(assignmentNumberInput.Text);
+                hasGenerated = true;
             }
             catch (Exception)
             {
-                Console.WriteLine("There is likely a type mismatch. Please ensure only ints are fed into input box");
+                MessageBox.Show("Either a type mismatch has occured, or the input textbox is empty");
             }
 
+            // Three colums of information, so we need assignemnts * 3 to hold all information
             int totalBoxes = numberOfAssignments * 3;
             textBoxes = new TextBox[totalBoxes];
 
-
+            // Adds the new textboxes to the form
             for (int i = 0; i < totalBoxes; i++)
             {
                 textBoxes[i] = new TextBox();
                 this.Controls.Add(textBoxes[i]);
             }
 
-            int yOffset = 25; //This is how far down each control will be from eachother, in pixels
+            int yOffset = 25; //This is how far down each control will be from eacho ther, in pixels
             int numberOfColums = 3;
-            int lineNumber = 0;
+            int lineNumber = 0; // The line number we start with
             Point[] xStart;
             xStart = new Point[3];
             xStart[0] = assignmentNameLabel.Location;
             xStart[1] = gradeLabel.Location;
             xStart[2] = percentOfTotalGradeLabel.Location;
 
+            // Every three generations, next set of boxes down 20 pixels
             for (int i = 0; i < numberOfAssignments; i++)
             {
-
+                // Generate n number of colums, using the values of xStart as base points
                 for (int j = 0; j < numberOfColums; j++)
                 {
                     Point tempPoint1 = xStart[j];
@@ -82,17 +125,26 @@ namespace ClassCalculater
             }
         }
 
+        /// <summary>
+        /// Clears all generated text and text boxes, and removes text boxes from the form.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ClearFormClick(object sender, EventArgs e)
         {
-            foreach (TextBox tB in textBoxes)
+            if(null != textBoxes)
             {
-                this.Controls.Remove(tB);
-                textBoxes = null;
-                hasGenerated = false;
+                foreach (TextBox tB in textBoxes)
+                {
+                    this.Controls.Remove(tB);
+                    textBoxes = null;
+                }
             }
+            hasGenerated = false;
             letterGrade.Text = DEFAULT_TEXT;
             weightedNumberGrade.Text = DEFAULT_TEXT;
             unweightedAverage.Text = DEFAULT_TEXT;
+            weightedAveragePartial.Text = DEFAULT_TEXT;
         }
 
         private void CalcGradeButtonClick(object sender, EventArgs e)
@@ -145,6 +197,7 @@ namespace ClassCalculater
             for (int i = 0; i < percentArray.Length; i++)
             {
                 percentSum += percentArray[i];
+                weightSum.Text = percentSum.ToString(CultureInfo.CurrentCulture);
             }
             if (1.0f < percentSum)
             {
@@ -152,8 +205,6 @@ namespace ClassCalculater
             }
             else
             {
-                // see http://members.logical.net/~marshall/uab/howtocalculategrade.html
-                // for next steps for algorithum
 
                 for(int i = 0; i < gradeArray.Length; i++)
                 {
@@ -172,30 +223,54 @@ namespace ClassCalculater
                     weightedAveragePartial.Text = weightedGrade.ToString(CultureInfo.CurrentCulture);
                 }
 
-                // Finds the letter grade
-                if (69 >= weightedGrade && 60 <= weightedGrade)
-                {
-                    letterGrade.Text = ("D");
-                }
-                else if (80 >= weightedGrade && 70 <= weightedGrade)
-                {
-                    letterGrade.Text = ("C");
-                }
-                else if (89 >= weightedGrade && 80 <= weightedGrade)
-                {
-                    letterGrade.Text = ("B");
-                }
-                else if (100 >= weightedGrade && 90 <= weightedGrade)
-                {
-                    letterGrade.Text = ("A");
-                }
-                else
-                {
-                    letterGrade.Text = ("F");
-                }
-
-                Console.WriteLine("Weighted grade = " + weightedGrade);
+                letterGrade.Text = CalcLetterGrade(weightedGrade);
             }
+        }
+
+        /// <summary>
+        /// Given the weighted grade, will return the letter grade based on current settings for grade ranges
+        /// </summary>
+        /// <param name="weightedGrade"></param>
+        /// <returns></returns>
+        private string CalcLetterGrade(float weightedGrade)
+        {
+            // Finds the letter grade
+            if (DMax >= (int)weightedGrade && DMin <= (int)weightedGrade)
+            {
+                return "D";
+            }
+            else if (CMax >= (int)weightedGrade && CMin <= (int)weightedGrade)
+            {
+                return "C";
+            }
+            else if (BMax >= (int)weightedGrade && BMin <= (int)weightedGrade)
+            {
+                return "B";
+            }
+            else if ((AMax >= (int)weightedGrade && AMin <= (int)weightedGrade) || (100 < (int)weightedGrade))
+            {
+                return "A";
+            }
+            else if (FPoint >= (int)weightedGrade)
+            {
+                return "F";
+            }
+            else
+            {
+                MessageBox.Show("Error, weighted grade did not match any defined bounds.");
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Generates a new letter grade range editing form and displays it
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void EditToolStripMenuGrade_Click(object sender, EventArgs e)
+        {
+            LetterGradeRangeEditForm editForm = new LetterGradeRangeEditForm();
+            editForm.ShowDialog();
         }
     }
 }

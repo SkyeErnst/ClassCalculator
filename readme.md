@@ -1,0 +1,1 @@
+This is a program designed to calculate your grade in a spesific school class for you, given your assignment grades and weights.

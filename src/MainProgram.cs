@@ -8,15 +8,26 @@ namespace ClassCalculater
 {
     public static class MainProgram
     {
+        #region Internal Fields
+
+        internal readonly static MainForm mainFormRef;
+
+        #endregion
+
+        static MainProgram()
+        {
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            mainFormRef = new MainForm();
+        }
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
         public static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+            Application.Run(mainFormRef);
         }
     }
 }
