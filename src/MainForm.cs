@@ -86,7 +86,7 @@ namespace ClassCalculater
             }
             catch (Exception)
             {
-                Console.WriteLine("Either a type mismatch has occured, or the input textbox is empty");
+                MessageBox.Show("Either a type mismatch has occured, or the input textbox is empty");
             }
 
             // Three colums of information, so we need assignemnts * 3 to hold all information
@@ -197,7 +197,7 @@ namespace ClassCalculater
             for (int i = 0; i < percentArray.Length; i++)
             {
                 percentSum += percentArray[i];
-                weightSum.Text = percentSum.ToString();
+                weightSum.Text = percentSum.ToString(CultureInfo.CurrentCulture);
             }
             if (1.0f < percentSum)
             {
@@ -247,11 +247,7 @@ namespace ClassCalculater
             {
                 return "B";
             }
-            else if (AMax >= (int)weightedGrade && AMin <= (int)weightedGrade)
-            {
-                return "A";
-            }
-            else if (100 < (int)weightedGrade)
+            else if ((AMax >= (int)weightedGrade && AMin <= (int)weightedGrade) || (100 < (int)weightedGrade))
             {
                 return "A";
             }
