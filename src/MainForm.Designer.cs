@@ -138,14 +138,15 @@
             this.gradeRangeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.editToolStripMenuItem1});
             this.gradeRangeToolStripMenuItem.Name = "gradeRangeToolStripMenuItem";
-            this.gradeRangeToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.gradeRangeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.gradeRangeToolStripMenuItem.Text = "Grade Range";
             // 
             // editToolStripMenuItem1
             // 
             this.editToolStripMenuItem1.Name = "editToolStripMenuItem1";
-            this.editToolStripMenuItem1.Size = new System.Drawing.Size(94, 22);
+            this.editToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.editToolStripMenuItem1.Text = "Edit";
+            this.editToolStripMenuItem1.Click += new System.EventHandler(this.EditToolStripMenuGrade_Click);
             // 
             // menuStrip
             // 

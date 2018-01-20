@@ -51,6 +51,12 @@
     <Compile Include="src\InputControl.Designer.cs">
       <DependentUpon>InputControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="src\LetterGradeRangeEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="src\LetterGradeRangeEdit.Designer.cs">
+      <DependentUpon>LetterGradeRangeEdit.cs</DependentUpon>
+    </Compile>
     <Compile Include="src\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -61,6 +67,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="src\InputControl.resx">
       <DependentUpon>InputControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\LetterGradeRangeEdit.resx">
+      <DependentUpon>LetterGradeRangeEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="src\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

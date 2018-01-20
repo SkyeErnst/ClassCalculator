@@ -204,5 +204,10 @@ namespace ClassCalculater
                 return "F";
             }
         }
+
+        private void EditToolStripMenuGrade_Click(object sender, EventArgs e)
+        {
+            
+        }
     }
 }
