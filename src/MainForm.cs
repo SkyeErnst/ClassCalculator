@@ -93,6 +93,7 @@ namespace ClassCalculater
             letterGrade.Text = DEFAULT_TEXT;
             weightedNumberGrade.Text = DEFAULT_TEXT;
             unweightedAverage.Text = DEFAULT_TEXT;
+            weightedAveragePartial.Text = DEFAULT_TEXT;
         }
 
         private void CalcGradeButtonClick(object sender, EventArgs e)
@@ -152,8 +153,6 @@ namespace ClassCalculater
             }
             else
             {
-                // see http://members.logical.net/~marshall/uab/howtocalculategrade.html
-                // for next steps for algorithum
 
                 for(int i = 0; i < gradeArray.Length; i++)
                 {
@@ -172,29 +171,41 @@ namespace ClassCalculater
                     weightedAveragePartial.Text = weightedGrade.ToString(CultureInfo.CurrentCulture);
                 }
 
-                // Finds the letter grade
-                if (69 >= weightedGrade && 60 <= weightedGrade)
-                {
-                    letterGrade.Text = ("D");
-                }
-                else if (80 >= weightedGrade && 70 <= weightedGrade)
-                {
-                    letterGrade.Text = ("C");
-                }
-                else if (89 >= weightedGrade && 80 <= weightedGrade)
-                {
-                    letterGrade.Text = ("B");
-                }
-                else if (100 >= weightedGrade && 90 <= weightedGrade)
-                {
-                    letterGrade.Text = ("A");
-                }
-                else
-                {
-                    letterGrade.Text = ("F");
-                }
+                letterGrade.Text = CalcLetterGrade(weightedGrade);
+            }
+        }
 
-                Console.WriteLine("Weighted grade = " + weightedGrade);
+        /// <summary>
+        /// Given the weighted grade, will return the letter grade based on current settings for grade ranges
+        /// </summary>
+        /// <param name="weightedGrade"></param>
+        /// <returns></returns>
+        private string CalcLetterGrade(float weightedGrade)
+        {
+            // Finds the letter grade
+            if (69 >= (int)weightedGrade && 60 <= (int)weightedGrade)
+            {
+                return "D";
+            }
+            else if (80 >= (int)weightedGrade && 70 <= (int)weightedGrade)
+            {
+                return "C";
+            }
+            else if (89 >= (int)weightedGrade && 80 <= (int)weightedGrade)
+            {
+                return "B";
+            }
+            else if (100 >= (int)weightedGrade && 90 <= (int)weightedGrade)
+            {
+                return "A";
+            }
+            else if (100 < (int)weightedGrade)
+            {
+                return "A";
+            }
+            else
+            {
+                return "F";
             }
         }
     }
