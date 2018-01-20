@@ -132,10 +132,13 @@ namespace ClassCalculater
         /// <param name="e"></param>
         private void ClearFormClick(object sender, EventArgs e)
         {
-            foreach (TextBox tB in textBoxes)
+            if(null != textBoxes)
             {
-                this.Controls.Remove(tB);
-                textBoxes = null;
+                foreach (TextBox tB in textBoxes)
+                {
+                    this.Controls.Remove(tB);
+                    textBoxes = null;
+                }
             }
             hasGenerated = false;
             letterGrade.Text = DEFAULT_TEXT;
@@ -194,6 +197,7 @@ namespace ClassCalculater
             for (int i = 0; i < percentArray.Length; i++)
             {
                 percentSum += percentArray[i];
+                weightSum.Text = percentSum.ToString();
             }
             if (1.0f < percentSum)
             {
@@ -262,6 +266,11 @@ namespace ClassCalculater
             }
         }
 
+        /// <summary>
+        /// Generates a new letter grade range editing form and displays it
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void EditToolStripMenuGrade_Click(object sender, EventArgs e)
         {
             LetterGradeRangeEditForm editForm = new LetterGradeRangeEditForm();

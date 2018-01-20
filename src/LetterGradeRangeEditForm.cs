@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Windows.Forms;
 
 namespace ClassCalculater
@@ -24,12 +25,13 @@ namespace ClassCalculater
             try
             {
                 MainForm.AMin = Int32.Parse(aMinBox.Text);
-                MainForm.AMax = Int32.Parse(aMaxBox.Text);
-                MainForm.BMin = Int32.Parse(bMaxBox.Text);
-                MainForm.BMax = Int32.Parse(bMaxBox.Text);
-                MainForm.CMin = Int32.Parse(cMaxBox.Text);
-                MainForm.CMax = Int32.Parse(cMaxBox.Text);
-                MainForm.DMin = Int32.Parse(dMaxBox.Text);
+                MainForm.AMax = Int32.Parse(aMaxLabel.Text);
+                MainForm.BMin = Int32.Parse(bMinBox.Text);
+                MainForm.BMax = Int32.Parse(bMaxLabel.Text);
+                MainForm.CMin = Int32.Parse(cMinBox.Text);
+                MainForm.CMax = Int32.Parse(cMaxLabel.Text);
+                MainForm.DMin = Int32.Parse(dMinBox.Text);
+                MainForm.DMax = Int32.Parse(dMaxLabel.Text);
                 MainForm.FPoint = MainForm.DMin - 1;
                 MainProgram.mainFormRef.UpdateRanges();
                 MessageBox.Show("Successfully saved the new grade ranges.");
@@ -52,6 +54,21 @@ namespace ClassCalculater
             {
                 this.Close();
             }
+        }
+
+        private void BMinBox_Leave(object sender, EventArgs e)
+        {
+            bMaxLabel.Text = (Int32.Parse(aMinBox.Text) - 1).ToString(CultureInfo.CurrentCulture);
+        }
+
+        private void CMinBox_Leave(object sender, EventArgs e)
+        {
+            cMaxLabel.Text = (Int32.Parse(bMinBox.Text) - 1).ToString(CultureInfo.CurrentCulture);
+        }
+
+        private void DMinBox_Leave(object sender, EventArgs e)
+        {
+            dMaxLabel.Text = (Int32.Parse(cMinBox.Text) - 1).ToString(CultureInfo.CurrentCulture);
         }
     }
 }

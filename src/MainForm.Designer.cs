@@ -69,6 +69,8 @@
             this.cMaxLabel = new System.Windows.Forms.Label();
             this.dMaxLabel = new System.Windows.Forms.Label();
             this.fPointLabel = new System.Windows.Forms.Label();
+            this.weightSumLabel = new System.Windows.Forms.Label();
+            this.weightSum = new System.Windows.Forms.Label();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -443,12 +445,32 @@
             this.fPointLabel.TabIndex = 36;
             this.fPointLabel.Text = "Max";
             // 
+            // weightSumLabel
+            // 
+            this.weightSumLabel.AutoSize = true;
+            this.weightSumLabel.Location = new System.Drawing.Point(479, 149);
+            this.weightSumLabel.Name = "weightSumLabel";
+            this.weightSumLabel.Size = new System.Drawing.Size(93, 20);
+            this.weightSumLabel.TabIndex = 37;
+            this.weightSumLabel.Text = "Weight sum";
+            // 
+            // weightSum
+            // 
+            this.weightSum.AutoSize = true;
+            this.weightSum.Location = new System.Drawing.Point(507, 169);
+            this.weightSum.Name = "weightSum";
+            this.weightSum.Size = new System.Drawing.Size(18, 20);
+            this.weightSum.TabIndex = 38;
+            this.weightSum.Text = "0";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1264, 681);
+            this.Controls.Add(this.weightSum);
+            this.Controls.Add(this.weightSumLabel);
             this.Controls.Add(this.fPointLabel);
             this.Controls.Add(this.dMaxLabel);
             this.Controls.Add(this.cMaxLabel);
@@ -538,6 +560,8 @@
         private System.Windows.Forms.Label cMaxLabel;
         private System.Windows.Forms.Label dMaxLabel;
         private System.Windows.Forms.Label fPointLabel;
+        private System.Windows.Forms.Label weightSumLabel;
+        private System.Windows.Forms.Label weightSum;
     }
 }
 
