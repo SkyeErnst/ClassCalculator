@@ -71,6 +71,8 @@
             this.fPointLabel = new System.Windows.Forms.Label();
             this.weightSumLabel = new System.Windows.Forms.Label();
             this.weightSum = new System.Windows.Forms.Label();
+            this.AddBoxesButton = new System.Windows.Forms.Button();
+            this.boxesToAdd = new System.Windows.Forms.MaskedTextBox();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -463,12 +465,34 @@
             this.weightSum.TabIndex = 38;
             this.weightSum.Text = "0";
             // 
+            // AddBoxesButton
+            // 
+            this.AddBoxesButton.Location = new System.Drawing.Point(260, 71);
+            this.AddBoxesButton.Name = "AddBoxesButton";
+            this.AddBoxesButton.Size = new System.Drawing.Size(241, 24);
+            this.AddBoxesButton.TabIndex = 39;
+            this.AddBoxesButton.Text = "Add More Boxes";
+            this.AddBoxesButton.UseVisualStyleBackColor = true;
+            this.AddBoxesButton.Click += new System.EventHandler(this.AddBoxesButton_Click);
+            // 
+            // boxesToAdd
+            // 
+            this.boxesToAdd.AsciiOnly = true;
+            this.boxesToAdd.BeepOnError = true;
+            this.boxesToAdd.Location = new System.Drawing.Point(210, 69);
+            this.boxesToAdd.Mask = "00";
+            this.boxesToAdd.Name = "boxesToAdd";
+            this.boxesToAdd.Size = new System.Drawing.Size(34, 26);
+            this.boxesToAdd.TabIndex = 40;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1264, 681);
+            this.Controls.Add(this.boxesToAdd);
+            this.Controls.Add(this.AddBoxesButton);
             this.Controls.Add(this.weightSum);
             this.Controls.Add(this.weightSumLabel);
             this.Controls.Add(this.fPointLabel);
@@ -562,6 +586,8 @@
         private System.Windows.Forms.Label fPointLabel;
         private System.Windows.Forms.Label weightSumLabel;
         private System.Windows.Forms.Label weightSum;
+        private System.Windows.Forms.Button AddBoxesButton;
+        private System.Windows.Forms.MaskedTextBox boxesToAdd;
     }
 }
 

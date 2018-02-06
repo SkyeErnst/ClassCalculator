@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 using System.Globalization;
+using System.Collections.Generic;
 
 namespace ClassCalculater
 {
@@ -21,24 +22,41 @@ namespace ClassCalculater
 
         #region public fields
 
+        /// <summary>
+        /// The base input for the number of assignments
+        /// </summary>
         public int numberOfAssignments;
 
-        public TextBox[] textBoxes;
+        public List<TextBox> textBoxes;
 
         #endregion
 
         #region private fields
-
+        /// <summary>
+        /// If the form has been generated or not
+        /// </summary>
         private bool hasGenerated;
 
+        /// <summary>
+        /// The total number of assignments, 
+        /// accounting for assignemnts that may have been added after the first generation of the form.
+        /// </summary>
+        private int assignmentsTotal;
+        private int linesGenerated = 0;
+
+        private const int DEFAULT_Y_OFFSET = 25;
         private const string DEFAULT_TEXT = "Waiting For Generation";
+
+        /// <summary>
+        /// How far down each control will be from each other, in pixels.
+        /// </summary>
+        private int yOffset = 25;
 
         #endregion
 
         public MainForm()
         {
             InitializeComponent();
-
 
             AMax = 100;
             AMin = 90;
@@ -53,6 +71,9 @@ namespace ClassCalculater
             UpdateRanges();
         }
 
+        /// <summary>
+        /// Updates the text representation of the grades
+        /// </summary>
         public void UpdateRanges()
         {
             aMaxLabel.Text = AMax.ToString(CultureInfo.CurrentCulture);
@@ -68,61 +89,114 @@ namespace ClassCalculater
             dMinLabel.Text = DMin.ToString(CultureInfo.CurrentCulture);
 
             fPointLabel.Text = FPoint.ToString(CultureInfo.CurrentCulture);
-
         }
 
         private void GenerateButtonClick(object sender, EventArgs e)
         {
+            // Inform the user that content must be cleared first.
             if (true == hasGenerated)
             {
                 MessageBox.Show("You must clear created content before asking for new content to be generated.");
                 return;
             }
 
+            // Attempts to get the number of assignments
+            // This should never have to be caught, but its there just in case.
             try
             {
                 numberOfAssignments = Int32.Parse(assignmentNumberInput.Text);
-                hasGenerated = true;
             }
             catch (Exception)
             {
                 MessageBox.Show("Either a type mismatch has occured, or the input textbox is empty");
             }
 
-            // Three colums of information, so we need assignemnts * 3 to hold all information
-            int totalBoxes = numberOfAssignments * 3;
-            textBoxes = new TextBox[totalBoxes];
+            textBoxes = new List<TextBox>();
+            AddTextBoxes(numberOfAssignments);
+        }
 
-            // Adds the new textboxes to the form
-            for (int i = 0; i < totalBoxes; i++)
+        /// <summary>
+        /// Will add the three boxes needed for each assignemnt to the form.
+        /// </summary>
+        /// <param name="assignmentAmounts"></param>
+        private void AddTextBoxes(int assignmentAmounts)
+        {
+            int totalBoxesToGenerate;
+            assignmentsTotal += assignmentAmounts;
+            // Three colums of information, so we need assignemnts * 3 to hold all information
+            
+            if(false == hasGenerated)
             {
-                textBoxes[i] = new TextBox();
-                this.Controls.Add(textBoxes[i]);
+                totalBoxesToGenerate = assignmentAmounts * 3;
+            }
+            else
+            {
+                totalBoxesToGenerate = (Int32.Parse(boxesToAdd.Text));
             }
 
-            int yOffset = 25; //This is how far down each control will be from eacho ther, in pixels
+            for (int i = 0; i < totalBoxesToGenerate; i++)
+            {
+                textBoxes.Add(new TextBox());
+            }
+
+            // Adds the new textboxes to the form
+            foreach (TextBox tb in textBoxes)
+            {
+                this.Controls.Add(tb);
+            }
+
             int numberOfColums = 3;
             int lineNumber = 0; // The line number we start with
             Point[] xStart;
             xStart = new Point[3];
-            xStart[0] = assignmentNameLabel.Location;
-            xStart[1] = gradeLabel.Location;
-            xStart[2] = percentOfTotalGradeLabel.Location;
 
+            // If we havent generated lines before, then 
+            if(false == hasGenerated)
+            {
+                xStart[0] = assignmentNameLabel.Location;
+                xStart[1] = gradeLabel.Location;
+                xStart[2] = percentOfTotalGradeLabel.Location;
+            }
+            else
+            {
+                Point assignL = assignmentNameLabel.Location;
+                assignL.Y += yOffset;
+                xStart[0] = assignL;
+
+                Point gradeL = gradeLabel.Location;
+                gradeL.Y += yOffset;
+                xStart[1] = gradeL;
+
+                Point percentTGL = percentOfTotalGradeLabel.Location;
+                percentTGL.Y += yOffset;
+                xStart[2] = percentTGL;
+            }
+            
+            // starting ammount should be number of lines generated so far
             // Every three generations, next set of boxes down 20 pixels
-            for (int i = 0; i < numberOfAssignments; i++)
+            for (int i = linesGenerated; i < assignmentsTotal; i++)
             {
                 // Generate n number of colums, using the values of xStart as base points
                 for (int j = 0; j < numberOfColums; j++)
                 {
                     Point tempPoint1 = xStart[j];
                     tempPoint1.Y += yOffset;
-                    textBoxes[j + lineNumber].Location = tempPoint1; 
+
+                    if(false == hasGenerated)
+                    {
+                        textBoxes[j + lineNumber].Location = tempPoint1;
+                    }
+                    else
+                    {
+                        textBoxes[j + lineNumber + numberOfAssignments].Location = tempPoint1;
+                    }
                 }
                 lineNumber += 3;
-
+                linesGenerated += 1;
                 yOffset += 20;
             }
+
+            hasGenerated = true;
         }
 
         /// <summary>
@@ -140,6 +214,7 @@ namespace ClassCalculater
                     textBoxes = null;
                 }
             }
+            yOffset = DEFAULT_Y_OFFSET;
             hasGenerated = false;
             letterGrade.Text = DEFAULT_TEXT;
             weightedNumberGrade.Text = DEFAULT_TEXT;
@@ -163,7 +238,7 @@ namespace ClassCalculater
 
             // Seperate the data in the textboxes array into seperate arrays
             // for easier traversal
-            for (int i = 0; i < textBoxes.Length; i++)
+            for (int i = 0; i < textBoxes.Count; i++)
             {
                 if (i % 3 == 0)
                 {
@@ -181,7 +256,6 @@ namespace ClassCalculater
                     percentArrIndex += 1;
                 }
             }
-
             
             // Suming the unweighted total
             for (int i = 0; i < gradeArray.Length; i++)
@@ -271,6 +345,16 @@ namespace ClassCalculater
         {
             LetterGradeRangeEditForm editForm = new LetterGradeRangeEditForm();
             editForm.ShowDialog();
+        }
+
+        /// <summary>
+        /// Method for adding more text boxes after the generation of the form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void AddBoxesButton_Click(object sender, EventArgs e)
+        {
+            AddTextBoxes(Int32.Parse(boxesToAdd.Text));
         }
     }
 }
