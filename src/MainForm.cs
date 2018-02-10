@@ -172,6 +172,8 @@ namespace ClassCalculater
                 xStart[2] = percentTGL;
             }
             
+            
+
             // starting ammount should be number of lines generated so far
             // Every three generations, next set of boxes down 20 pixels
             for (int i = linesGenerated; i < assignmentsTotal; i++)
@@ -179,16 +181,19 @@ namespace ClassCalculater
                 // Generate n number of colums, using the values of xStart as base points
                 for (int j = 0; j < numberOfColums; j++)
                 {
-                    Point tempPoint1 = xStart[j];
-                    tempPoint1.Y += yOffset;
+                    Point tempPoint = xStart[j];
+                    tempPoint.Y += yOffset;
 
                     if(false == hasGenerated)
                     {
-                        textBoxes[j + lineNumber].Location = tempPoint1;
+                        textBoxes[j + lineNumber].Location = tempPoint;
                     }
                     else
                     {
-                        textBoxes[j + lineNumber + numberOfAssignments].Location = tempPoint1;
+                        // I think the error here is that the index being accessed isnt right.
+                        // I think this needs to be re-factored into a form control
+                        Console.WriteLine("line num: " + lineNumber + " number of assignemnts: " + numberOfAssignments);
+                        textBoxes[j + linesGenerated].Location = tempPoint;
                     }
                 }
                 lineNumber += 3;
