@@ -89,7 +89,7 @@
             // assignmentNameLabel
             // 
             this.assignmentNameLabel.AutoSize = true;
-            this.assignmentNameLabel.Location = new System.Drawing.Point(15, 129);
+            this.assignmentNameLabel.Location = new System.Drawing.Point(15, 130);
             this.assignmentNameLabel.Name = "assignmentNameLabel";
             this.assignmentNameLabel.Size = new System.Drawing.Size(139, 20);
             this.assignmentNameLabel.TabIndex = 3;
@@ -99,7 +99,7 @@
             // gradeLabel
             // 
             this.gradeLabel.AutoSize = true;
-            this.gradeLabel.Location = new System.Drawing.Point(190, 129);
+            this.gradeLabel.Location = new System.Drawing.Point(190, 130);
             this.gradeLabel.Name = "gradeLabel";
             this.gradeLabel.Size = new System.Drawing.Size(54, 20);
             this.gradeLabel.TabIndex = 4;
@@ -109,7 +109,7 @@
             // percentOfTotalGradeLabel
             // 
             this.percentOfTotalGradeLabel.AutoSize = true;
-            this.percentOfTotalGradeLabel.Location = new System.Drawing.Point(331, 129);
+            this.percentOfTotalGradeLabel.Location = new System.Drawing.Point(300, 130);
             this.percentOfTotalGradeLabel.Name = "percentOfTotalGradeLabel";
             this.percentOfTotalGradeLabel.Size = new System.Drawing.Size(170, 20);
             this.percentOfTotalGradeLabel.TabIndex = 5;

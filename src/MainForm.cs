@@ -27,7 +27,7 @@ namespace ClassCalculater
         /// </summary>
         public int numberOfAssignments;
 
-        public List<TextBox> textBoxes;
+        public List<ClassCalculater.src.AssignmentInput> textBoxes;
 
         #endregion
 
@@ -44,13 +44,11 @@ namespace ClassCalculater
         private int assignmentsTotal;
         private int linesGenerated = 0;
 
+        
+        private int yOffset = 35;
+
         private const int DEFAULT_Y_OFFSET = 25;
         private const string DEFAULT_TEXT = "Waiting For Generation";
-
-        /// <summary>
-        /// How far down each control will be from each other, in pixels.
-        /// </summary>
-        private int yOffset = 25;
 
         #endregion
 
@@ -91,6 +89,12 @@ namespace ClassCalculater
             fPointLabel.Text = FPoint.ToString(CultureInfo.CurrentCulture);
         }
 
+        /// <summary>
+        /// Event that is called when the user clicks the generate form button.
+        /// Will generate the form.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void GenerateButtonClick(object sender, EventArgs e)
         {
             // Inform the user that content must be cleared first.
@@ -111,7 +115,7 @@ namespace ClassCalculater
                 MessageBox.Show("Either a type mismatch has occured, or the input textbox is empty");
             }
 
-            textBoxes = new List<TextBox>();
+            textBoxes = new List<src.AssignmentInput>();
             AddTextBoxes(numberOfAssignments);
         }
 
@@ -121,85 +125,98 @@ namespace ClassCalculater
         /// <param name="assignmentAmounts"></param>
         private void AddTextBoxes(int assignmentAmounts)
         {
-            int totalBoxesToGenerate;
+
             assignmentsTotal += assignmentAmounts;
-            // Three colums of information, so we need assignemnts * 3 to hold all information
+            Point start = assignmentNameLabel.Location;
+            Point ongoing = assignmentNameLabel.Location;
             
-            if(false == hasGenerated)
-            {
-                totalBoxesToGenerate = assignmentAmounts * 3;
-            }
-            else
-            {
-                totalBoxesToGenerate = (Int32.Parse(boxesToAdd.Text));
-            }
-
-            for (int i = 0; i < totalBoxesToGenerate; i++)
-            {
-                textBoxes.Add(new TextBox());
-            }
-
-            // Adds the new textboxes to the form
-            foreach (TextBox tb in textBoxes)
-            {
-                this.Controls.Add(tb);
-            }
-
-            int numberOfColums = 3;
-            int lineNumber = 0; // The line number we start with
-            Point[] xStart;
-            xStart = new Point[3];
-
-            // If we havent generated lines before, then 
-            if(false == hasGenerated)
-            {
-                xStart[0] = assignmentNameLabel.Location;
-                xStart[1] = gradeLabel.Location;
-                xStart[2] = percentOfTotalGradeLabel.Location;
-            }
-            else
-            {
-                Point assignL = assignmentNameLabel.Location;
-                assignL.Y += yOffset;
-                xStart[0] = assignL;
-
-                Point gradeL = gradeLabel.Location;
-                gradeL.Y += yOffset;
-                xStart[1] = gradeL;
-
-                Point percentTGL = percentOfTotalGradeLabel.Location;
-                percentTGL.Y += yOffset;
-                xStart[2] = percentTGL;
-            }
-            
-            
-
-            // starting ammount should be number of lines generated so far
-            // Every three generations, next set of boxes down 20 pixels
             for (int i = linesGenerated; i < assignmentsTotal; i++)
             {
-                // Generate n number of colums, using the values of xStart as base points
-                for (int j = 0; j < numberOfColums; j++)
-                {
-                    Point tempPoint = xStart[j];
-                    tempPoint.Y += yOffset;
+                textBoxes.Add(new src.AssignmentInput());
+                this.Controls.Add(textBoxes[i]);
 
-                    if(false == hasGenerated)
-                    {
-                        textBoxes[j + lineNumber].Location = tempPoint;
-                    }
-                    else
-                    {
-                        // I think the error here is that the index being accessed isnt right.
-                        // I think this needs to be re-factored into a form control
-                        Console.WriteLine("line num: " + lineNumber + " number of assignemnts: " + numberOfAssignments);
-                        textBoxes[j + linesGenerated].Location = tempPoint;
-                    }
-                }
-                lineNumber += 3;
+                ongoing.Y += yOffset;
+                textBoxes[i].Location = ongoing;
                 linesGenerated += 1;
-                yOffset += 20;
             }
+
+
+            
+            //if(false == hasGenerated)
+            //{
+            //    totalBoxesToGenerate = assignmentAmounts * 3;
+            //}
+            //else
+            //{
+            //    totalBoxesToGenerate = (Int32.Parse(boxesToAdd.Text) * 3);
+            //}
+
+            //for (int i = 0; i < totalBoxesToGenerate; i++)
+            //{
+            //    textBoxes.Add(new TextBox());
+            //}
+
+            //// Adds the new textboxes to the form
+            //foreach (TextBox tb in textBoxes)
+            //{
+            //    this.Controls.Add(tb);
+            //}
+
+            //int numberOfColums = 3;
+            //int lineNumber = 0; // The line number we start with
+            //Point[] xStart;
+            //xStart = new Point[3];
+
+            //// If we havent generated lines before, then 
+            //if(false == hasGenerated)
+            //{
+            //    xStart[0] = assignmentNameLabel.Location;
+            //    xStart[1] = gradeLabel.Location;
+            //    xStart[2] = percentOfTotalGradeLabel.Location;
+            //}
+            //else
+            //{
+            //    Point assignL = assignmentNameLabel.Location;
+            //    assignL.Y += yOffset;
+            //    xStart[0] = assignL;
+
+            //    Point gradeL = gradeLabel.Location;
+            //    gradeL.Y += yOffset;
+            //    xStart[1] = gradeL;
+
+            //    Point percentTGL = percentOfTotalGradeLabel.Location;
+            //    percentTGL.Y += yOffset;
+            //    xStart[2] = percentTGL;
+            //}
+            
+            
+
+            //// starting ammount should be number of lines generated so far
+            //// Every three generations, increse y offset by 20 pixels
+            //for (int i = linesGenerated; i < assignmentsTotal; i++)
+            //{
+            //    // Generate n number of colums, using the values of xStart as base points
+            //    for (int j = 0; j < numberOfColums; j++)
+            //    {
+            //        Point tempPoint = xStart[j];
+            //        tempPoint.Y += yOffset;
+
+            //        if(false == hasGenerated)
+            //        {
+            //            textBoxes[j + lineNumber].Location = tempPoint;
+            //        }
+            //        else
+            //        {
+            //            // I think the error here is that the index being accessed isnt right.
+            //            // I think this needs to be re-factored into a form control
+            //            Console.WriteLine("line num: " + lineNumber + " number of assignemnts: " + numberOfAssignments);
+            //            textBoxes[j + linesGenerated].Location = tempPoint;
+            //        }
+            //    }
+            //    lineNumber += 3;
+            //    linesGenerated += 1;
+            //    yOffset += 20;
+            //}
 
             hasGenerated = true;
         }
@@ -213,7 +230,7 @@ namespace ClassCalculater
         {
             if(null != textBoxes)
             {
-                foreach (TextBox tB in textBoxes)
+                foreach (src.AssignmentInput tB in textBoxes)
                 {
                     this.Controls.Remove(tB);
                     textBoxes = null;
