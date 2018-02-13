@@ -27,6 +27,10 @@ namespace ClassCalculater
         /// </summary>
         public int numberOfAssignments;
 
+        /// <summary>
+        /// The list that contains the user control
+        /// objects for input.
+        /// </summary>
         public List<ClassCalculater.src.AssignmentInput> textBoxes;
 
         #endregion
@@ -45,9 +49,11 @@ namespace ClassCalculater
         private int linesGenerated = 0;
 
         
-        private int yOffset = 35;
+        private int yOffset = 40;
 
         private const int DEFAULT_Y_OFFSET = 25;
+        private const int DEFAULT_LINES_GENERATED = 0;
+        private const int DEFAULT_ASSIGNMENT_TOTAL = 0;
         private const string DEFAULT_TEXT = "Waiting For Generation";
 
         #endregion
@@ -148,84 +154,6 @@ namespace ClassCalculater
                 linesGenerated += 1;
             }
 
-
-
-            //if(false == hasGenerated)
-            //{
-            //    totalBoxesToGenerate = assignmentAmounts * 3;
-            //}
-            //else
-            //{
-            //    totalBoxesToGenerate = (Int32.Parse(boxesToAdd.Text) * 3);
-            //}
-
-            //for (int i = 0; i < totalBoxesToGenerate; i++)
-            //{
-            //    textBoxes.Add(new TextBox());
-            //}
-
-            //// Adds the new textboxes to the form
-            //foreach (TextBox tb in textBoxes)
-            //{
-            //    this.Controls.Add(tb);
-            //}
-
-            //int numberOfColums = 3;
-            //int lineNumber = 0; // The line number we start with
-            //Point[] xStart;
-            //xStart = new Point[3];
-
-            //// If we havent generated lines before, then 
-            //if(false == hasGenerated)
-            //{
-            //    xStart[0] = assignmentNameLabel.Location;
-            //    xStart[1] = gradeLabel.Location;
-            //    xStart[2] = percentOfTotalGradeLabel.Location;
-            //}
-            //else
-            //{
-            //    Point assignL = assignmentNameLabel.Location;
-            //    assignL.Y += yOffset;
-            //    xStart[0] = assignL;
-
-            //    Point gradeL = gradeLabel.Location;
-            //    gradeL.Y += yOffset;
-            //    xStart[1] = gradeL;
-
-            //    Point percentTGL = percentOfTotalGradeLabel.Location;
-            //    percentTGL.Y += yOffset;
-            //    xStart[2] = percentTGL;
-            //}
-
-
-
-            //// starting ammount should be number of lines generated so far
-            //// Every three generations, increse y offset by 20 pixels
-            //for (int i = linesGenerated; i < assignmentsTotal; i++)
-            //{
-            //    // Generate n number of colums, using the values of xStart as base points
-            //    for (int j = 0; j < numberOfColums; j++)
-            //    {
-            //        Point tempPoint = xStart[j];
-            //        tempPoint.Y += yOffset;
-
-            //        if(false == hasGenerated)
-            //        {
-            //            textBoxes[j + lineNumber].Location = tempPoint;
-            //        }
-            //        else
-            //        {
-            //            // I think the error here is that the index being accessed isnt right.
-            //            // I think this needs to be re-factored into a form control
-            //            Console.WriteLine("line num: " + lineNumber + " number of assignemnts: " + numberOfAssignments);
-            //            textBoxes[j + linesGenerated].Location = tempPoint;
-            //        }
-            //    }
-            //    lineNumber += 3;
-            //    linesGenerated += 1;
-            //    yOffset += 20;
-            //}
-
             hasGenerated = true;
         }
 
@@ -244,8 +172,10 @@ namespace ClassCalculater
                     textBoxes = null;
                 }
             }
-            yOffset = DEFAULT_Y_OFFSET;
             hasGenerated = false;
+            yOffset = DEFAULT_Y_OFFSET;
+            linesGenerated = DEFAULT_LINES_GENERATED;
+            assignmentsTotal = DEFAULT_ASSIGNMENT_TOTAL;
             letterGrade.Text = DEFAULT_TEXT;
             weightedNumberGrade.Text = DEFAULT_TEXT;
             unweightedAverage.Text = DEFAULT_TEXT;
