@@ -41,7 +41,7 @@ namespace ClassCalculater
         /// The total number of assignments, 
         /// accounting for assignemnts that may have been added after the first generation of the form.
         /// </summary>
-        private int assignmentsTotal;
+        private int assignmentsTotal = 0;
         private int linesGenerated = 0;
 
         
@@ -122,14 +122,22 @@ namespace ClassCalculater
         /// <summary>
         /// Will add the three boxes needed for each assignemnt to the form.
         /// </summary>
-        /// <param name="assignmentAmounts"></param>
-        private void AddTextBoxes(int assignmentAmounts)
+        /// <param name="assignmentsToAdd"></param>
+        private void AddTextBoxes(int assignmentsToAdd)
         {
 
-            assignmentsTotal += assignmentAmounts;
-            Point start = assignmentNameLabel.Location;
-            Point ongoing = assignmentNameLabel.Location;
-            
+            assignmentsTotal += assignmentsToAdd;
+            Point ongoing;
+
+            if(false == hasGenerated)
+            {
+                ongoing = assignmentNameLabel.Location;
+            }
+            else
+            {
+                ongoing = textBoxes[textBoxes.Count - 1].Location;
+            }
+
             for (int i = linesGenerated; i < assignmentsTotal; i++)
             {
                 textBoxes.Add(new src.AssignmentInput());
@@ -141,7 +149,7 @@ namespace ClassCalculater
             }
 
 
-            
+
             //if(false == hasGenerated)
             //{
             //    totalBoxesToGenerate = assignmentAmounts * 3;
@@ -188,8 +196,8 @@ namespace ClassCalculater
             //    percentTGL.Y += yOffset;
             //    xStart[2] = percentTGL;
             //}
-            
-            
+
+
 
             //// starting ammount should be number of lines generated so far
             //// Every three generations, increse y offset by 20 pixels
@@ -376,7 +384,15 @@ namespace ClassCalculater
         /// <param name="e"></param>
         private void AddBoxesButton_Click(object sender, EventArgs e)
         {
-            AddTextBoxes(Int32.Parse(boxesToAdd.Text));
+            try
+            {
+                AddTextBoxes(Int32.Parse(boxesToAdd.Text));
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Either a type missmatch has occured, or the input box is empty.");
+            }
+            
         }
     }
 }
