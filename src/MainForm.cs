@@ -46,11 +46,11 @@ namespace ClassCalculater
         /// The total number of assignments, 
         /// accounting for assignemnts that may have been added after the first generation of the form.
         /// </summary>
-        private int assignmentsTotal = 0;
+        private int assignmentsTotal;
         /// <summary>
         /// The tottal number of lines of assignments that have been generated so far.
         /// </summary>
-        private int linesGenerated = 0;
+        private int linesGenerated;
 
         
         private int yOffset = 40;
