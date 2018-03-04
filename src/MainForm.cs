@@ -215,82 +215,6 @@ namespace ClassCalculater
             {
                 CalcNumberGrade(false, summedWeights);
             }
-
-            //string[] nameArray = new string[numberOfAssignments];
-            //float[] gradeArray = new float[numberOfAssignments];
-            //float[] percentArray = new float[numberOfAssignments];
-
-            //int nameArrIndex = 0;
-            //int gradeArrIndex = 0;
-            //int percentArrIndex = 0;
-
-            //float unweightedTotal = 0;
-            //float percentSum = 0.0f;
-            //float weightedGrade = 0.0f;
-
-            //// Seperate the data in the textboxes array into seperate arrays
-            //// for easier traversal
-            //for (int i = 0; i < textBoxes.Count; i++)
-            //{
-            //    if (i % 3 == 0)
-            //    {
-            //        nameArray[nameArrIndex] = textBoxes[i].Text;
-            //        nameArrIndex += 1;
-            //    }
-            //    else if ((i - 1) % 3 == 0)
-            //    {
-            //        gradeArray[gradeArrIndex] = float.Parse(textBoxes[i].Text);
-            //        gradeArrIndex += 1;
-            //    }
-            //    else if ((i - 2) % 3 == 0)
-            //    {
-            //        percentArray[percentArrIndex] = float.Parse(textBoxes[i].Text);
-            //        percentArrIndex += 1;
-            //    }
-            //}
-
-            //// Suming the unweighted total
-            //for (int i = 0; i < gradeArray.Length; i++)
-            //{
-            //    unweightedTotal += gradeArray[i];
-            //}
-
-            //unweightedTotal = unweightedTotal / numberOfAssignments;
-            //unweightedAverage.Text = unweightedTotal.ToString(CultureInfo.CurrentCulture);
-
-            //// Ensure that the sum of the weights is not greater than 1, warning if it is
-            //// If it is not, calculate the weighted grade and partial grade.
-            //for (int i = 0; i < percentArray.Length; i++)
-            //{
-            //    percentSum += percentArray[i];
-            //    weightSum.Text = percentSum.ToString(CultureInfo.CurrentCulture);
-            //}
-            //if (1.0f < percentSum)
-            //{
-            //    MessageBox.Show("Sum of weights is more than 1.0. Ensure that weights are entered correctly");
-            //}
-            //else
-            //{
-
-            //    for (int i = 0; i < gradeArray.Length; i++)
-            //    {
-            //        weightedGrade += gradeArray[i] * percentArray[i];
-            //        this.weightedGrade.Text = weightedGrade.ToString(CultureInfo.CurrentCulture);
-            //    }
-
-            //    if (1.0f > percentSum)
-            //    {
-            //        MessageBox.Show("sum of weights is less than 1.0. If this is not intentional, check " +
-            //            "entered weights for accuracy.");
-            //        weightedAveragePartial.Text = (weightedGrade / (percentSum)).ToString(CultureInfo.CurrentCulture);
-            //    }
-            //    else
-            //    {
-            //        weightedAveragePartial.Text = weightedGrade.ToString(CultureInfo.CurrentCulture);
-            //    }
-
-            //    letterGrade.Text = CalcLetterGrade(weightedGrade);
-            //}
         }
 
         /// <summary>
@@ -300,68 +224,74 @@ namespace ClassCalculater
         /// <returns></returns>
         private string CalcLetterGrade(float weightedGrade)
         {
+            string car;
+
             // Finds the letter grade
             if (DMax >= (int)weightedGrade && DMin <= (int)weightedGrade)
             {
-                return "D";
+                car = "D";
+
             }
             else if (CMax >= (int)weightedGrade && CMin <= (int)weightedGrade)
             {
-                return "C";
+                car = "C";
             }
             else if (BMax >= (int)weightedGrade && BMin <= (int)weightedGrade)
             {
-                return "B";
+                car = "B";
             }
             else if ((AMax >= (int)weightedGrade && AMin <= (int)weightedGrade) || (100 < (int)weightedGrade))
             {
-                return "A";
+                car = "A";
             }
             else if (FPoint >= (int)weightedGrade)
             {
-                return "F";
+                car = "F";
             }
             else
             {
                 MessageBox.Show("Error, weighted grade did not match any defined bounds.");
                 return null;
             }
+
+            return car;
         }
 
+        /// <summary>
+        /// Calculates both the partial and fully weighted grade
+        /// </summary>
+        /// <param name="partial">Weather or not the weights being handed in are less than 1.0 </param>
+        /// <param name="totalWeight">The sum of the weights for all assignments </param>
         private void CalcNumberGrade(bool partial, float totalWeight)
         {
             int rawSum = 0;
-            int unweighted = 0;
             float weighted = 0;
 
-            // calc total ra
             for (int i = 0; i < textBoxes.Count; i++)
             {
                 rawSum += textBoxes[i].AssignemntGrade; 
             }
-            unweightedAverage.Text = (rawSum / textBoxes.Count).ToString(CultureInfo.CurrentCulture);
+
+            for (int i = 0; i < textBoxes.Count; i++)
+            {
+                weighted += textBoxes[i].AssignemntGrade * textBoxes[i].AssignmentWeight;
+            }
 
             if (true == partial)
             {
-                for (int i = 0; i < textBoxes.Count; i++)
-                {
-                    weighted += textBoxes[i].AssignemntGrade * textBoxes[i].AssignmentWeight;
-                }
-
-                weightedAveragePartial.Text = ((rawSum / textBoxes.Count) / totalWeight).ToString(CultureInfo.CurrentCulture);
+                weighted = weighted / totalWeight;
+                weightedAveragePartial.Text = (weighted).ToString(CultureInfo.CurrentCulture);
                 weightedGrade.Text = PARTIAL_USED_TEXT;
-                CalcLetterGrade((rawSum / textBoxes.Count) / totalWeight);
             }
             else
             {
-                for (int i = 0; i < textBoxes.Count; i++)
-                {
-                    weighted += textBoxes[i].AssignemntGrade * textBoxes[i].AssignmentWeight;
-                }
                 weightedGrade.Text = weighted.ToString(CultureInfo.CurrentCulture);
                 weightedAveragePartial.Text = PARTIAL_NOT_USED_TEXT;
             }
-            CalcLetterGrade(weighted);
+
+            unweightedAverage.Text = (rawSum / textBoxes.Count).ToString(CultureInfo.CurrentCulture);
+
+            UpdateLetterGrade(CalcLetterGrade(weighted));
         }
 
         /// <summary>
@@ -369,7 +299,7 @@ namespace ClassCalculater
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void EditToolStripMenuGrade_Click(object sender, EventArgs e)
+        private void EditLetterGradeRange(object sender, EventArgs e)
         {
             LetterGradeRangeEditForm editForm = new LetterGradeRangeEditForm();
             editForm.ShowDialog();
@@ -390,6 +320,15 @@ namespace ClassCalculater
             {
                 MessageBox.Show("Either a type missmatch has occured, or the input box is empty.");
             }
+        }
+
+        /// <summary>
+        /// Method for handling changes to the letter grade
+        /// </summary>
+        /// <param name="gradeLetter"></param>
+        private void UpdateLetterGrade(string gradeLetter)
+        {
+            letterGrade.Text = gradeLetter;
         }
     }
 }

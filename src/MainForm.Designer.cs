@@ -168,7 +168,7 @@
             this.editToolStripMenuItem1.Name = "editToolStripMenuItem1";
             this.editToolStripMenuItem1.Size = new System.Drawing.Size(94, 22);
             this.editToolStripMenuItem1.Text = "Edit";
-            this.editToolStripMenuItem1.Click += new System.EventHandler(this.EditToolStripMenuGrade_Click);
+            this.editToolStripMenuItem1.Click += new System.EventHandler(this.EditLetterGradeRange);
             // 
             // menuStrip
             // 
