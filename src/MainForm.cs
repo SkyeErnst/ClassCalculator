@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using System.Globalization;
 using System.Collections.Generic;
 
+
 namespace ClassCalculater
 {
     public partial class MainForm : Form
@@ -27,7 +28,11 @@ namespace ClassCalculater
         /// </summary>
         public int numberOfAssignments;
 
-        public List<TextBox> textBoxes;
+        /// <summary>
+        /// The list that contains the user control
+        /// objects for input.
+        /// </summary>
+        public List<ClassCalculater.src.AssignmentInput> textBoxes;
 
         #endregion
 
@@ -42,15 +47,20 @@ namespace ClassCalculater
         /// accounting for assignemnts that may have been added after the first generation of the form.
         /// </summary>
         private int assignmentsTotal;
-        private int linesGenerated = 0;
-
-        private const int DEFAULT_Y_OFFSET = 25;
-        private const string DEFAULT_TEXT = "Waiting For Generation";
-
         /// <summary>
-        /// How far down each control will be from each other, in pixels.
+        /// The tottal number of lines of assignments that have been generated so far.
         /// </summary>
-        private int yOffset = 25;
+        private int linesGenerated;
+
+        
+        private int yOffset = 40;
+
+        private const int DEFAULT_Y_OFFSET = 40;
+        private const int DEFAULT_LINES_GENERATED = 0;
+        private const int DEFAULT_ASSIGNMENT_TOTAL = 0;
+        private const string DEFAULT_TEXT = "Waiting For Generation";
+        private const string PARTIAL_NOT_USED_TEXT = "Partial score not needed\nas all weights are provided";
+        private const string PARTIAL_USED_TEXT = "Using partial score, weight sum < 1.0";
 
         #endregion
 
@@ -91,6 +101,12 @@ namespace ClassCalculater
             fPointLabel.Text = FPoint.ToString(CultureInfo.CurrentCulture);
         }
 
+        /// <summary>
+        /// Event that is called when the user clicks the generate form button.
+        /// Will generate the form.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void GenerateButtonClick(object sender, EventArgs e)
         {
             // Inform the user that content must be cleared first.
@@ -111,94 +127,37 @@ namespace ClassCalculater
                 MessageBox.Show("Either a type mismatch has occured, or the input textbox is empty");
             }
 
-            textBoxes = new List<TextBox>();
+            textBoxes = new List<src.AssignmentInput>();
             AddTextBoxes(numberOfAssignments);
         }
 
         /// <summary>
         /// Will add the three boxes needed for each assignemnt to the form.
         /// </summary>
-        /// <param name="assignmentAmounts"></param>
-        private void AddTextBoxes(int assignmentAmounts)
+        /// <param name="assignmentsToAdd"></param>
+        private void AddTextBoxes(int assignmentsToAdd)
         {
-            int totalBoxesToGenerate;
-            assignmentsTotal += assignmentAmounts;
-            // Three colums of information, so we need assignemnts * 3 to hold all information
-            
+
+            assignmentsTotal += assignmentsToAdd;
+            Point ongoing;
+
             if(false == hasGenerated)
             {
-                totalBoxesToGenerate = assignmentAmounts * 3;
+                ongoing = assignmentNameLabel.Location;
             }
             else
             {
-                totalBoxesToGenerate = (Int32.Parse(boxesToAdd.Text));
+                ongoing = textBoxes[textBoxes.Count - 1].Location;
             }
 
-            for (int i = 0; i < totalBoxesToGenerate; i++)
-            {
-                textBoxes.Add(new TextBox());
-            }
-
-            // Adds the new textboxes to the form
-            foreach (TextBox tb in textBoxes)
-            {
-                this.Controls.Add(tb);
-            }
-
-            int numberOfColums = 3;
-            int lineNumber = 0; // The line number we start with
-            Point[] xStart;
-            xStart = new Point[3];
-
-            // If we havent generated lines before, then 
-            if(false == hasGenerated)
-            {
-                xStart[0] = assignmentNameLabel.Location;
-                xStart[1] = gradeLabel.Location;
-                xStart[2] = percentOfTotalGradeLabel.Location;
-            }
-            else
-            {
-                Point assignL = assignmentNameLabel.Location;
-                assignL.Y += yOffset;
-                xStart[0] = assignL;
-
-                Point gradeL = gradeLabel.Location;
-                gradeL.Y += yOffset;
-                xStart[1] = gradeL;
-
-                Point percentTGL = percentOfTotalGradeLabel.Location;
-                percentTGL.Y += yOffset;
-                xStart[2] = percentTGL;
-            }
-            
-            
-
-            // starting ammount should be number of lines generated so far
-            // Every three generations, next set of boxes down 20 pixels
             for (int i = linesGenerated; i < assignmentsTotal; i++)
             {
-                // Generate n number of colums, using the values of xStart as base points
-                for (int j = 0; j < numberOfColums; j++)
-                {
-                    Point tempPoint = xStart[j];
-                    tempPoint.Y += yOffset;
+                textBoxes.Add(new src.AssignmentInput());
+                this.Controls.Add(textBoxes[i]);
 
-                    if(false == hasGenerated)
-                    {
-                        textBoxes[j + lineNumber].Location = tempPoint;
-                    }
-                    else
-                    {
-                        // I think the error here is that the index being accessed isnt right.
-                        // I think this needs to be re-factored into a form control
-                        Console.WriteLine("line num: " + lineNumber + " number of assignemnts: " + numberOfAssignments);
-                        textBoxes[j + linesGenerated].Location = tempPoint;
-                    }
-                }
-                lineNumber += 3;
+                ongoing.Y += yOffset;
+                textBoxes[i].Location = ongoing;
                 linesGenerated += 1;
-                yOffset += 20;
             }
 
             hasGenerated = true;
@@ -213,96 +172,48 @@ namespace ClassCalculater
         {
             if(null != textBoxes)
             {
-                foreach (TextBox tB in textBoxes)
+                foreach (src.AssignmentInput tB in textBoxes)
                 {
                     this.Controls.Remove(tB);
                     textBoxes = null;
                 }
             }
-            yOffset = DEFAULT_Y_OFFSET;
             hasGenerated = false;
+            yOffset = DEFAULT_Y_OFFSET;
+            linesGenerated = DEFAULT_LINES_GENERATED;
+            assignmentsTotal = DEFAULT_ASSIGNMENT_TOTAL;
             letterGrade.Text = DEFAULT_TEXT;
-            weightedNumberGrade.Text = DEFAULT_TEXT;
+            weightedGrade.Text = DEFAULT_TEXT;
             unweightedAverage.Text = DEFAULT_TEXT;
             weightedAveragePartial.Text = DEFAULT_TEXT;
         }
 
         private void CalcGradeButtonClick(object sender, EventArgs e)
-        { 
-            string[] nameArray = new string[numberOfAssignments];
-            float[] gradeArray = new float[numberOfAssignments];
-            float[] percentArray = new float[numberOfAssignments];
-
-            int nameArrIndex = 0;
-            int gradeArrIndex = 0;
-            int percentArrIndex = 0;
-
-            float unweightedTotal = 0;
-            float percentSum = 0.0f;
-            float weightedGrade = 0.0f;
-
-            // Seperate the data in the textboxes array into seperate arrays
-            // for easier traversal
-            for (int i = 0; i < textBoxes.Count; i++)
+        {
+            // Sum the weights, and clac unweighted grade
+            float summedWeights = 0.0f;
+            float unweightGrade = 0.0f;
+            for (int i = 0; i < assignmentsTotal; i++)
             {
-                if (i % 3 == 0)
-                {
-                    nameArray[nameArrIndex] = textBoxes[i].Text;
-                    nameArrIndex += 1;
-                }
-                else if ((i - 1) % 3 == 0)
-                {
-                    gradeArray[gradeArrIndex] = float.Parse(textBoxes[i].Text);
-                    gradeArrIndex += 1;
-                }
-                else if ((i - 2) % 3 == 0)
-                {
-                    percentArray[percentArrIndex] = float.Parse(textBoxes[i].Text);
-                    percentArrIndex += 1;
-                }
+                summedWeights += textBoxes[i].AssignmentWeight;
+                unweightGrade += textBoxes[i].AssignemntGrade;
             }
-            
-            // Suming the unweighted total
-            for (int i = 0; i < gradeArray.Length; i++)
-            {
-                unweightedTotal += gradeArray[i];
-            }
+            // Update form text
+            unweightedAverage.Text = unweightGrade.ToString(CultureInfo.CurrentCulture);
+            weightSum.Text = summedWeights.ToString(CultureInfo.CurrentCulture);
 
-            unweightedTotal = unweightedTotal / numberOfAssignments;
-            unweightedAverage.Text = unweightedTotal.ToString(CultureInfo.CurrentCulture);
-
-            // Ensure that the sum of the weights is not greater than 1, warning if it is
-            // If it is not, calculate the weighted grade and partial grade.
-            for (int i = 0; i < percentArray.Length; i++)
+            // If sum of weights is less than 1, warn user, update partial weight form
+            if(1.0f > summedWeights)
             {
-                percentSum += percentArray[i];
-                weightSum.Text = percentSum.ToString(CultureInfo.CurrentCulture);
-            }
-            if (1.0f < percentSum)
-            {
-                MessageBox.Show("Sum of weights is more than 1.0. Ensure that weights are entered correctly");
+                MessageBox.Show("Sum of weights is not equal to 1.0.\n" +
+                    "If this is intentional, no action need be taken.\n" +
+                    "If it is not intentional, ensure that weights are entered corectly.\n" +
+                    "Weight sum should never be more than 1.0!");
+                CalcNumberGrade(true, summedWeights);
             }
             else
             {
-
-                for(int i = 0; i < gradeArray.Length; i++)
-                {
-                    weightedGrade += gradeArray[i] * percentArray[i];
-                    weightedNumberGrade.Text = weightedGrade.ToString(CultureInfo.CurrentCulture);
-                }
-
-                if(1.0f > percentSum)
-                {
-                    MessageBox.Show("sum of weights is less than 1.0. If this is not intentional, check " +
-                        "entered weights for accuracy.");
-                    weightedAveragePartial.Text = (weightedGrade / (percentSum)).ToString(CultureInfo.CurrentCulture);
-                }
-                else
-                {
-                    weightedAveragePartial.Text = weightedGrade.ToString(CultureInfo.CurrentCulture);
-                }
-
-                letterGrade.Text = CalcLetterGrade(weightedGrade);
+                CalcNumberGrade(false, summedWeights);
             }
         }
 
@@ -313,32 +224,74 @@ namespace ClassCalculater
         /// <returns></returns>
         private string CalcLetterGrade(float weightedGrade)
         {
+            string car;
+
             // Finds the letter grade
             if (DMax >= (int)weightedGrade && DMin <= (int)weightedGrade)
             {
-                return "D";
+                car = "D";
+
             }
             else if (CMax >= (int)weightedGrade && CMin <= (int)weightedGrade)
             {
-                return "C";
+                car = "C";
             }
             else if (BMax >= (int)weightedGrade && BMin <= (int)weightedGrade)
             {
-                return "B";
+                car = "B";
             }
             else if ((AMax >= (int)weightedGrade && AMin <= (int)weightedGrade) || (100 < (int)weightedGrade))
             {
-                return "A";
+                car = "A";
             }
             else if (FPoint >= (int)weightedGrade)
             {
-                return "F";
+                car = "F";
             }
             else
             {
                 MessageBox.Show("Error, weighted grade did not match any defined bounds.");
                 return null;
             }
+
+            return car;
+        }
+
+        /// <summary>
+        /// Calculates both the partial and fully weighted grade
+        /// </summary>
+        /// <param name="partial">Weather or not the weights being handed in are less than 1.0 </param>
+        /// <param name="totalWeight">The sum of the weights for all assignments </param>
+        private void CalcNumberGrade(bool partial, float totalWeight)
+        {
+            int rawSum = 0;
+            float weighted = 0;
+
+            for (int i = 0; i < textBoxes.Count; i++)
+            {
+                rawSum += textBoxes[i].AssignemntGrade; 
+            }
+
+            for (int i = 0; i < textBoxes.Count; i++)
+            {
+                weighted += textBoxes[i].AssignemntGrade * textBoxes[i].AssignmentWeight;
+            }
+
+            if (true == partial)
+            {
+                weighted = weighted / totalWeight;
+                weightedAveragePartial.Text = (weighted).ToString(CultureInfo.CurrentCulture);
+                weightedGrade.Text = PARTIAL_USED_TEXT;
+            }
+            else
+            {
+                weightedGrade.Text = weighted.ToString(CultureInfo.CurrentCulture);
+                weightedAveragePartial.Text = PARTIAL_NOT_USED_TEXT;
+            }
+
+            unweightedAverage.Text = (rawSum / textBoxes.Count).ToString(CultureInfo.CurrentCulture);
+
+            UpdateLetterGrade(CalcLetterGrade(weighted));
         }
 
         /// <summary>
@@ -346,7 +299,7 @@ namespace ClassCalculater
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void EditToolStripMenuGrade_Click(object sender, EventArgs e)
+        private void EditLetterGradeRange(object sender, EventArgs e)
         {
             LetterGradeRangeEditForm editForm = new LetterGradeRangeEditForm();
             editForm.ShowDialog();
@@ -359,7 +312,23 @@ namespace ClassCalculater
         /// <param name="e"></param>
         private void AddBoxesButton_Click(object sender, EventArgs e)
         {
-            AddTextBoxes(Int32.Parse(boxesToAdd.Text));
+            try
+            {
+                AddTextBoxes(Int32.Parse(boxesToAdd.Text));
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Either a type missmatch has occured, or the input box is empty.");
+            }
+        }
+
+        /// <summary>
+        /// Method for handling changes to the letter grade
+        /// </summary>
+        /// <param name="gradeLetter"></param>
+        private void UpdateLetterGrade(string gradeLetter)
+        {
+            letterGrade.Text = gradeLetter;
         }
     }
 }

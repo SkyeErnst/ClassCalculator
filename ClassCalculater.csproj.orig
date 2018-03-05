@@ -45,12 +45,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <Compile Include="src\IOManager.cs" />
+=======
+    <Compile Include="src\AssignmentInput.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="src\AssignmentInput.Designer.cs">
       <DependentUpon>AssignmentInput.cs</DependentUpon>
     </Compile>
+>>>>>>> 065ad0cf49a0117c39142c8871d3dd9ea69a508c
     <Compile Include="src\LetterGradeRangeEditForm.cs">
       <SubType>Form</SubType>
     </Compile>
