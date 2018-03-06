@@ -16,7 +16,7 @@ namespace ClassCalculater
         #region Private fields
 
         /// <summary>
-        /// The path to the save directory for grade files
+        /// The path to the save directory for files
         /// </summary>
         private string path;
 
@@ -26,14 +26,17 @@ namespace ClassCalculater
         /// </summary>
         public IOManager()
         {
+            MessageBox.Show("Please select folder for saving and loading grade files.");
             FolderBrowserDialog folderBrowDiag = new FolderBrowserDialog();
 
             // Shows the folder browser and waits, will execute if statement
             // only if the user presses the okay button
-            if (folderBrowDiag.ShowDialog() == DialogResult.OK)
-            {
-                path = folderBrowDiag.SelectedPath;
-            }
+            //if (folderBrowDiag.ShowDialog() == DialogResult.OK)
+            //{
+            //    path = folderBrowDiag.SelectedPath;
+            //}
+            folderBrowDiag.ShowDialog();
+            path = folderBrowDiag.SelectedPath;
         }
 
         /// <summary>
