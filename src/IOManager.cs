@@ -31,19 +31,17 @@ namespace ClassCalculater
 
             // Shows the folder browser and waits, will execute if statement
             // only if the user presses the okay button
-            //if (folderBrowDiag.ShowDialog() == DialogResult.OK)
-            //{
-            //    path = folderBrowDiag.SelectedPath;
-            //}
-            folderBrowDiag.ShowDialog();
-            path = folderBrowDiag.SelectedPath;
+            if (folderBrowDiag.ShowDialog() == DialogResult.OK)
+            {
+                path = folderBrowDiag.SelectedPath;
+            }
         }
 
         /// <summary>
         /// Will write all data from list of AssignmentInput objects to xml file
         /// </summary>
         /// <param name="boxes"></param>
-        public void WriteToFile(List<ClassCalculater.src.AssignmentInput> boxes, string fileName)
+        public void WriteToFile(List<AssignmentInput> boxes, string fileName)
         {
             throw new NotImplementedException();
         }
@@ -54,7 +52,7 @@ namespace ClassCalculater
         /// </summary>
         /// <param name="fileName"></param>
         /// <returns></returns>
-        public List<ClassCalculater.src.AssignmentInput> ReadFromFile(string fileName)
+        public List<AssignmentInput> ReadFromFile(string fileName)
         {
             throw new NotImplementedException();
         }

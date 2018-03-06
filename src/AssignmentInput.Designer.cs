@@ -1,4 +1,4 @@
-﻿namespace ClassCalculater.src
+﻿namespace ClassCalculater
 {
     partial class AssignmentInput
     {

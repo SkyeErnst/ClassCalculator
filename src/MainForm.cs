@@ -32,7 +32,7 @@ namespace ClassCalculater
         /// The list that contains the user control
         /// objects for input.
         /// </summary>
-        public List<ClassCalculater.src.AssignmentInput> assignments;
+        public List<AssignmentInput> assignments;
 
         #endregion
 
@@ -127,7 +127,7 @@ namespace ClassCalculater
                 MessageBox.Show("Either a type mismatch has occured, or the input textbox is empty");
             }
 
-            assignments = new List<src.AssignmentInput>();
+            assignments = new List<AssignmentInput>();
             AddTextBoxes(numberOfAssignments);
         }
 
@@ -152,7 +152,7 @@ namespace ClassCalculater
 
             for (int i = linesGenerated; i < assignmentsTotal; i++)
             {
-                assignments.Add(new src.AssignmentInput());
+                assignments.Add(new AssignmentInput());
                 this.Controls.Add(assignments[i]);
 
                 ongoing.Y += yOffset;
@@ -172,7 +172,7 @@ namespace ClassCalculater
         {
             if(null != assignments)
             {
-                foreach (src.AssignmentInput tB in assignments)
+                foreach (AssignmentInput tB in assignments)
                 {
                     this.Controls.Remove(tB);
                     assignments = null;

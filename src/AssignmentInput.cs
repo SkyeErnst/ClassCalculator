@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ClassCalculater.src
+namespace ClassCalculater
 {
     public partial class AssignmentInput : UserControl
     {
