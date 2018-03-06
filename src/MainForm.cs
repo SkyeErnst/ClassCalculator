@@ -32,7 +32,7 @@ namespace ClassCalculater
         /// The list that contains the user control
         /// objects for input.
         /// </summary>
-        public List<ClassCalculater.src.AssignmentInput> textBoxes;
+        public List<ClassCalculater.src.AssignmentInput> assignments;
 
         #endregion
 
@@ -127,7 +127,7 @@ namespace ClassCalculater
                 MessageBox.Show("Either a type mismatch has occured, or the input textbox is empty");
             }
 
-            textBoxes = new List<src.AssignmentInput>();
+            assignments = new List<src.AssignmentInput>();
             AddTextBoxes(numberOfAssignments);
         }
 
@@ -147,16 +147,16 @@ namespace ClassCalculater
             }
             else
             {
-                ongoing = textBoxes[textBoxes.Count - 1].Location;
+                ongoing = assignments[assignments.Count - 1].Location;
             }
 
             for (int i = linesGenerated; i < assignmentsTotal; i++)
             {
-                textBoxes.Add(new src.AssignmentInput());
-                this.Controls.Add(textBoxes[i]);
+                assignments.Add(new src.AssignmentInput());
+                this.Controls.Add(assignments[i]);
 
                 ongoing.Y += yOffset;
-                textBoxes[i].Location = ongoing;
+                assignments[i].Location = ongoing;
                 linesGenerated += 1;
             }
 
@@ -170,12 +170,12 @@ namespace ClassCalculater
         /// <param name="e"></param>
         private void ClearFormClick(object sender, EventArgs e)
         {
-            if(null != textBoxes)
+            if(null != assignments)
             {
-                foreach (src.AssignmentInput tB in textBoxes)
+                foreach (src.AssignmentInput tB in assignments)
                 {
                     this.Controls.Remove(tB);
-                    textBoxes = null;
+                    assignments = null;
                 }
             }
             hasGenerated = false;
@@ -195,8 +195,8 @@ namespace ClassCalculater
             float unweightGrade = 0.0f;
             for (int i = 0; i < assignmentsTotal; i++)
             {
-                summedWeights += textBoxes[i].AssignmentWeight;
-                unweightGrade += textBoxes[i].AssignemntGrade;
+                summedWeights += assignments[i].AssignmentWeight;
+                unweightGrade += assignments[i].AssignemntGrade;
             }
             // Update form text
             unweightedAverage.Text = unweightGrade.ToString(CultureInfo.CurrentCulture);
@@ -267,14 +267,14 @@ namespace ClassCalculater
             int rawSum = 0;
             float weighted = 0;
 
-            for (int i = 0; i < textBoxes.Count; i++)
+            for (int i = 0; i < assignments.Count; i++)
             {
-                rawSum += textBoxes[i].AssignemntGrade; 
+                rawSum += assignments[i].AssignemntGrade; 
             }
 
-            for (int i = 0; i < textBoxes.Count; i++)
+            for (int i = 0; i < assignments.Count; i++)
             {
-                weighted += textBoxes[i].AssignemntGrade * textBoxes[i].AssignmentWeight;
+                weighted += assignments[i].AssignemntGrade * assignments[i].AssignmentWeight;
             }
 
             if (true == partial)
@@ -289,7 +289,7 @@ namespace ClassCalculater
                 weightedAveragePartial.Text = PARTIAL_NOT_USED_TEXT;
             }
 
-            unweightedAverage.Text = (rawSum / textBoxes.Count).ToString(CultureInfo.CurrentCulture);
+            unweightedAverage.Text = (rawSum / assignments.Count).ToString(CultureInfo.CurrentCulture);
 
             UpdateLetterGrade(CalcLetterGrade(weighted));
         }
