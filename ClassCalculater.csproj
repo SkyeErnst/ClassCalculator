@@ -49,16 +49,22 @@
     <Compile Include="src\AssignmentInput.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="src\AssignmentInput.Designer.cs" />
+    <Compile Include="src\AssignmentInput.Designer.cs">
+      <DependentUpon>AssignmentInput.cs</DependentUpon>
+    </Compile>
     <Compile Include="src\IOManager.cs" />
     <Compile Include="src\LetterGradeRangeEditForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="src\LetterGradeRangeEditForm.Designer.cs" />
+    <Compile Include="src\LetterGradeRangeEditForm.Designer.cs">
+      <DependentUpon>LetterGradeRangeEditForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="src\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="src\MainForm.Designer.cs" />
+    <Compile Include="src\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="src\MainProgram.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -69,9 +75,15 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="src\AssignmentInput.resx" />
-    <EmbeddedResource Include="src\LetterGradeRangeEditForm.resx" />
-    <EmbeddedResource Include="src\MainForm.resx" />
+    <EmbeddedResource Include="src\AssignmentInput.resx">
+      <DependentUpon>AssignmentInput.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\LetterGradeRangeEditForm.resx">
+      <DependentUpon>LetterGradeRangeEditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
