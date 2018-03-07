@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text;
 using System.Xml;
+using System.Globalization;
 using System.Windows.Forms;
 using System.Collections.Generic;
 
@@ -14,6 +15,10 @@ namespace ClassCalculater
     {
 
         #region Private fields
+
+        private const string ASSIGNMENT_NAME_TAG = "Name";
+        private const string GRADE_TAG = "Grade";
+        private const string WEIGHT_TAG = "Weight";
 
         /// <summary>
         /// The path to the save directory for files
@@ -43,6 +48,34 @@ namespace ClassCalculater
         /// <param name="boxes"></param>
         public void WriteToFile(List<AssignmentInput> boxes, string fileName)
         {
+            if (false == File.Exists(fileName))
+            {
+                XmlWriter writer = XmlWriter.Create(fileName, null);
+                writer.WriteStartDocument();
+
+                foreach (AssignmentInput ai in boxes)
+                {
+                    writer.WriteStartElement(ASSIGNMENT_NAME_TAG);
+                    writer.WriteStartAttribute(ai.AssignmentName);
+                    writer.WriteEndAttribute();
+                    writer.WriteEndElement();
+
+                    writer.WriteStartElement(GRADE_TAG);
+                    writer.WriteStartAttribute(ai.AssignemntGrade.ToString(CultureInfo.CurrentCulture));
+                    writer.WriteEndAttribute();
+                    writer.WriteEndElement();
+
+                    writer.WriteStartElement(WEIGHT_TAG);
+                    writer.WriteStartAttribute(ai.AssignmentWeight.ToString(CultureInfo.CurrentCulture));
+                    writer.WriteEndAttribute();
+                    writer.WriteEndElement();
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("ERROR: XML file with name " + fileName + " already exists.");
+            }
             throw new NotImplementedException();
         }
 
