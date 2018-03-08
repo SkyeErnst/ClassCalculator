@@ -13,6 +13,14 @@ namespace ClassCalculater
     /// </summary>
     public class IOManager
     {
+        #region Internal Fields
+        /// <summary>
+        /// This is the current version of how serializing to XML is handled
+        /// within the program. This is NOT the xml version number refering to
+        /// the language revisions.
+        /// </summary>
+        internal static string XMLVersion = "1.0";
+        #endregion
 
         #region Private fields
 
@@ -26,6 +34,7 @@ namespace ClassCalculater
         private string path;
 
         #endregion
+
         /// <summary>
         /// Constructor
         /// </summary>
@@ -48,54 +57,51 @@ namespace ClassCalculater
         /// <param name="boxes"></param>
         public void WriteToFile(List<AssignmentInput> boxes, string fileName)
         {
+
             if (false == File.Exists(fileName))
             {
-                XmlWriter writer = XmlWriter.Create(fileName, null);
+                // Create new xml document at path
+                XmlWriter writer = XmlWriter.Create(path + @"\" + fileName);
                 writer.WriteStartDocument();
 
-                foreach (AssignmentInput ai in boxes)
+                writer.WriteStartElement("Assignments");
+
+                for (int i = 0; i < boxes.Count; i++)
                 {
-                    writer.WriteStartElement(ASSIGNMENT_NAME_TAG);
-                    writer.WriteStartAttribute(ai.AssignmentName);
-                    writer.WriteEndAttribute();
-                    writer.WriteEndElement();
-
-                    writer.WriteStartElement(GRADE_TAG);
-                    writer.WriteStartAttribute(ai.AssignemntGrade.ToString(CultureInfo.CurrentCulture));
-                    writer.WriteEndAttribute();
-                    writer.WriteEndElement();
-
-                    writer.WriteStartElement(WEIGHT_TAG);
-                    writer.WriteStartAttribute(ai.AssignmentWeight.ToString(CultureInfo.CurrentCulture));
-                    writer.WriteEndAttribute();
+                    writer.WriteStartElement("assignment_number_" + i);
+                    writer.WriteAttributeString(ASSIGNMENT_NAME_TAG, boxes[i].AssignmentName);
+                    writer.WriteAttributeString(GRADE_TAG, boxes[i].AssignemntGrade.ToString(CultureInfo.CurrentCulture));
+                    writer.WriteAttributeString(WEIGHT_TAG, boxes[i].AssignmentWeight.ToString(CultureInfo.CurrentCulture));
                     writer.WriteEndElement();
                 }
+
+                writer.WriteEndDocument();
+                writer.Close();
 
             }
             else
             {
-                MessageBox.Show("ERROR: XML file with name " + fileName + " already exists.");
+                FileInfo f = new FileInfo(fileName);
+                MessageBox.Show("ERROR: XML file with name " + fileName + " already exists. At path: " + f.FullName);
             }
-            throw new NotImplementedException();
         }
 
         /// <summary>
-        /// Reads data from spesified file name and returns that data formated as an
-        /// AssignmentInput object
+        /// Prompts the user to find and select a file, then opens that file 
+        /// and reads the data into a list, which it then returns
         /// </summary>
-        /// <param name="fileName"></param>
         /// <returns></returns>
-        public List<AssignmentInput> ReadFromFile(string fileName)
+        public void ReadFromFile(ref List<AssignmentInput> list)
         {
             throw new NotImplementedException();
         }
 
         /// <summary>
         /// Opens the file dialog, and if the user clicks okay after selecting a file
-        /// returns the name of that file
+        /// returns the name of that file and its path.
         /// </summary>
         /// <returns></returns>
-        public string OpenDialogue()
+        public void OpenDialogue(out string path, out string fileName)
         {
             throw new NotImplementedException();
         }

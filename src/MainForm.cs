@@ -330,5 +330,32 @@ namespace ClassCalculater
         {
             letterGrade.Text = gradeLetter;
         }
+
+        /// <summary>
+        /// Method for handling the clicking of the open file dropdown
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OpenFileClick(object sender, EventArgs e)
+        {
+            if(false == hasGenerated)
+            {
+                MessageBox.Show("Please generate the form and fill with data before attempting to save.");
+            }
+            else
+            {
+                MainProgram.ioManRef.ReadFromFile(ref assignments);
+            }
+        }
+
+        /// <summary>
+        /// Method for handling the clicking of the save file dropdown
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SaveFileClick(object sender, EventArgs e)
+        {
+            MainProgram.ioManRef.WriteToFile(assignments, "TestOutput");
+        }
     }
 }
