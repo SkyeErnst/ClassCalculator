@@ -178,6 +178,14 @@ namespace ClassCalculater
                     assignments = null;
                 }
             }
+            ClearForm();
+        }
+
+        /// <summary>
+        /// Method for clearing just the information from the right hand side of the application
+        /// </summary>
+        private void ClearForm()
+        {
             hasGenerated = false;
             yOffset = DEFAULT_Y_OFFSET;
             linesGenerated = DEFAULT_LINES_GENERATED;
@@ -338,14 +346,9 @@ namespace ClassCalculater
         /// <param name="e"></param>
         private void OpenFileClick(object sender, EventArgs e)
         {
-            if(false == hasGenerated)
-            {
-                MessageBox.Show("Please generate the form and fill with data before attempting to save.");
-            }
-            else
-            {
-                MainProgram.ioManRef.ReadFromFile(ref assignments);
-            }
+            ClearFormClick(null, null);
+            MainProgram.ioManRef.ReadFromFile(ref assignments);
+            CalcGradeButtonClick(null, null);
         }
 
         /// <summary>
@@ -355,7 +358,14 @@ namespace ClassCalculater
         /// <param name="e"></param>
         private void SaveFileClick(object sender, EventArgs e)
         {
-            MainProgram.ioManRef.WriteToFile(assignments, "TestOutput");
+            if (false == hasGenerated)
+            {
+                MessageBox.Show("Please generate the form and fill with data before attempting to save.");
+            }
+            else
+            {
+                MainProgram.ioManRef.WriteToFile(assignments, "TestOutput");
+            }
         }
     }
 }

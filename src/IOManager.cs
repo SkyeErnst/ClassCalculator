@@ -1,10 +1,9 @@
 ﻿using System;
-using System.IO;
-using System.Text;
-using System.Xml;
-using System.Globalization;
-using System.Windows.Forms;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+using System.Windows.Forms;
+using System.Xml;
 
 namespace ClassCalculater
 {
@@ -88,12 +87,63 @@ namespace ClassCalculater
 
         /// <summary>
         /// Prompts the user to find and select a file, then opens that file 
-        /// and reads the data into a list, which it then returns
+        /// and reads the data into a list, which it then assigns to the refferenced list.
         /// </summary>
         /// <returns></returns>
         public void ReadFromFile(ref List<AssignmentInput> list)
         {
-            throw new NotImplementedException();
+            OpenFileDialog fileDiaglogue = new OpenFileDialog();
+
+            DialogResult result = fileDiaglogue.ShowDialog();
+
+            if (DialogResult.OK == result)
+            {
+                List<AssignmentInput> tmpLst = new List<AssignmentInput>();
+
+                string file = fileDiaglogue.FileName;
+                XmlReader reader = XmlReader.Create(file);
+
+                int i = 0;
+                int j = 0;
+
+                while (reader.Read())
+                {
+                    if(2 < j)
+                    {
+                        tmpLst.Add(new AssignmentInput());
+                        i += 1;
+                    }
+                    switch (reader.NodeType)
+                    {
+                        case XmlNodeType.Element:
+                            break;
+                        case XmlNodeType.Attribute:
+                            switch (reader.Value)
+                            {
+                                case ASSIGNMENT_NAME_TAG:
+                                    j += 1;
+                                    tmpLst[i].AssignmentName = reader.Value;
+                                    break;
+                                case GRADE_TAG:
+                                    j += 1;
+                                    tmpLst[i].AssignemntGrade = int.Parse(reader.Value);
+                                    break;
+                                case WEIGHT_TAG:
+                                    j += 1;
+                                    tmpLst[i].AssignmentWeight = int.Parse(reader.Value);
+                                    break;
+                                default:
+                                    MessageBox.Show("Error occured in nested switch");
+                                    break;
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                }
+
+                list = tmpLst;
+            }  
         }
 
         /// <summary>

@@ -13,6 +13,10 @@
             {
                 return assignmentName.Text;
             }
+            set
+            {
+                assignmentName.Text = value;
+            }
         }
         /// <summary>
         /// The grade for the assignemnt
@@ -30,6 +34,10 @@
                     throw;
                 }
             }
+            set
+            {
+                assignmentGrade.Text = value.ToString();
+            }
         }
         /// <summary>
         /// The weight of the assignemnt
@@ -46,6 +54,10 @@
                 {
                     throw;
                 }
+            }
+            set
+            {
+                assignmentWeight.Text = value.ToString();
             }
         }
         #endregion
