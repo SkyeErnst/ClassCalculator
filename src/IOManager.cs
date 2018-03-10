@@ -99,7 +99,7 @@ namespace ClassCalculater
 
             if (DialogResult.OK == result)
             {
-                List<AssignmentInput> tmpLst = new List<AssignmentInput>();
+                list = new List<AssignmentInput>();
 
                 string file = fileDiaglogue.FileName;
                 XmlReader reader = XmlReader.Create(file);
@@ -108,13 +108,11 @@ namespace ClassCalculater
                 doc.Load(file);
 
                 XmlElement root = doc.DocumentElement;
-
-                XmlNodeList nodes = root.SelectNodes(ASSIGNMENT_NUMBERING);
+                XmlNodeList nodes = root.ChildNodes;
 
                 List<XmlNode> nodeAttrib = new List<XmlNode>();
 
                 XmlAttributeCollection collection;
-
                 int itter = 0;
 
                 foreach (XmlNode node in nodes)
@@ -143,85 +141,6 @@ namespace ClassCalculater
 
                     itter += 1;
                 }
-
-
-
-                //XmlNode nod = doc.ReadNode(reader);
-
-                //XmlNodeList lst = doc.ChildNodes;
-
-                ////for (int j = 0; j < lst.Count; j++)
-                ////{
-
-                ////}
-
-                //if (true == nod.HasChildNodes)
-                //{
-                //    list.Add(new AssignmentInput());
-                //    i++;
-
-                //    list[i].AssignmentName = nod.FirstChild.Value;
-                //    list[i].AssignemntGrade = int.Parse(nod.NextSibling.Value);
-                //    list[i].AssignemntGrade = int.Parse(nod.LastChild.Value);
-                //}
-
-                //int i = 0;
-                //int j = 0;
-
-                //while (reader.Read())
-                //{
-
-                //    if (2 < j)
-                //    {
-                //        list.Add(new AssignmentInput());
-                //        i += 1;
-                //    }
-
-                //    if (reader.NodeType == XmlNodeType.Element)
-                //    {
-                //        if
-                //        if(reader.Name == (ASSIGNMENT_NUMBERING + i))
-                //        {
-
-                //        }
-                //    }
-
-
-                //    //if(2 < j)
-                //    //{
-                //    //    tmpLst.Add(new AssignmentInput());
-                //    //    i += 1;
-                //    //}
-                //    //switch (reader.NodeType)
-                //    //{
-                //    //    case XmlNodeType.Element:
-                //    //        break;
-                //    //    case XmlNodeType.Attribute:
-                //    //        switch (reader.Value)
-                //    //        {
-                //    //            case ASSIGNMENT_NAME_TAG:
-                //    //                j += 1;
-                //    //                tmpLst[i].AssignmentName = reader.Value;
-                //    //                break;
-                //    //            case GRADE_TAG:
-                //    //                j += 1;
-                //    //                tmpLst[i].AssignemntGrade = int.Parse(reader.Value);
-                //    //                break;
-                //    //            case WEIGHT_TAG:
-                //    //                j += 1;
-                //    //                tmpLst[i].AssignmentWeight = int.Parse(reader.Value);
-                //    //                break;
-                //    //            default:
-                //    //                MessageBox.Show("Error occured in nested switch");
-                //    //                break;
-                //    //        }
-                //    //        break;
-                //    //    default:
-                //    //        break;
-                //    //}
-                //}
-
-                list = tmpLst;
             }  
         }
 

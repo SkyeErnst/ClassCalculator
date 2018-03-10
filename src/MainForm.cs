@@ -217,11 +217,11 @@ namespace ClassCalculater
                     "If this is intentional, no action need be taken.\n" +
                     "If it is not intentional, ensure that weights are entered corectly.\n" +
                     "Weight sum should never be more than 1.0!");
-                CalcNumberGrade(true, summedWeights);
+                CalcNumberGrade();
             }
             else
             {
-                CalcNumberGrade(false, summedWeights);
+                CalcNumberGrade();
             }
         }
 
@@ -268,16 +268,28 @@ namespace ClassCalculater
         /// <summary>
         /// Calculates both the partial and fully weighted grade
         /// </summary>
-        /// <param name="partial">Weather or not the weights being handed in are less than 1.0 </param>
+        /// <param name="full">Weather or not the weights being handed in are less than 1.0 </param>
         /// <param name="totalWeight">The sum of the weights for all assignments </param>
-        private void CalcNumberGrade(bool partial, float totalWeight)
+        private void CalcNumberGrade()
         {
+            bool full;
             int rawSum = 0;
             float weighted = 0;
+            float totalWeight = 0;
 
             for (int i = 0; i < assignments.Count; i++)
             {
-                rawSum += assignments[i].AssignemntGrade; 
+                rawSum += assignments[i].AssignemntGrade;
+                totalWeight += assignments[i].AssignmentWeight;
+            }
+
+            if(1.0 > totalWeight)
+            {
+                full = false;
+            }
+            else
+            {
+                full = true;
             }
 
             for (int i = 0; i < assignments.Count; i++)
@@ -285,7 +297,7 @@ namespace ClassCalculater
                 weighted += assignments[i].AssignemntGrade * assignments[i].AssignmentWeight;
             }
 
-            if (true == partial)
+            if (true == full)
             {
                 weighted = weighted / totalWeight;
                 weightedAveragePartial.Text = (weighted).ToString(CultureInfo.CurrentCulture);
