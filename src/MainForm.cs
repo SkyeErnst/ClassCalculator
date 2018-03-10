@@ -206,6 +206,7 @@ namespace ClassCalculater
         private void ClearForm()
         {
             hasGenerated = false;
+            weightSum.Text = "0";
             yOffset = DEFAULT_Y_OFFSET;
             linesGenerated = DEFAULT_LINES_GENERATED;
             assignmentsTotal = DEFAULT_ASSIGNMENT_TOTAL;
@@ -229,19 +230,7 @@ namespace ClassCalculater
             unweightedAverage.Text = unweightGrade.ToString(CultureInfo.CurrentCulture);
             weightSum.Text = summedWeights.ToString(CultureInfo.CurrentCulture);
 
-            // If sum of weights is less than 1, warn user, update partial weight form
-            if(1.0f > summedWeights)
-            {
-                MessageBox.Show("Sum of weights is not equal to 1.0.\n" +
-                    "If this is intentional, no action need be taken.\n" +
-                    "If it is not intentional, ensure that weights are entered corectly.\n" +
-                    "Weight sum should never be more than 1.0!");
-                CalcNumberGrade();
-            }
-            else
-            {
-                CalcNumberGrade();
-            }
+            CalcNumberGrade();
         }
 
         /// <summary>
@@ -302,9 +291,13 @@ namespace ClassCalculater
                 totalWeight += assignments[i].AssignmentWeight;
             }
 
-            if(1.0 > totalWeight)
+            if(1.0f > totalWeight)
             {
                 full = false;
+                MessageBox.Show("Sum of weights is not equal to 1.0.\n" +
+                "If this is intentional, no action need be taken.\n" +
+                "If it is not intentional, ensure that weights are entered corectly.\n" +
+                "Weight sum should never be more than 1.0!");
             }
             else
             {
@@ -316,7 +309,7 @@ namespace ClassCalculater
                 weighted += assignments[i].AssignemntGrade * assignments[i].AssignmentWeight;
             }
 
-            if (true == full)
+            if (false == full)
             {
                 weighted = weighted / totalWeight;
                 weightedAveragePartial.Text = (weighted).ToString(CultureInfo.CurrentCulture);
@@ -399,7 +392,7 @@ namespace ClassCalculater
             }
             else
             {
-                MainProgram.ioManRef.WriteToFile(assignments, "TestOutput");
+                MainProgram.ioManRef.WriteToFile(assignments, "Output.xml");
             }
         }
 
