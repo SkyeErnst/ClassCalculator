@@ -164,6 +164,26 @@ namespace ClassCalculater
         }
 
         /// <summary>
+        /// Helper method for the OrganizeForm method. Will ONLY organize already generated and added
+        /// text boxes
+        /// </summary>
+        /// <param name="lst"></param>
+        private void AddTextBoxes()
+        {
+            Point ongoing = assignmentNameLabel.Location;
+            assignmentsTotal = assignments.Count;
+
+            for (int i = linesGenerated; i < assignmentsTotal; i++)
+            {
+                ongoing.Y += yOffset;
+                assignments[i].Location = ongoing;
+                linesGenerated += 1;
+            }
+
+            hasGenerated = true;
+        }
+
+        /// <summary>
         /// Clears all generated text and text boxes, and removes text boxes from the form.
         /// </summary>
         /// <param name="sender"></param>
@@ -361,6 +381,7 @@ namespace ClassCalculater
             ClearFormClick(null, null);
             MainProgram.ioManRef.ReadFromFile(ref assignments);
             CalcGradeButtonClick(null, null);
+            OrganizeFormControls();
         }
 
         /// <summary>
@@ -378,6 +399,19 @@ namespace ClassCalculater
             {
                 MainProgram.ioManRef.WriteToFile(assignments, "TestOutput");
             }
+        }
+
+        /// <summary>
+        /// Given a reference to a list of AssignmentInput classes, 
+        /// formats their contents onto this form.
+        /// </summary>
+        private void OrganizeFormControls()
+        {
+            foreach (AssignmentInput inp in assignments)
+            {
+                this.Controls.Add(inp);
+            }
+            AddTextBoxes();
         }
     }
 }
