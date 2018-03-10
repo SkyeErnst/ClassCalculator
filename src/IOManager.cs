@@ -93,15 +93,15 @@ namespace ClassCalculater
         /// <returns></returns>
         public void ReadFromFile(ref List<AssignmentInput> list)
         {
-            OpenFileDialog fileDiaglogue = new OpenFileDialog();
+            OpenFileDialog fileDialogue = new OpenFileDialog();
 
-            DialogResult result = fileDiaglogue.ShowDialog();
+            DialogResult result = fileDialogue.ShowDialog();
 
             if (DialogResult.OK == result)
             {
                 list = new List<AssignmentInput>();
 
-                string file = fileDiaglogue.FileName;
+                string file = fileDialogue.FileName;
                 XmlReader reader = XmlReader.Create(file);
 
                 XmlDocument doc = new XmlDocument();
@@ -112,26 +112,31 @@ namespace ClassCalculater
 
                 List<XmlNode> nodeAttrib = new List<XmlNode>();
 
-                XmlAttributeCollection collection;
+                XmlAttributeCollection xmlAttr;
                 int itter = 0;
 
                 foreach (XmlNode node in nodes)
                 {
-                    collection = node.Attributes;
+                    // TODO 
+                    // Move assignment to list to end of algorythm
+                    // Get rid of inner loop
+                    // Use direct assignemnts for attributes, as that is essentually what is already being done
+
+                    xmlAttr = node.Attributes;
                     list.Add(new AssignmentInput());
 
-                    for (int i = 0; i < collection.Count; i++)
+                    for (int i = 0; i < xmlAttr.Count; i++)
                     {
                         switch (i)
                         {
                             case 0:
-                                list[itter].AssignmentName = collection[i].Value;
+                                list[itter].AssignmentName = xmlAttr[i].Value;
                                 break;
                             case 1:
-                                list[itter].AssignemntGrade = Int32.Parse(collection[i].Value);
+                                list[itter].AssignemntGrade = Int32.Parse(xmlAttr[i].Value);
                                 break;
                             case 2:
-                                list[itter].AssignmentWeight = float.Parse(collection[i].Value);
+                                list[itter].AssignmentWeight = float.Parse(xmlAttr[i].Value);
                                 break;
                             default:
                                 MessageBox.Show("Access out of bounds in for loop of xml reader.");
@@ -139,7 +144,7 @@ namespace ClassCalculater
                         }
                     }
 
-                    itter += 1;
+                    itter++;
                 }
             }  
         }
