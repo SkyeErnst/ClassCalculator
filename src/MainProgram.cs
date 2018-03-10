@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ClassCalculater
@@ -11,6 +8,7 @@ namespace ClassCalculater
         #region Internal Fields
 
         internal readonly static MainForm mainFormRef;
+        internal readonly static IOManager ioManRef;
 
         #endregion
 
@@ -19,6 +17,7 @@ namespace ClassCalculater
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             mainFormRef = new MainForm();
+            ioManRef = new IOManager();
         }
 
         /// <summary>

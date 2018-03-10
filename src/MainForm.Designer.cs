@@ -44,9 +44,9 @@
             this.button1 = new System.Windows.Forms.Button();
             this.calcGradeButton = new System.Windows.Forms.Button();
             this.letterGradeLabel = new System.Windows.Forms.Label();
-            this.numberGradeLabel = new System.Windows.Forms.Label();
+            this.weightedGradeLabel = new System.Windows.Forms.Label();
             this.letterGrade = new System.Windows.Forms.Label();
-            this.weightedNumberGrade = new System.Windows.Forms.Label();
+            this.weightedGrade = new System.Windows.Forms.Label();
             this.unweightedAverageLabel = new System.Windows.Forms.Label();
             this.unweightedAverage = new System.Windows.Forms.Label();
             this.weightedAveragePartial = new System.Windows.Forms.Label();
@@ -71,6 +71,8 @@
             this.fPointLabel = new System.Windows.Forms.Label();
             this.weightSumLabel = new System.Windows.Forms.Label();
             this.weightSum = new System.Windows.Forms.Label();
+            this.AddBoxesButton = new System.Windows.Forms.Button();
+            this.boxesToAdd = new System.Windows.Forms.MaskedTextBox();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -87,7 +89,7 @@
             // assignmentNameLabel
             // 
             this.assignmentNameLabel.AutoSize = true;
-            this.assignmentNameLabel.Location = new System.Drawing.Point(15, 129);
+            this.assignmentNameLabel.Location = new System.Drawing.Point(15, 130);
             this.assignmentNameLabel.Name = "assignmentNameLabel";
             this.assignmentNameLabel.Size = new System.Drawing.Size(139, 20);
             this.assignmentNameLabel.TabIndex = 3;
@@ -97,7 +99,7 @@
             // gradeLabel
             // 
             this.gradeLabel.AutoSize = true;
-            this.gradeLabel.Location = new System.Drawing.Point(190, 129);
+            this.gradeLabel.Location = new System.Drawing.Point(190, 130);
             this.gradeLabel.Name = "gradeLabel";
             this.gradeLabel.Size = new System.Drawing.Size(54, 20);
             this.gradeLabel.TabIndex = 4;
@@ -107,7 +109,7 @@
             // percentOfTotalGradeLabel
             // 
             this.percentOfTotalGradeLabel.AutoSize = true;
-            this.percentOfTotalGradeLabel.Location = new System.Drawing.Point(331, 129);
+            this.percentOfTotalGradeLabel.Location = new System.Drawing.Point(300, 130);
             this.percentOfTotalGradeLabel.Name = "percentOfTotalGradeLabel";
             this.percentOfTotalGradeLabel.Size = new System.Drawing.Size(170, 20);
             this.percentOfTotalGradeLabel.TabIndex = 5;
@@ -136,14 +138,16 @@
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.openToolStripMenuItem.Text = "Open";
+            this.openToolStripMenuItem.Click += new System.EventHandler(this.OpenFileClick);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveToolStripMenuItem.Text = "Save";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.SaveFileClick);
             // 
             // editToolStripMenuItem
             // 
@@ -166,7 +170,7 @@
             this.editToolStripMenuItem1.Name = "editToolStripMenuItem1";
             this.editToolStripMenuItem1.Size = new System.Drawing.Size(94, 22);
             this.editToolStripMenuItem1.Text = "Edit";
-            this.editToolStripMenuItem1.Click += new System.EventHandler(this.EditToolStripMenuGrade_Click);
+            this.editToolStripMenuItem1.Click += new System.EventHandler(this.EditLetterGradeRange);
             // 
             // menuStrip
             // 
@@ -220,14 +224,14 @@
             this.letterGradeLabel.TabIndex = 10;
             this.letterGradeLabel.Text = "Letter Grade";
             // 
-            // numberGradeLabel
+            // weightedGradeLabel
             // 
-            this.numberGradeLabel.AutoSize = true;
-            this.numberGradeLabel.Location = new System.Drawing.Point(836, 176);
-            this.numberGradeLabel.Name = "numberGradeLabel";
-            this.numberGradeLabel.Size = new System.Drawing.Size(114, 20);
-            this.numberGradeLabel.TabIndex = 11;
-            this.numberGradeLabel.Text = "Number Grade";
+            this.weightedGradeLabel.AutoSize = true;
+            this.weightedGradeLabel.Location = new System.Drawing.Point(816, 175);
+            this.weightedGradeLabel.Name = "weightedGradeLabel";
+            this.weightedGradeLabel.Size = new System.Drawing.Size(126, 20);
+            this.weightedGradeLabel.TabIndex = 11;
+            this.weightedGradeLabel.Text = "Weighted Grade";
             // 
             // letterGrade
             // 
@@ -238,19 +242,19 @@
             this.letterGrade.TabIndex = 12;
             this.letterGrade.Text = "Waiting for Generation";
             // 
-            // weightedNumberGrade
+            // weightedGrade
             // 
-            this.weightedNumberGrade.AutoSize = true;
-            this.weightedNumberGrade.Location = new System.Drawing.Point(810, 195);
-            this.weightedNumberGrade.Name = "weightedNumberGrade";
-            this.weightedNumberGrade.Size = new System.Drawing.Size(169, 20);
-            this.weightedNumberGrade.TabIndex = 14;
-            this.weightedNumberGrade.Text = "Waiting for Generation";
+            this.weightedGrade.AutoSize = true;
+            this.weightedGrade.Location = new System.Drawing.Point(793, 195);
+            this.weightedGrade.Name = "weightedGrade";
+            this.weightedGrade.Size = new System.Drawing.Size(169, 20);
+            this.weightedGrade.TabIndex = 14;
+            this.weightedGrade.Text = "Waiting for Generation";
             // 
             // unweightedAverageLabel
             // 
             this.unweightedAverageLabel.AutoSize = true;
-            this.unweightedAverageLabel.Location = new System.Drawing.Point(1051, 175);
+            this.unweightedAverageLabel.Location = new System.Drawing.Point(1073, 175);
             this.unweightedAverageLabel.Name = "unweightedAverageLabel";
             this.unweightedAverageLabel.Size = new System.Drawing.Size(157, 20);
             this.unweightedAverageLabel.TabIndex = 15;
@@ -259,7 +263,7 @@
             // unweightedAverage
             // 
             this.unweightedAverage.AutoSize = true;
-            this.unweightedAverage.Location = new System.Drawing.Point(1061, 195);
+            this.unweightedAverage.Location = new System.Drawing.Point(1083, 195);
             this.unweightedAverage.Name = "unweightedAverage";
             this.unweightedAverage.Size = new System.Drawing.Size(169, 20);
             this.unweightedAverage.TabIndex = 16;
@@ -268,7 +272,7 @@
             // weightedAveragePartial
             // 
             this.weightedAveragePartial.AutoSize = true;
-            this.weightedAveragePartial.Location = new System.Drawing.Point(1061, 240);
+            this.weightedAveragePartial.Location = new System.Drawing.Point(806, 254);
             this.weightedAveragePartial.Name = "weightedAveragePartial";
             this.weightedAveragePartial.Size = new System.Drawing.Size(169, 20);
             this.weightedAveragePartial.TabIndex = 17;
@@ -277,16 +281,16 @@
             // weightedAveragePartialLabel
             // 
             this.weightedAveragePartialLabel.AutoSize = true;
-            this.weightedAveragePartialLabel.Location = new System.Drawing.Point(1051, 220);
+            this.weightedAveragePartialLabel.Location = new System.Drawing.Point(796, 234);
             this.weightedAveragePartialLabel.Name = "weightedAveragePartialLabel";
-            this.weightedAveragePartialLabel.Size = new System.Drawing.Size(192, 20);
+            this.weightedAveragePartialLabel.Size = new System.Drawing.Size(188, 20);
             this.weightedAveragePartialLabel.TabIndex = 18;
-            this.weightedAveragePartialLabel.Text = "Weighted Average So Far";
+            this.weightedAveragePartialLabel.Text = "Partial Weighted Average";
             // 
             // gradeRangeLabel
             // 
             this.gradeRangeLabel.AutoSize = true;
-            this.gradeRangeLabel.Location = new System.Drawing.Point(600, 260);
+            this.gradeRangeLabel.Location = new System.Drawing.Point(596, 340);
             this.gradeRangeLabel.Name = "gradeRangeLabel";
             this.gradeRangeLabel.Size = new System.Drawing.Size(106, 20);
             this.gradeRangeLabel.TabIndex = 19;
@@ -295,7 +299,7 @@
             // aLabel
             // 
             this.aLabel.AutoSize = true;
-            this.aLabel.Location = new System.Drawing.Point(600, 290);
+            this.aLabel.Location = new System.Drawing.Point(596, 370);
             this.aLabel.Name = "aLabel";
             this.aLabel.Size = new System.Drawing.Size(20, 20);
             this.aLabel.TabIndex = 20;
@@ -304,7 +308,7 @@
             // bLabel
             // 
             this.bLabel.AutoSize = true;
-            this.bLabel.Location = new System.Drawing.Point(600, 320);
+            this.bLabel.Location = new System.Drawing.Point(596, 400);
             this.bLabel.Name = "bLabel";
             this.bLabel.Size = new System.Drawing.Size(20, 20);
             this.bLabel.TabIndex = 21;
@@ -313,7 +317,7 @@
             // cLabel
             // 
             this.cLabel.AutoSize = true;
-            this.cLabel.Location = new System.Drawing.Point(600, 350);
+            this.cLabel.Location = new System.Drawing.Point(596, 430);
             this.cLabel.Name = "cLabel";
             this.cLabel.Size = new System.Drawing.Size(20, 20);
             this.cLabel.TabIndex = 22;
@@ -322,7 +326,7 @@
             // dLabel
             // 
             this.dLabel.AutoSize = true;
-            this.dLabel.Location = new System.Drawing.Point(600, 380);
+            this.dLabel.Location = new System.Drawing.Point(596, 460);
             this.dLabel.Name = "dLabel";
             this.dLabel.Size = new System.Drawing.Size(21, 20);
             this.dLabel.TabIndex = 23;
@@ -331,7 +335,7 @@
             // Label
             // 
             this.Label.AutoSize = true;
-            this.Label.Location = new System.Drawing.Point(600, 410);
+            this.Label.Location = new System.Drawing.Point(596, 490);
             this.Label.Name = "Label";
             this.Label.Size = new System.Drawing.Size(19, 20);
             this.Label.TabIndex = 24;
@@ -340,7 +344,7 @@
             // min
             // 
             this.min.AutoSize = true;
-            this.min.Location = new System.Drawing.Point(733, 260);
+            this.min.Location = new System.Drawing.Point(729, 340);
             this.min.Name = "min";
             this.min.Size = new System.Drawing.Size(34, 20);
             this.min.TabIndex = 25;
@@ -349,7 +353,7 @@
             // max
             // 
             this.max.AutoSize = true;
-            this.max.Location = new System.Drawing.Point(810, 260);
+            this.max.Location = new System.Drawing.Point(806, 340);
             this.max.Name = "max";
             this.max.Size = new System.Drawing.Size(38, 20);
             this.max.TabIndex = 26;
@@ -358,7 +362,7 @@
             // aMinLabel
             // 
             this.aMinLabel.AutoSize = true;
-            this.aMinLabel.Location = new System.Drawing.Point(733, 290);
+            this.aMinLabel.Location = new System.Drawing.Point(729, 370);
             this.aMinLabel.Name = "aMinLabel";
             this.aMinLabel.Size = new System.Drawing.Size(34, 20);
             this.aMinLabel.TabIndex = 27;
@@ -367,7 +371,7 @@
             // bMinLabel
             // 
             this.bMinLabel.AutoSize = true;
-            this.bMinLabel.Location = new System.Drawing.Point(733, 320);
+            this.bMinLabel.Location = new System.Drawing.Point(729, 400);
             this.bMinLabel.Name = "bMinLabel";
             this.bMinLabel.Size = new System.Drawing.Size(34, 20);
             this.bMinLabel.TabIndex = 28;
@@ -376,7 +380,7 @@
             // cMinLabel
             // 
             this.cMinLabel.AutoSize = true;
-            this.cMinLabel.Location = new System.Drawing.Point(733, 350);
+            this.cMinLabel.Location = new System.Drawing.Point(729, 430);
             this.cMinLabel.Name = "cMinLabel";
             this.cMinLabel.Size = new System.Drawing.Size(34, 20);
             this.cMinLabel.TabIndex = 29;
@@ -385,7 +389,7 @@
             // dMinLabel
             // 
             this.dMinLabel.AutoSize = true;
-            this.dMinLabel.Location = new System.Drawing.Point(733, 380);
+            this.dMinLabel.Location = new System.Drawing.Point(729, 460);
             this.dMinLabel.Name = "dMinLabel";
             this.dMinLabel.Size = new System.Drawing.Size(34, 20);
             this.dMinLabel.TabIndex = 30;
@@ -394,7 +398,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(777, 410);
+            this.label13.Location = new System.Drawing.Point(773, 490);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(27, 20);
             this.label13.TabIndex = 31;
@@ -403,7 +407,7 @@
             // aMaxLabel
             // 
             this.aMaxLabel.AutoSize = true;
-            this.aMaxLabel.Location = new System.Drawing.Point(810, 290);
+            this.aMaxLabel.Location = new System.Drawing.Point(806, 370);
             this.aMaxLabel.Name = "aMaxLabel";
             this.aMaxLabel.Size = new System.Drawing.Size(38, 20);
             this.aMaxLabel.TabIndex = 32;
@@ -412,7 +416,7 @@
             // bMaxLabel
             // 
             this.bMaxLabel.AutoSize = true;
-            this.bMaxLabel.Location = new System.Drawing.Point(810, 320);
+            this.bMaxLabel.Location = new System.Drawing.Point(806, 400);
             this.bMaxLabel.Name = "bMaxLabel";
             this.bMaxLabel.Size = new System.Drawing.Size(38, 20);
             this.bMaxLabel.TabIndex = 33;
@@ -421,7 +425,7 @@
             // cMaxLabel
             // 
             this.cMaxLabel.AutoSize = true;
-            this.cMaxLabel.Location = new System.Drawing.Point(810, 350);
+            this.cMaxLabel.Location = new System.Drawing.Point(806, 430);
             this.cMaxLabel.Name = "cMaxLabel";
             this.cMaxLabel.Size = new System.Drawing.Size(38, 20);
             this.cMaxLabel.TabIndex = 34;
@@ -430,7 +434,7 @@
             // dMaxLabel
             // 
             this.dMaxLabel.AutoSize = true;
-            this.dMaxLabel.Location = new System.Drawing.Point(810, 380);
+            this.dMaxLabel.Location = new System.Drawing.Point(806, 460);
             this.dMaxLabel.Name = "dMaxLabel";
             this.dMaxLabel.Size = new System.Drawing.Size(38, 20);
             this.dMaxLabel.TabIndex = 35;
@@ -439,7 +443,7 @@
             // fPointLabel
             // 
             this.fPointLabel.AutoSize = true;
-            this.fPointLabel.Location = new System.Drawing.Point(810, 410);
+            this.fPointLabel.Location = new System.Drawing.Point(806, 490);
             this.fPointLabel.Name = "fPointLabel";
             this.fPointLabel.Size = new System.Drawing.Size(38, 20);
             this.fPointLabel.TabIndex = 36;
@@ -463,12 +467,34 @@
             this.weightSum.TabIndex = 38;
             this.weightSum.Text = "0";
             // 
+            // AddBoxesButton
+            // 
+            this.AddBoxesButton.Location = new System.Drawing.Point(260, 71);
+            this.AddBoxesButton.Name = "AddBoxesButton";
+            this.AddBoxesButton.Size = new System.Drawing.Size(241, 24);
+            this.AddBoxesButton.TabIndex = 39;
+            this.AddBoxesButton.Text = "Add More Boxes";
+            this.AddBoxesButton.UseVisualStyleBackColor = true;
+            this.AddBoxesButton.Click += new System.EventHandler(this.AddBoxesButton_Click);
+            // 
+            // boxesToAdd
+            // 
+            this.boxesToAdd.AsciiOnly = true;
+            this.boxesToAdd.BeepOnError = true;
+            this.boxesToAdd.Location = new System.Drawing.Point(210, 69);
+            this.boxesToAdd.Mask = "00";
+            this.boxesToAdd.Name = "boxesToAdd";
+            this.boxesToAdd.Size = new System.Drawing.Size(34, 26);
+            this.boxesToAdd.TabIndex = 40;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1264, 681);
+            this.Controls.Add(this.boxesToAdd);
+            this.Controls.Add(this.AddBoxesButton);
             this.Controls.Add(this.weightSum);
             this.Controls.Add(this.weightSumLabel);
             this.Controls.Add(this.fPointLabel);
@@ -493,9 +519,9 @@
             this.Controls.Add(this.weightedAveragePartial);
             this.Controls.Add(this.unweightedAverage);
             this.Controls.Add(this.unweightedAverageLabel);
-            this.Controls.Add(this.weightedNumberGrade);
+            this.Controls.Add(this.weightedGrade);
             this.Controls.Add(this.letterGrade);
-            this.Controls.Add(this.numberGradeLabel);
+            this.Controls.Add(this.weightedGradeLabel);
             this.Controls.Add(this.letterGradeLabel);
             this.Controls.Add(this.calcGradeButton);
             this.Controls.Add(this.button1);
@@ -535,9 +561,9 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button calcGradeButton;
         private System.Windows.Forms.Label letterGradeLabel;
-        private System.Windows.Forms.Label numberGradeLabel;
+        private System.Windows.Forms.Label weightedGradeLabel;
         private System.Windows.Forms.Label letterGrade;
-        private System.Windows.Forms.Label weightedNumberGrade;
+        private System.Windows.Forms.Label weightedGrade;
         private System.Windows.Forms.Label unweightedAverageLabel;
         private System.Windows.Forms.Label unweightedAverage;
         private System.Windows.Forms.Label weightedAveragePartial;
@@ -562,6 +588,8 @@
         private System.Windows.Forms.Label fPointLabel;
         private System.Windows.Forms.Label weightSumLabel;
         private System.Windows.Forms.Label weightSum;
+        private System.Windows.Forms.Button AddBoxesButton;
+        private System.Windows.Forms.MaskedTextBox boxesToAdd;
     }
 }
 
