@@ -171,7 +171,6 @@ namespace ClassCalculater
         private void AddTextBoxes()
         {
             Point ongoing = assignmentNameLabel.Location;
-            assignmentsTotal = assignments.Count;
 
             for (int i = linesGenerated; i < assignmentsTotal; i++)
             {
@@ -380,6 +379,9 @@ namespace ClassCalculater
         {
             ClearFormClick(null, null);
             MainProgram.ioManRef.ReadFromFile(ref assignments);
+
+            assignmentsTotal = assignments.Count;
+
             CalcGradeButtonClick(null, null);
             OrganizeFormControls();
         }
@@ -411,6 +413,7 @@ namespace ClassCalculater
             {
                 this.Controls.Add(inp);
             }
+
             AddTextBoxes();
         }
     }
