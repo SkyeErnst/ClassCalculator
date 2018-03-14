@@ -60,8 +60,16 @@ namespace ClassCalculater
 
             if (false == File.Exists(fileName))
             {
+
+                // Sets up settings for the xml writer
+
+                XmlWriterSettings formatSettings = new XmlWriterSettings();
+                formatSettings.NewLineOnAttributes = true;
+                formatSettings.Indent = true;
+
                 // Create new xml document at path
-                XmlWriter writer = XmlWriter.Create(path + @"\" + fileName);
+                XmlWriter writer = XmlWriter.Create(path + @"\" + fileName, formatSettings);
+               
                 writer.WriteStartDocument();
 
                 writer.WriteStartElement("Assignments");
