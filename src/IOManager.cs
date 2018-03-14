@@ -58,7 +58,7 @@ namespace ClassCalculater
         public void WriteToFile(List<AssignmentInput> boxes, string fileName)
         {
 
-            if (false == File.Exists(fileName))
+            if (false == File.Exists(path + @"\" + fileName))
             {
 
                 // Sets up settings for the xml writer
@@ -70,10 +70,11 @@ namespace ClassCalculater
                 // Create new xml document at path
                 XmlWriter writer = XmlWriter.Create(path + @"\" + fileName, formatSettings);
                
+                // Starts writing to document
                 writer.WriteStartDocument();
-
                 writer.WriteStartElement("Assignments");
 
+                // Records the information to the file
                 for (int i = 0; i < boxes.Count; i++)
                 {
                     writer.WriteStartElement(ASSIGNMENT_NUMBERING + i);
@@ -83,6 +84,7 @@ namespace ClassCalculater
                     writer.WriteEndElement();
                 }
 
+                // Placest the closing tags and closes the document. 
                 writer.WriteEndDocument();
                 writer.Close();
 
