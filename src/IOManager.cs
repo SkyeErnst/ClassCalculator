@@ -113,38 +113,18 @@ namespace ClassCalculater
                 List<XmlNode> nodeAttrib = new List<XmlNode>();
 
                 XmlAttributeCollection xmlAttr;
-                int itter = 0;
 
                 foreach (XmlNode node in nodes)
                 {
-                    // TODO 
-                    // Move assignment to list to end of algorythm
-                    // Get rid of inner loop
-                    // Use direct assignemnts for attributes, as that is essentually what is already being done
 
                     xmlAttr = node.Attributes;
-                    list.Add(new AssignmentInput());
+                    AssignmentInput input = new AssignmentInput();
 
-                    for (int i = 0; i < xmlAttr.Count; i++)
-                    {
-                        switch (i)
-                        {
-                            case 0:
-                                list[itter].AssignmentName = xmlAttr[i].Value;
-                                break;
-                            case 1:
-                                list[itter].AssignemntGrade = Int32.Parse(xmlAttr[i].Value);
-                                break;
-                            case 2:
-                                list[itter].AssignmentWeight = float.Parse(xmlAttr[i].Value);
-                                break;
-                            default:
-                                MessageBox.Show("Access out of bounds in for loop of xml reader.");
-                                break;
-                        }
-                    }
+                    input.AssignmentName = xmlAttr[0].Value;
+                    input.AssignemntGrade = Int32.Parse(xmlAttr[1].Value);
+                    input.AssignmentWeight = float.Parse(xmlAttr[2].Value);
 
-                    itter++;
+                    list.Add(input);
                 }
             }  
         }
