@@ -99,7 +99,7 @@
             // gradeLabel
             // 
             this.gradeLabel.AutoSize = true;
-            this.gradeLabel.Location = new System.Drawing.Point(190, 130);
+            this.gradeLabel.Location = new System.Drawing.Point(206, 130);
             this.gradeLabel.Name = "gradeLabel";
             this.gradeLabel.Size = new System.Drawing.Size(54, 20);
             this.gradeLabel.TabIndex = 4;
@@ -109,11 +109,11 @@
             // percentOfTotalGradeLabel
             // 
             this.percentOfTotalGradeLabel.AutoSize = true;
-            this.percentOfTotalGradeLabel.Location = new System.Drawing.Point(300, 130);
+            this.percentOfTotalGradeLabel.Location = new System.Drawing.Point(355, 130);
             this.percentOfTotalGradeLabel.Name = "percentOfTotalGradeLabel";
-            this.percentOfTotalGradeLabel.Size = new System.Drawing.Size(170, 20);
+            this.percentOfTotalGradeLabel.Size = new System.Drawing.Size(59, 20);
             this.percentOfTotalGradeLabel.TabIndex = 5;
-            this.percentOfTotalGradeLabel.Text = "Percent of Total Grade";
+            this.percentOfTotalGradeLabel.Text = "Weight";
             this.percentOfTotalGradeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // assignmentNumberInput
@@ -138,14 +138,14 @@
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.OpenFileClick);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.SaveFileClick);
             // 
@@ -227,7 +227,7 @@
             // weightedGradeLabel
             // 
             this.weightedGradeLabel.AutoSize = true;
-            this.weightedGradeLabel.Location = new System.Drawing.Point(816, 175);
+            this.weightedGradeLabel.Location = new System.Drawing.Point(796, 175);
             this.weightedGradeLabel.Name = "weightedGradeLabel";
             this.weightedGradeLabel.Size = new System.Drawing.Size(126, 20);
             this.weightedGradeLabel.TabIndex = 11;
@@ -245,7 +245,7 @@
             // weightedGrade
             // 
             this.weightedGrade.AutoSize = true;
-            this.weightedGrade.Location = new System.Drawing.Point(793, 195);
+            this.weightedGrade.Location = new System.Drawing.Point(806, 195);
             this.weightedGrade.Name = "weightedGrade";
             this.weightedGrade.Size = new System.Drawing.Size(169, 20);
             this.weightedGrade.TabIndex = 14;
@@ -254,7 +254,7 @@
             // unweightedAverageLabel
             // 
             this.unweightedAverageLabel.AutoSize = true;
-            this.unweightedAverageLabel.Location = new System.Drawing.Point(1073, 175);
+            this.unweightedAverageLabel.Location = new System.Drawing.Point(1083, 175);
             this.unweightedAverageLabel.Name = "unweightedAverageLabel";
             this.unweightedAverageLabel.Size = new System.Drawing.Size(157, 20);
             this.unweightedAverageLabel.TabIndex = 15;
@@ -398,7 +398,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(773, 490);
+            this.label13.Location = new System.Drawing.Point(732, 490);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(27, 20);
             this.label13.TabIndex = 31;
