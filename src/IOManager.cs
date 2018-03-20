@@ -69,9 +69,11 @@ namespace ClassCalculater
                 overwrite = false;
 
                 // Sets up settings for the xml writer
-                XmlWriterSettings formatSettings = new XmlWriterSettings();
-                formatSettings.NewLineOnAttributes = true;
-                formatSettings.Indent = true;
+                XmlWriterSettings formatSettings = new XmlWriterSettings
+                {
+                    NewLineOnAttributes = true,
+                    Indent = true
+                };
 
                 // Create new xml document at given path
                 XmlWriter writer = XmlWriter.Create(fileName + ".xml", formatSettings);
