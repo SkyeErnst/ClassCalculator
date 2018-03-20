@@ -51,12 +51,6 @@ namespace ClassCalculater
         /// The tottal number of lines of assignments that have been generated so far.
         /// </summary>
         private int linesGenerated;
-
-        /// <summary>
-        /// Name of the last file saved to.
-        /// </summary>
-        private string fileName;
-
         
         private int yOffset = 40;
 
