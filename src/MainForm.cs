@@ -416,10 +416,5 @@ namespace ClassCalculater
 
             AddTextBoxes();
         }
-
-        public void SetFileName(string input)
-        {
-            fileName = input;
-        }
     }
 }
