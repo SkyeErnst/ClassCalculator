@@ -52,6 +52,11 @@ namespace ClassCalculater
         /// </summary>
         private int linesGenerated;
 
+        /// <summary>
+        /// Name of the last file saved to.
+        /// </summary>
+        private string fileName;
+
         
         private int yOffset = 40;
 
@@ -392,7 +397,9 @@ namespace ClassCalculater
             }
             else
             {
-                MainProgram.ioManRef.WriteToFile(assignments, "Output.xml");
+                SaveFileDialog save = new SaveFileDialog();
+                save.ShowDialog();
+                MainProgram.ioManRef.WriteToFile(assignments, save.FileName);
             }
         }
 
@@ -408,6 +415,11 @@ namespace ClassCalculater
             }
 
             AddTextBoxes();
+        }
+
+        public void SetFileName(string input)
+        {
+            fileName = input;
         }
     }
 }

@@ -33,6 +33,12 @@ namespace ClassCalculater
         /// </summary>
         private string path;
 
+        /// <summary>
+        /// Bool to hold flag for whether or not the user
+        /// wants to overwrite the saved file.
+        /// </summary>
+        private bool overwrite = false;
+
         #endregion
 
         /// <summary>
@@ -58,8 +64,9 @@ namespace ClassCalculater
         public void WriteToFile(List<AssignmentInput> boxes, string fileName)
         {
 
-            if (false == File.Exists(path + @"\" + fileName))
+            if (false == File.Exists(fileName) || true == overwrite)
             {
+                overwrite = false;
 
                 // Sets up settings for the xml writer
                 XmlWriterSettings formatSettings = new XmlWriterSettings();
@@ -67,7 +74,7 @@ namespace ClassCalculater
                 formatSettings.Indent = true;
 
                 // Create new xml document at given path
-                XmlWriter writer = XmlWriter.Create(path + @"\" + fileName, formatSettings);
+                XmlWriter writer = XmlWriter.Create(fileName + ".xml", formatSettings);
                
                 // Starts writing to document
                 writer.WriteStartDocument();
@@ -90,7 +97,7 @@ namespace ClassCalculater
                     }
                 }
 
-                // Placest the closing tags and closes the document. 
+                // Places the closing tags and closes the document. 
                 writer.WriteEndDocument();
                 writer.Close();
 
@@ -98,7 +105,9 @@ namespace ClassCalculater
             else
             {
                 FileInfo f = new FileInfo(fileName);
-                MessageBox.Show("ERROR: XML file with name " + fileName + " already exists. At path: " + f.FullName);
+                MessageBox.Show("ERROR: XML file with name " + fileName + " already exists. At path: " + f.FullName + 
+                    "\nIf you want to overwrite this file, save again.");
+                overwrite = true;
             }
         }
 
