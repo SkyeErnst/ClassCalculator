@@ -18,7 +18,7 @@ namespace ClassCalculater
         /// within the program. This is NOT the xml version number refering to
         /// the language revisions.
         /// </summary>
-        internal static string XMLVersion = "1.0";
+        internal static string XMLWritingVersion = "1.0";
         #endregion
 
         #region Private fields
@@ -62,12 +62,11 @@ namespace ClassCalculater
             {
 
                 // Sets up settings for the xml writer
-
                 XmlWriterSettings formatSettings = new XmlWriterSettings();
                 formatSettings.NewLineOnAttributes = true;
                 formatSettings.Indent = true;
 
-                // Create new xml document at path
+                // Create new xml document at given path
                 XmlWriter writer = XmlWriter.Create(path + @"\" + fileName, formatSettings);
                
                 // Starts writing to document
@@ -77,11 +76,18 @@ namespace ClassCalculater
                 // Records the information to the file
                 for (int i = 0; i < boxes.Count; i++)
                 {
-                    writer.WriteStartElement(ASSIGNMENT_NUMBERING + i);
-                    writer.WriteAttributeString(ASSIGNMENT_NAME_TAG, boxes[i].AssignmentName);
-                    writer.WriteAttributeString(GRADE_TAG, boxes[i].AssignemntGrade.ToString(CultureInfo.CurrentCulture));
-                    writer.WriteAttributeString(WEIGHT_TAG, boxes[i].AssignmentWeight.ToString(CultureInfo.CurrentCulture));
-                    writer.WriteEndElement();
+                    try
+                    {
+                        writer.WriteStartElement(ASSIGNMENT_NUMBERING + i);
+                        writer.WriteAttributeString(ASSIGNMENT_NAME_TAG, boxes[i].AssignmentName);
+                        writer.WriteAttributeString(GRADE_TAG, boxes[i].AssignemntGrade.ToString(CultureInfo.CurrentCulture));
+                        writer.WriteAttributeString(WEIGHT_TAG, boxes[i].AssignmentWeight.ToString(CultureInfo.CurrentCulture));
+                        writer.WriteEndElement();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
                 }
 
                 // Placest the closing tags and closes the document. 
