@@ -73,6 +73,9 @@
             this.weightSum = new System.Windows.Forms.Label();
             this.AddBoxesButton = new System.Windows.Forms.Button();
             this.boxesToAdd = new System.Windows.Forms.MaskedTextBox();
+            this.removeBoxesButton = new System.Windows.Forms.Button();
+            this.lineRemovalText = new System.Windows.Forms.Label();
+            this.lineRemovalInputBox = new System.Windows.Forms.MaskedTextBox();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -487,12 +490,44 @@
             this.boxesToAdd.Size = new System.Drawing.Size(34, 26);
             this.boxesToAdd.TabIndex = 40;
             // 
+            // removeBoxesButton
+            // 
+            this.removeBoxesButton.Location = new System.Drawing.Point(600, 69);
+            this.removeBoxesButton.Name = "removeBoxesButton";
+            this.removeBoxesButton.Size = new System.Drawing.Size(140, 26);
+            this.removeBoxesButton.TabIndex = 41;
+            this.removeBoxesButton.Text = "Remove Lines";
+            this.removeBoxesButton.UseVisualStyleBackColor = true;
+            this.removeBoxesButton.Click += new System.EventHandler(this.RemoveLines);
+            // 
+            // lineRemovalText
+            // 
+            this.lineRemovalText.AutoSize = true;
+            this.lineRemovalText.Location = new System.Drawing.Point(590, 9);
+            this.lineRemovalText.Name = "lineRemovalText";
+            this.lineRemovalText.Size = new System.Drawing.Size(193, 20);
+            this.lineRemovalText.TabIndex = 42;
+            this.lineRemovalText.Text = "Number of lines to remove";
+            // 
+            // lineRemovalInputBox
+            // 
+            this.lineRemovalInputBox.AsciiOnly = true;
+            this.lineRemovalInputBox.BeepOnError = true;
+            this.lineRemovalInputBox.Location = new System.Drawing.Point(655, 37);
+            this.lineRemovalInputBox.Mask = "00";
+            this.lineRemovalInputBox.Name = "lineRemovalInputBox";
+            this.lineRemovalInputBox.Size = new System.Drawing.Size(34, 26);
+            this.lineRemovalInputBox.TabIndex = 43;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1264, 681);
+            this.Controls.Add(this.lineRemovalInputBox);
+            this.Controls.Add(this.lineRemovalText);
+            this.Controls.Add(this.removeBoxesButton);
             this.Controls.Add(this.boxesToAdd);
             this.Controls.Add(this.AddBoxesButton);
             this.Controls.Add(this.weightSum);
@@ -590,6 +625,9 @@
         private System.Windows.Forms.Label weightSum;
         private System.Windows.Forms.Button AddBoxesButton;
         private System.Windows.Forms.MaskedTextBox boxesToAdd;
+        private System.Windows.Forms.Button removeBoxesButton;
+        private System.Windows.Forms.Label lineRemovalText;
+        private System.Windows.Forms.MaskedTextBox lineRemovalInputBox;
     }
 }
 

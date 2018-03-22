@@ -295,7 +295,7 @@ namespace ClassCalculater
 
             // Weights are entered as mixed numbers,
             // converts to a multipliable weight.
-            totalWeight = totalWeight * .01f; 
+            totalWeight = totalWeight * .01f;
 
             if(1.0f > totalWeight)
             {
@@ -416,6 +416,47 @@ namespace ClassCalculater
             }
 
             AddTextBoxes();
+        }
+
+        private void RemoveLines(object sender, EventArgs e)
+        {
+            int toRem = Int32.Parse(lineRemovalInputBox.Text);
+            int index = assignments.Count - 1;
+
+            if (assignments.Count < toRem)
+            {
+                toRem = assignments.Count;
+            }
+
+            Control.ControlCollection allControls;
+            allControls = this.Controls;
+
+            // While there are still assignments left to remove
+            // Look for the last insatnce of an Assignment Input
+            // Loop until we have removed enough of the controls
+            while(0 < toRem)
+            {
+                toRem--;
+
+                assignments.RemoveAt(index);
+
+
+                for (int i = index; i != 0; i--)
+                {
+                    if (typeof(AssignmentInput) == allControls[index].GetType())
+                    {
+                        this.Controls.RemoveAt(index);
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Control: " + this.Controls[index] + " is not of type: " + typeof(AssignmentInput));
+                    }
+                }
+
+
+                index--;
+            }
         }
     }
 }
