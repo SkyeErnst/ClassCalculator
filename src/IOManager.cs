@@ -19,6 +19,7 @@ namespace ClassCalculater
         /// the language revisions.
         /// </summary>
         internal static string XMLWritingVersion = "1.0";
+        // Changelog: 1.1: Switched to different method of entering weights
         #endregion
 
         #region Private fields

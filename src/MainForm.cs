@@ -222,9 +222,12 @@ namespace ClassCalculater
             float unweightGrade = 0.0f;
             for (int i = 0; i < assignmentsTotal; i++)
             {
-                summedWeights += assignments[i].AssignmentWeight;
+                summedWeights += (assignments[i].AssignmentWeight);
                 unweightGrade += assignments[i].AssignemntGrade;
             }
+
+            summedWeights *= .01f;
+
             // Update form text
             unweightedAverage.Text = unweightGrade.ToString(CultureInfo.CurrentCulture);
             weightSum.Text = summedWeights.ToString(CultureInfo.CurrentCulture);
@@ -290,6 +293,10 @@ namespace ClassCalculater
                 totalWeight += assignments[i].AssignmentWeight;
             }
 
+            // Weights are entered as mixed numbers,
+            // converts to a multipliable weight.
+            totalWeight = totalWeight * .01f; 
+
             if(1.0f > totalWeight)
             {
                 full = false;
@@ -305,7 +312,7 @@ namespace ClassCalculater
 
             for (int i = 0; i < assignments.Count; i++)
             {
-                weighted += assignments[i].AssignemntGrade * assignments[i].AssignmentWeight;
+                weighted += assignments[i].AssignemntGrade * (assignments[i].AssignmentWeight * .01f);
             }
 
             if (false == full)
