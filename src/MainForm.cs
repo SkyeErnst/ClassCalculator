@@ -151,12 +151,21 @@ namespace ClassCalculater
 
             for (int i = linesGenerated; i < assignmentsTotal; i++)
             {
-                assignments.Add(new AssignmentInput());
-                this.Controls.Add(assignments[i]);
+                AssignmentInput inp = new AssignmentInput();
+                assignments.Add(inp);
+                this.Controls.Add(inp);
 
                 ongoing.Y += yOffset;
-                assignments[i].Location = ongoing;
+                inp.Location = ongoing;
+                
                 linesGenerated += 1;
+
+                //assignments.Add(new AssignmentInput());
+                //this.Controls.Add(assignments[i]);
+
+                //ongoing.Y += yOffset;
+                //assignments[i].Location = ongoing;
+                //linesGenerated += 1;
             }
 
             hasGenerated = true;
@@ -354,9 +363,9 @@ namespace ClassCalculater
             {
                 AddTextBoxes(Int32.Parse(boxesToAdd.Text));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                MessageBox.Show("Either a type missmatch has occured, or the input box is empty.");
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -420,13 +429,25 @@ namespace ClassCalculater
 
         private void RemoveLines(object sender, EventArgs e)
         {
-            int toRem = Int32.Parse(lineRemovalInputBox.Text);
+            int toRem = 0;
             int index = assignments.Count - 1;
+
+            try
+            {
+                toRem = Int32.Parse(lineRemovalInputBox.Text);
+            }
+            catch (Exception ex) 
+            {
+                MessageBox.Show(ex.Message);
+                return;
+            }
 
             if (assignments.Count < toRem)
             {
                 toRem = assignments.Count;
             }
+
+            assignmentsTotal -= toRem;
 
             Control.ControlCollection allControls;
             allControls = this.Controls;
@@ -434,29 +455,30 @@ namespace ClassCalculater
             // While there are still assignments left to remove
             // Look for the last insatnce of an Assignment Input
             // Loop until we have removed enough of the controls
-            while(0 < toRem)
+            while (0 < toRem)
             {
-                toRem--;
-
                 assignments.RemoveAt(index);
 
+                yOffset -= DEFAULT_Y_OFFSET;
 
-                for (int i = index; i != 0; i--)
+                for (int i = (allControls.Count - 1); i != 0; i--)
                 {
-                    if (typeof(AssignmentInput) == allControls[index].GetType())
+                    if (typeof(AssignmentInput) == allControls[i].GetType())
                     {
-                        this.Controls.RemoveAt(index);
+                        this.Controls[i].Dispose();
                         break;
                     }
                     else
                     {
-                        Console.WriteLine("Control: " + this.Controls[index] + " is not of type: " + typeof(AssignmentInput));
+                        Console.WriteLine("Control: " + this.Controls[i] + " is not of type: " + typeof(AssignmentInput));
                     }
+
                 }
 
-
+                toRem--;
                 index--;
             }
+
         }
     }
 }
