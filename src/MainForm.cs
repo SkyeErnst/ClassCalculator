@@ -19,6 +19,14 @@ namespace ClassCalculater
         public static int DMax { get; set; }
         public static int DMin { get; set; }
         public static int FPoint { get; set; }
+
+        public string EditingFileName
+        {
+            set
+            {
+                fileNameLabel.Text = value;
+            }
+        }
         #endregion
 
         #region public fields
@@ -51,16 +59,17 @@ namespace ClassCalculater
         /// The tottal number of lines of assignments that have been generated so far.
         /// </summary>
         private int linesGenerated;
-
         
         private int yOffset = 40;
 
         private const int DEFAULT_Y_OFFSET = 40;
         private const int DEFAULT_LINES_GENERATED = 0;
         private const int DEFAULT_ASSIGNMENT_TOTAL = 0;
+        private const string DEFAULT_FILE_NAME = "No file";
         private const string DEFAULT_TEXT = "Waiting For Generation";
         private const string PARTIAL_NOT_USED_TEXT = "Partial score not needed\nas all weights are provided";
         private const string PARTIAL_USED_TEXT = "Using partial score, weight sum < 1.0";
+     
 
         #endregion
 
@@ -80,6 +89,8 @@ namespace ClassCalculater
 
             UpdateRanges();
         }
+
+        
 
         /// <summary>
         /// Updates the text representation of the grades
@@ -150,14 +161,24 @@ namespace ClassCalculater
                 ongoing = assignments[assignments.Count - 1].Location;
             }
 
+            yOffset = DEFAULT_Y_OFFSET;
+
             for (int i = linesGenerated; i < assignmentsTotal; i++)
             {
-                assignments.Add(new AssignmentInput());
-                this.Controls.Add(assignments[i]);
 
-                ongoing.Y += yOffset;
-                assignments[i].Location = ongoing;
+                AssignmentInput inp = new AssignmentInput();
+                this.Controls.Add(inp);
+               // inp.Location = ongoing;
+
+                ongoing.Y += Math.Abs(yOffset);
+
+                assignments.Add(inp);
+                
+
+                inp.Location = ongoing;
+
                 linesGenerated += 1;
+
             }
 
             hasGenerated = true;
@@ -174,7 +195,7 @@ namespace ClassCalculater
 
             for (int i = linesGenerated; i < assignmentsTotal; i++)
             {
-                ongoing.Y += yOffset;
+                ongoing.Y += Math.Abs(yOffset);
                 assignments[i].Location = ongoing;
                 linesGenerated += 1;
             }
@@ -214,6 +235,7 @@ namespace ClassCalculater
             weightedGrade.Text = DEFAULT_TEXT;
             unweightedAverage.Text = DEFAULT_TEXT;
             weightedAveragePartial.Text = DEFAULT_TEXT;
+            fileNameLabel.Text = DEFAULT_FILE_NAME;
         }
 
         private void CalcGradeButtonClick(object sender, EventArgs e)
@@ -223,9 +245,12 @@ namespace ClassCalculater
             float unweightGrade = 0.0f;
             for (int i = 0; i < assignmentsTotal; i++)
             {
-                summedWeights += assignments[i].AssignmentWeight;
+                summedWeights += (assignments[i].AssignmentWeight);
                 unweightGrade += assignments[i].AssignemntGrade;
             }
+
+            summedWeights *= .01f;
+
             // Update form text
             unweightedAverage.Text = unweightGrade.ToString(CultureInfo.CurrentCulture);
             weightSum.Text = summedWeights.ToString(CultureInfo.CurrentCulture);
@@ -291,6 +316,10 @@ namespace ClassCalculater
                 totalWeight += assignments[i].AssignmentWeight;
             }
 
+            // Weights are entered as mixed numbers,
+            // converts to a multipliable weight.
+            totalWeight = totalWeight * .01f;
+
             if(1.0f > totalWeight)
             {
                 full = false;
@@ -306,7 +335,7 @@ namespace ClassCalculater
 
             for (int i = 0; i < assignments.Count; i++)
             {
-                weighted += assignments[i].AssignemntGrade * assignments[i].AssignmentWeight;
+                weighted += assignments[i].AssignemntGrade * (assignments[i].AssignmentWeight * .01f);
             }
 
             if (false == full)
@@ -348,9 +377,9 @@ namespace ClassCalculater
             {
                 AddTextBoxes(Int32.Parse(boxesToAdd.Text));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                MessageBox.Show("Either a type missmatch has occured, or the input box is empty.");
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -392,7 +421,9 @@ namespace ClassCalculater
             }
             else
             {
-                MainProgram.ioManRef.WriteToFile(assignments, "Output.xml");
+                SaveFileDialog save = new SaveFileDialog();
+                save.ShowDialog();
+                MainProgram.ioManRef.WriteToFile(assignments, save.FileName);
             }
         }
 
@@ -408,6 +439,59 @@ namespace ClassCalculater
             }
 
             AddTextBoxes();
+        }
+
+        private void RemoveLines(object sender, EventArgs e)
+        {
+            int toRem = 0;
+            int index = assignments.Count - 1;
+
+            try
+            {
+                toRem = Int32.Parse(lineRemovalInputBox.Text);
+            }
+            catch (Exception ex) 
+            {
+                MessageBox.Show(ex.Message);
+                return;
+            }
+
+            if (assignments.Count < toRem)
+            {
+                toRem = assignments.Count;
+            }
+
+            assignmentsTotal -= toRem;
+            linesGenerated -= toRem;
+
+            Control.ControlCollection allControls;
+            allControls = this.Controls;
+
+            // While there are still assignments left to remove
+            // Look for the last insatnce of an Assignment Input
+            // Loop until we have removed enough of the controls
+            while (0 < toRem)
+            {
+                assignments.RemoveAt(index);
+
+                for (int i = (allControls.Count - 1); i != 0; i--)
+                {
+                    if (typeof(AssignmentInput) == allControls[i].GetType())
+                    {
+                        this.Controls[i].Dispose();
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Control: " + this.Controls[i] + " is not of type: " + typeof(AssignmentInput));
+                    }
+
+                }
+
+                toRem--;
+                index--;
+            }
+
         }
     }
 }

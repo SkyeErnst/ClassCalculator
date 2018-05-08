@@ -73,6 +73,10 @@
             this.weightSum = new System.Windows.Forms.Label();
             this.AddBoxesButton = new System.Windows.Forms.Button();
             this.boxesToAdd = new System.Windows.Forms.MaskedTextBox();
+            this.removeBoxesButton = new System.Windows.Forms.Button();
+            this.lineRemovalInputBox = new System.Windows.Forms.MaskedTextBox();
+            this.fileNameLabelHeader = new System.Windows.Forms.Label();
+            this.fileNameLabel = new System.Windows.Forms.Label();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -99,7 +103,7 @@
             // gradeLabel
             // 
             this.gradeLabel.AutoSize = true;
-            this.gradeLabel.Location = new System.Drawing.Point(190, 130);
+            this.gradeLabel.Location = new System.Drawing.Point(206, 130);
             this.gradeLabel.Name = "gradeLabel";
             this.gradeLabel.Size = new System.Drawing.Size(54, 20);
             this.gradeLabel.TabIndex = 4;
@@ -109,11 +113,11 @@
             // percentOfTotalGradeLabel
             // 
             this.percentOfTotalGradeLabel.AutoSize = true;
-            this.percentOfTotalGradeLabel.Location = new System.Drawing.Point(300, 130);
+            this.percentOfTotalGradeLabel.Location = new System.Drawing.Point(355, 130);
             this.percentOfTotalGradeLabel.Name = "percentOfTotalGradeLabel";
-            this.percentOfTotalGradeLabel.Size = new System.Drawing.Size(170, 20);
+            this.percentOfTotalGradeLabel.Size = new System.Drawing.Size(59, 20);
             this.percentOfTotalGradeLabel.TabIndex = 5;
-            this.percentOfTotalGradeLabel.Text = "Percent of Total Grade";
+            this.percentOfTotalGradeLabel.Text = "Weight";
             this.percentOfTotalGradeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // assignmentNumberInput
@@ -138,14 +142,14 @@
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.OpenFileClick);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.SaveFileClick);
             // 
@@ -227,7 +231,7 @@
             // weightedGradeLabel
             // 
             this.weightedGradeLabel.AutoSize = true;
-            this.weightedGradeLabel.Location = new System.Drawing.Point(816, 175);
+            this.weightedGradeLabel.Location = new System.Drawing.Point(796, 175);
             this.weightedGradeLabel.Name = "weightedGradeLabel";
             this.weightedGradeLabel.Size = new System.Drawing.Size(126, 20);
             this.weightedGradeLabel.TabIndex = 11;
@@ -245,7 +249,7 @@
             // weightedGrade
             // 
             this.weightedGrade.AutoSize = true;
-            this.weightedGrade.Location = new System.Drawing.Point(793, 195);
+            this.weightedGrade.Location = new System.Drawing.Point(806, 195);
             this.weightedGrade.Name = "weightedGrade";
             this.weightedGrade.Size = new System.Drawing.Size(169, 20);
             this.weightedGrade.TabIndex = 14;
@@ -254,7 +258,7 @@
             // unweightedAverageLabel
             // 
             this.unweightedAverageLabel.AutoSize = true;
-            this.unweightedAverageLabel.Location = new System.Drawing.Point(1073, 175);
+            this.unweightedAverageLabel.Location = new System.Drawing.Point(1083, 175);
             this.unweightedAverageLabel.Name = "unweightedAverageLabel";
             this.unweightedAverageLabel.Size = new System.Drawing.Size(157, 20);
             this.unweightedAverageLabel.TabIndex = 15;
@@ -398,7 +402,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(773, 490);
+            this.label13.Location = new System.Drawing.Point(732, 490);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(27, 20);
             this.label13.TabIndex = 31;
@@ -471,9 +475,9 @@
             // 
             this.AddBoxesButton.Location = new System.Drawing.Point(260, 71);
             this.AddBoxesButton.Name = "AddBoxesButton";
-            this.AddBoxesButton.Size = new System.Drawing.Size(241, 24);
+            this.AddBoxesButton.Size = new System.Drawing.Size(128, 24);
             this.AddBoxesButton.TabIndex = 39;
-            this.AddBoxesButton.Text = "Add More Boxes";
+            this.AddBoxesButton.Text = "Add";
             this.AddBoxesButton.UseVisualStyleBackColor = true;
             this.AddBoxesButton.Click += new System.EventHandler(this.AddBoxesButton_Click);
             // 
@@ -487,12 +491,54 @@
             this.boxesToAdd.Size = new System.Drawing.Size(34, 26);
             this.boxesToAdd.TabIndex = 40;
             // 
+            // removeBoxesButton
+            // 
+            this.removeBoxesButton.Location = new System.Drawing.Point(260, 101);
+            this.removeBoxesButton.Name = "removeBoxesButton";
+            this.removeBoxesButton.Size = new System.Drawing.Size(128, 26);
+            this.removeBoxesButton.TabIndex = 41;
+            this.removeBoxesButton.Text = "Remove";
+            this.removeBoxesButton.UseVisualStyleBackColor = true;
+            this.removeBoxesButton.Click += new System.EventHandler(this.RemoveLines);
+            // 
+            // lineRemovalInputBox
+            // 
+            this.lineRemovalInputBox.AsciiOnly = true;
+            this.lineRemovalInputBox.BeepOnError = true;
+            this.lineRemovalInputBox.Location = new System.Drawing.Point(210, 101);
+            this.lineRemovalInputBox.Mask = "00";
+            this.lineRemovalInputBox.Name = "lineRemovalInputBox";
+            this.lineRemovalInputBox.Size = new System.Drawing.Size(34, 26);
+            this.lineRemovalInputBox.TabIndex = 43;
+            // 
+            // fileNameLabelHeader
+            // 
+            this.fileNameLabelHeader.AutoSize = true;
+            this.fileNameLabelHeader.Location = new System.Drawing.Point(569, 31);
+            this.fileNameLabelHeader.Name = "fileNameLabelHeader";
+            this.fileNameLabelHeader.Size = new System.Drawing.Size(86, 20);
+            this.fileNameLabelHeader.TabIndex = 44;
+            this.fileNameLabelHeader.Text = "Editing file:";
+            // 
+            // fileNameLabel
+            // 
+            this.fileNameLabel.AutoSize = true;
+            this.fileNameLabel.Location = new System.Drawing.Point(669, 31);
+            this.fileNameLabel.Name = "fileNameLabel";
+            this.fileNameLabel.Size = new System.Drawing.Size(53, 20);
+            this.fileNameLabel.TabIndex = 45;
+            this.fileNameLabel.Text = "No file";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1264, 681);
+            this.Controls.Add(this.fileNameLabel);
+            this.Controls.Add(this.fileNameLabelHeader);
+            this.Controls.Add(this.lineRemovalInputBox);
+            this.Controls.Add(this.removeBoxesButton);
             this.Controls.Add(this.boxesToAdd);
             this.Controls.Add(this.AddBoxesButton);
             this.Controls.Add(this.weightSum);
@@ -590,6 +636,10 @@
         private System.Windows.Forms.Label weightSum;
         private System.Windows.Forms.Button AddBoxesButton;
         private System.Windows.Forms.MaskedTextBox boxesToAdd;
+        private System.Windows.Forms.Button removeBoxesButton;
+        private System.Windows.Forms.MaskedTextBox lineRemovalInputBox;
+        private System.Windows.Forms.Label fileNameLabelHeader;
+        private System.Windows.Forms.Label fileNameLabel;
     }
 }
 

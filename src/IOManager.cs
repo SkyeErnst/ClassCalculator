@@ -18,7 +18,8 @@ namespace ClassCalculater
         /// within the program. This is NOT the xml version number refering to
         /// the language revisions.
         /// </summary>
-        internal static string XMLVersion = "1.0";
+        internal static string XMLWritingVersion = "1.0";
+        // Changelog: 1.1: Switched to different method of entering weights
         #endregion
 
         #region Private fields
@@ -57,16 +58,35 @@ namespace ClassCalculater
         /// <param name="boxes"></param>
         public void WriteToFile(List<AssignmentInput> boxes, string fileName)
         {
-
-            if (false == File.Exists(fileName))
+            string extensionHandledFileName;
+            // Takes care of xml extension
+            if (".xml" != fileName.Substring(fileName.Length - 4))
             {
-                // Create new xml document at path
-                XmlWriter writer = XmlWriter.Create(path + @"\" + fileName);
-                writer.WriteStartDocument();
+                extensionHandledFileName = fileName + ".xml";
+            }
+            else
+            {
+                extensionHandledFileName = fileName;
+            }
 
-                writer.WriteStartElement("Assignments");
+            // Sets up settings for the xml writer
+            XmlWriterSettings formatSettings = new XmlWriterSettings
+            {
+                NewLineOnAttributes = true,
+                Indent = true
+            };
 
-                for (int i = 0; i < boxes.Count; i++)
+            // Create new xml document at given path
+            XmlWriter writer = XmlWriter.Create(extensionHandledFileName, formatSettings);
+               
+            // Starts writing to document
+            writer.WriteStartDocument();
+            writer.WriteStartElement("Assignments");
+
+            // Records the information to the file
+            for (int i = 0; i < boxes.Count; i++)
+            {
+                try
                 {
                     writer.WriteStartElement(ASSIGNMENT_NUMBERING + i);
                     writer.WriteAttributeString(ASSIGNMENT_NAME_TAG, boxes[i].AssignmentName);
@@ -74,16 +94,17 @@ namespace ClassCalculater
                     writer.WriteAttributeString(WEIGHT_TAG, boxes[i].AssignmentWeight.ToString(CultureInfo.CurrentCulture));
                     writer.WriteEndElement();
                 }
-
-                writer.WriteEndDocument();
-                writer.Close();
-
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
-            else
-            {
-                FileInfo f = new FileInfo(fileName);
-                MessageBox.Show("ERROR: XML file with name " + fileName + " already exists. At path: " + f.FullName);
-            }
+
+            // Places the closing tags and closes the document. 
+            writer.WriteEndDocument();
+            writer.Close();
+
+            MainProgram.mainFormRef.EditingFileName = extensionHandledFileName;
         }
 
         /// <summary>
@@ -113,39 +134,21 @@ namespace ClassCalculater
                 List<XmlNode> nodeAttrib = new List<XmlNode>();
 
                 XmlAttributeCollection xmlAttr;
-                int itter = 0;
 
                 foreach (XmlNode node in nodes)
                 {
-                    // TODO 
-                    // Move assignment to list to end of algorythm
-                    // Get rid of inner loop
-                    // Use direct assignemnts for attributes, as that is essentually what is already being done
 
                     xmlAttr = node.Attributes;
-                    list.Add(new AssignmentInput());
+                    AssignmentInput input = new AssignmentInput();
 
-                    for (int i = 0; i < xmlAttr.Count; i++)
-                    {
-                        switch (i)
-                        {
-                            case 0:
-                                list[itter].AssignmentName = xmlAttr[i].Value;
-                                break;
-                            case 1:
-                                list[itter].AssignemntGrade = Int32.Parse(xmlAttr[i].Value);
-                                break;
-                            case 2:
-                                list[itter].AssignmentWeight = float.Parse(xmlAttr[i].Value);
-                                break;
-                            default:
-                                MessageBox.Show("Access out of bounds in for loop of xml reader.");
-                                break;
-                        }
-                    }
+                    input.AssignmentName = xmlAttr[0].Value;
+                    input.AssignemntGrade = Int32.Parse(xmlAttr[1].Value);
+                    input.AssignmentWeight = float.Parse(xmlAttr[2].Value);
 
-                    itter++;
+                    list.Add(input);
                 }
+
+                MainProgram.mainFormRef.EditingFileName = file;
             }  
         }
 
