@@ -34,12 +34,6 @@ namespace ClassCalculater
         /// </summary>
         private string path;
 
-        /// <summary>
-        /// Bool to hold flag for whether or not the user
-        /// wants to overwrite the saved file.
-        /// </summary>
-        private bool overwrite = false;
-
         #endregion
 
         /// <summary>
@@ -64,11 +58,15 @@ namespace ClassCalculater
         /// <param name="boxes"></param>
         public void WriteToFile(List<AssignmentInput> boxes, string fileName)
         {
-
+            string extensionHandledFileName;
             // Takes care of xml extension
             if (".xml" != fileName.Substring(fileName.Length - 4))
             {
-                fileName += ".xml";
+                extensionHandledFileName = fileName + ".xml";
+            }
+            else
+            {
+                extensionHandledFileName = fileName;
             }
 
             // Sets up settings for the xml writer
@@ -79,7 +77,7 @@ namespace ClassCalculater
             };
 
             // Create new xml document at given path
-            XmlWriter writer = XmlWriter.Create(fileName, formatSettings);
+            XmlWriter writer = XmlWriter.Create(extensionHandledFileName, formatSettings);
                
             // Starts writing to document
             writer.WriteStartDocument();
@@ -106,7 +104,7 @@ namespace ClassCalculater
             writer.WriteEndDocument();
             writer.Close();
 
-            MainProgram.mainFormRef.EditingFileName = fileName;
+            MainProgram.mainFormRef.EditingFileName = extensionHandledFileName;
         }
 
         /// <summary>
