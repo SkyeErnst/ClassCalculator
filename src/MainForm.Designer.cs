@@ -474,9 +474,9 @@
             // 
             this.AddBoxesButton.Location = new System.Drawing.Point(260, 71);
             this.AddBoxesButton.Name = "AddBoxesButton";
-            this.AddBoxesButton.Size = new System.Drawing.Size(241, 24);
+            this.AddBoxesButton.Size = new System.Drawing.Size(128, 24);
             this.AddBoxesButton.TabIndex = 39;
-            this.AddBoxesButton.Text = "Add More Boxes";
+            this.AddBoxesButton.Text = "Add";
             this.AddBoxesButton.UseVisualStyleBackColor = true;
             this.AddBoxesButton.Click += new System.EventHandler(this.AddBoxesButton_Click);
             // 
@@ -492,11 +492,11 @@
             // 
             // removeBoxesButton
             // 
-            this.removeBoxesButton.Location = new System.Drawing.Point(600, 69);
+            this.removeBoxesButton.Location = new System.Drawing.Point(260, 101);
             this.removeBoxesButton.Name = "removeBoxesButton";
-            this.removeBoxesButton.Size = new System.Drawing.Size(140, 26);
+            this.removeBoxesButton.Size = new System.Drawing.Size(128, 26);
             this.removeBoxesButton.TabIndex = 41;
-            this.removeBoxesButton.Text = "Remove Lines";
+            this.removeBoxesButton.Text = "Remove";
             this.removeBoxesButton.UseVisualStyleBackColor = true;
             this.removeBoxesButton.Click += new System.EventHandler(this.RemoveLines);
             // 
@@ -513,7 +513,7 @@
             // 
             this.lineRemovalInputBox.AsciiOnly = true;
             this.lineRemovalInputBox.BeepOnError = true;
-            this.lineRemovalInputBox.Location = new System.Drawing.Point(655, 37);
+            this.lineRemovalInputBox.Location = new System.Drawing.Point(210, 101);
             this.lineRemovalInputBox.Mask = "00";
             this.lineRemovalInputBox.Name = "lineRemovalInputBox";
             this.lineRemovalInputBox.Size = new System.Drawing.Size(34, 26);
