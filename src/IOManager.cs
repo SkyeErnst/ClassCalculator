@@ -65,53 +65,48 @@ namespace ClassCalculater
         public void WriteToFile(List<AssignmentInput> boxes, string fileName)
         {
 
-            if (false == File.Exists(fileName) || true == overwrite)
+            string foo = fileName.Substring(fileName.Length - 4);
+
+            // Takes care of xml extension
+            if (".xml" != fileName.Substring(fileName.Length - 4))
             {
-                overwrite = false;
+                fileName += ".xml";
+            }
 
-                // Sets up settings for the xml writer
-                XmlWriterSettings formatSettings = new XmlWriterSettings
-                {
-                    NewLineOnAttributes = true,
-                    Indent = true
-                };
+            // Sets up settings for the xml writer
+            XmlWriterSettings formatSettings = new XmlWriterSettings
+            {
+                NewLineOnAttributes = true,
+                Indent = true
+            };
 
-                // Create new xml document at given path
-                XmlWriter writer = XmlWriter.Create(fileName + ".xml", formatSettings);
+            // Create new xml document at given path
+            XmlWriter writer = XmlWriter.Create(fileName, formatSettings);
                
-                // Starts writing to document
-                writer.WriteStartDocument();
-                writer.WriteStartElement("Assignments");
+            // Starts writing to document
+            writer.WriteStartDocument();
+            writer.WriteStartElement("Assignments");
 
-                // Records the information to the file
-                for (int i = 0; i < boxes.Count; i++)
-                {
-                    try
-                    {
-                        writer.WriteStartElement(ASSIGNMENT_NUMBERING + i);
-                        writer.WriteAttributeString(ASSIGNMENT_NAME_TAG, boxes[i].AssignmentName);
-                        writer.WriteAttributeString(GRADE_TAG, boxes[i].AssignemntGrade.ToString(CultureInfo.CurrentCulture));
-                        writer.WriteAttributeString(WEIGHT_TAG, boxes[i].AssignmentWeight.ToString(CultureInfo.CurrentCulture));
-                        writer.WriteEndElement();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
-                }
-
-                // Places the closing tags and closes the document. 
-                writer.WriteEndDocument();
-                writer.Close();
-
-            }
-            else
+            // Records the information to the file
+            for (int i = 0; i < boxes.Count; i++)
             {
-                FileInfo f = new FileInfo(fileName);
-                MessageBox.Show("ERROR: XML file with name " + fileName + " already exists. At path: " + f.FullName + 
-                    "\nIf you want to overwrite this file, save again.");
-                overwrite = true;
+                try
+                {
+                    writer.WriteStartElement(ASSIGNMENT_NUMBERING + i);
+                    writer.WriteAttributeString(ASSIGNMENT_NAME_TAG, boxes[i].AssignmentName);
+                    writer.WriteAttributeString(GRADE_TAG, boxes[i].AssignemntGrade.ToString(CultureInfo.CurrentCulture));
+                    writer.WriteAttributeString(WEIGHT_TAG, boxes[i].AssignmentWeight.ToString(CultureInfo.CurrentCulture));
+                    writer.WriteEndElement();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
+
+            // Places the closing tags and closes the document. 
+            writer.WriteEndDocument();
+            writer.Close();
         }
 
         /// <summary>
