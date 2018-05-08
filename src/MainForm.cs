@@ -149,23 +149,24 @@ namespace ClassCalculater
                 ongoing = assignments[assignments.Count - 1].Location;
             }
 
+            yOffset = DEFAULT_Y_OFFSET;
+
             for (int i = linesGenerated; i < assignmentsTotal; i++)
             {
-                AssignmentInput inp = new AssignmentInput();
-                assignments.Add(inp);
-                this.Controls.Add(inp);
 
-                ongoing.Y += yOffset;
-                inp.Location = ongoing;
+                AssignmentInput inp = new AssignmentInput();
+                this.Controls.Add(inp);
+               // inp.Location = ongoing;
+
+                ongoing.Y += Math.Abs(yOffset);
+
+                assignments.Add(inp);
                 
+
+                inp.Location = ongoing;
+
                 linesGenerated += 1;
 
-                //assignments.Add(new AssignmentInput());
-                //this.Controls.Add(assignments[i]);
-
-                //ongoing.Y += yOffset;
-                //assignments[i].Location = ongoing;
-                //linesGenerated += 1;
             }
 
             hasGenerated = true;
@@ -182,7 +183,7 @@ namespace ClassCalculater
 
             for (int i = linesGenerated; i < assignmentsTotal; i++)
             {
-                ongoing.Y += yOffset;
+                ongoing.Y += Math.Abs(yOffset);
                 assignments[i].Location = ongoing;
                 linesGenerated += 1;
             }
@@ -448,6 +449,7 @@ namespace ClassCalculater
             }
 
             assignmentsTotal -= toRem;
+            linesGenerated -= toRem;
 
             Control.ControlCollection allControls;
             allControls = this.Controls;
@@ -458,8 +460,6 @@ namespace ClassCalculater
             while (0 < toRem)
             {
                 assignments.RemoveAt(index);
-
-                yOffset -= DEFAULT_Y_OFFSET;
 
                 for (int i = (allControls.Count - 1); i != 0; i--)
                 {
