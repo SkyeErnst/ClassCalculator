@@ -65,8 +65,6 @@ namespace ClassCalculater
         public void WriteToFile(List<AssignmentInput> boxes, string fileName)
         {
 
-            string foo = fileName.Substring(fileName.Length - 4);
-
             // Takes care of xml extension
             if (".xml" != fileName.Substring(fileName.Length - 4))
             {
@@ -107,6 +105,8 @@ namespace ClassCalculater
             // Places the closing tags and closes the document. 
             writer.WriteEndDocument();
             writer.Close();
+
+            MainProgram.mainFormRef.EditingFileName = fileName;
         }
 
         /// <summary>
@@ -149,6 +149,8 @@ namespace ClassCalculater
 
                     list.Add(input);
                 }
+
+                MainProgram.mainFormRef.EditingFileName = file;
             }  
         }
 

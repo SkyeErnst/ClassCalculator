@@ -19,6 +19,14 @@ namespace ClassCalculater
         public static int DMax { get; set; }
         public static int DMin { get; set; }
         public static int FPoint { get; set; }
+
+        public string EditingFileName
+        {
+            set
+            {
+                fileNameLabel.Text = value;
+            }
+        }
         #endregion
 
         #region public fields
@@ -57,9 +65,11 @@ namespace ClassCalculater
         private const int DEFAULT_Y_OFFSET = 40;
         private const int DEFAULT_LINES_GENERATED = 0;
         private const int DEFAULT_ASSIGNMENT_TOTAL = 0;
+        private const string DEFAULT_FILE_NAME = "No file";
         private const string DEFAULT_TEXT = "Waiting For Generation";
         private const string PARTIAL_NOT_USED_TEXT = "Partial score not needed\nas all weights are provided";
         private const string PARTIAL_USED_TEXT = "Using partial score, weight sum < 1.0";
+     
 
         #endregion
 
@@ -79,6 +89,8 @@ namespace ClassCalculater
 
             UpdateRanges();
         }
+
+        
 
         /// <summary>
         /// Updates the text representation of the grades
@@ -223,6 +235,7 @@ namespace ClassCalculater
             weightedGrade.Text = DEFAULT_TEXT;
             unweightedAverage.Text = DEFAULT_TEXT;
             weightedAveragePartial.Text = DEFAULT_TEXT;
+            fileNameLabel.Text = DEFAULT_FILE_NAME;
         }
 
         private void CalcGradeButtonClick(object sender, EventArgs e)

@@ -74,8 +74,9 @@
             this.AddBoxesButton = new System.Windows.Forms.Button();
             this.boxesToAdd = new System.Windows.Forms.MaskedTextBox();
             this.removeBoxesButton = new System.Windows.Forms.Button();
-            this.lineRemovalText = new System.Windows.Forms.Label();
             this.lineRemovalInputBox = new System.Windows.Forms.MaskedTextBox();
+            this.fileNameLabelHeader = new System.Windows.Forms.Label();
+            this.fileNameLabel = new System.Windows.Forms.Label();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -500,15 +501,6 @@
             this.removeBoxesButton.UseVisualStyleBackColor = true;
             this.removeBoxesButton.Click += new System.EventHandler(this.RemoveLines);
             // 
-            // lineRemovalText
-            // 
-            this.lineRemovalText.AutoSize = true;
-            this.lineRemovalText.Location = new System.Drawing.Point(590, 9);
-            this.lineRemovalText.Name = "lineRemovalText";
-            this.lineRemovalText.Size = new System.Drawing.Size(193, 20);
-            this.lineRemovalText.TabIndex = 42;
-            this.lineRemovalText.Text = "Number of lines to remove";
-            // 
             // lineRemovalInputBox
             // 
             this.lineRemovalInputBox.AsciiOnly = true;
@@ -519,14 +511,33 @@
             this.lineRemovalInputBox.Size = new System.Drawing.Size(34, 26);
             this.lineRemovalInputBox.TabIndex = 43;
             // 
+            // fileNameLabelHeader
+            // 
+            this.fileNameLabelHeader.AutoSize = true;
+            this.fileNameLabelHeader.Location = new System.Drawing.Point(569, 31);
+            this.fileNameLabelHeader.Name = "fileNameLabelHeader";
+            this.fileNameLabelHeader.Size = new System.Drawing.Size(86, 20);
+            this.fileNameLabelHeader.TabIndex = 44;
+            this.fileNameLabelHeader.Text = "Editing file:";
+            // 
+            // fileNameLabel
+            // 
+            this.fileNameLabel.AutoSize = true;
+            this.fileNameLabel.Location = new System.Drawing.Point(669, 31);
+            this.fileNameLabel.Name = "fileNameLabel";
+            this.fileNameLabel.Size = new System.Drawing.Size(53, 20);
+            this.fileNameLabel.TabIndex = 45;
+            this.fileNameLabel.Text = "No file";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1264, 681);
+            this.Controls.Add(this.fileNameLabel);
+            this.Controls.Add(this.fileNameLabelHeader);
             this.Controls.Add(this.lineRemovalInputBox);
-            this.Controls.Add(this.lineRemovalText);
             this.Controls.Add(this.removeBoxesButton);
             this.Controls.Add(this.boxesToAdd);
             this.Controls.Add(this.AddBoxesButton);
@@ -626,8 +637,9 @@
         private System.Windows.Forms.Button AddBoxesButton;
         private System.Windows.Forms.MaskedTextBox boxesToAdd;
         private System.Windows.Forms.Button removeBoxesButton;
-        private System.Windows.Forms.Label lineRemovalText;
         private System.Windows.Forms.MaskedTextBox lineRemovalInputBox;
+        private System.Windows.Forms.Label fileNameLabelHeader;
+        private System.Windows.Forms.Label fileNameLabel;
     }
 }
 
