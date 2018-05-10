@@ -28,22 +28,14 @@ namespace ClassCalculater
         }
         #endregion
 
-        #region public fields
-
-        /// <summary>
-        /// The base input for the number of assignments
-        /// </summary>
-        public int numberOfAssignments;
+        #region private fields
 
         /// <summary>
         /// The list that contains the user control
         /// objects for input.
         /// </summary>
-        public List<AssignmentInput> assignments;
+        private List<AssignmentInput> assignments;
 
-        #endregion
-
-        #region private fields
         /// <summary>
         /// If the form has been generated or not
         /// </summary>
@@ -58,7 +50,12 @@ namespace ClassCalculater
         /// The tottal number of lines of assignments that have been generated so far.
         /// </summary>
         private int linesGenerated;
-        
+
+        /// <summary>
+        /// The base input for the number of assignments
+        /// </summary>
+        private int numberOfAssignments;
+
         private int yOffset = 40;
 
         private const int DEFAULT_Y_OFFSET = 40;
@@ -68,7 +65,6 @@ namespace ClassCalculater
         private const string DEFAULT_TEXT = "Waiting For Generation";
         private const string PARTIAL_NOT_USED_TEXT = "Partial score not needed\nas all weights are provided";
         private const string PARTIAL_USED_TEXT = "Using partial score, weight sum < 1.0";
-     
 
         #endregion
 
@@ -88,8 +84,6 @@ namespace ClassCalculater
 
             UpdateRanges();
         }
-
-        
 
         /// <summary>
         /// Updates the text representation of the grades
@@ -142,6 +136,11 @@ namespace ClassCalculater
             AddBoxesStart(null, null);
         }
 
+        /// <summary>
+        /// Helper method that allows for both UI generated calls and internal calls
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddBoxesStart(object sender, EventArgs e)
         {
             int numAssignmentsToAdd;
@@ -201,6 +200,11 @@ namespace ClassCalculater
             fileNameLabel.Text = DEFAULT_FILE_NAME;
         }
 
+        /// <summary>
+        /// Only called by the UI, makes a call into the assistant class
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CalcGradeButtonClick(object sender, EventArgs e)
         {
             MainProgram.assistant.CalculateGrade(assignmentsTotal,
