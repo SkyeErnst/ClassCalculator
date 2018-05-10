@@ -9,6 +9,7 @@ namespace ClassCalculater
 
         internal readonly static MainForm mainFormRef;
         internal readonly static IOManager ioManRef;
+        internal readonly static MainFormAssistant assistant;
 
         #endregion
 
@@ -18,6 +19,7 @@ namespace ClassCalculater
             Application.SetCompatibleTextRenderingDefault(false);
             mainFormRef = new MainForm();
             ioManRef = new IOManager();
+            assistant = new MainFormAssistant();
         }
 
         /// <summary>

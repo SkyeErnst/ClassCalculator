@@ -148,14 +148,14 @@
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.OpenFileClick);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.SaveFileClick);
             // 
@@ -497,7 +497,7 @@
             this.generalToolTip.SetToolTip(this.AddBoxesButton, "Adds the given number of input boxes to the form. Use this after generating the f" +
         "orm");
             this.AddBoxesButton.UseVisualStyleBackColor = true;
-            this.AddBoxesButton.Click += new System.EventHandler(this.AddBoxesButton_Click);
+            this.AddBoxesButton.Click += new System.EventHandler(this.AddBoxesStart);
             // 
             // boxesToAdd
             // 
