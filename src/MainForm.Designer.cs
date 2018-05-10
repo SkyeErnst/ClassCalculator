@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.numAssignmentsLabel = new System.Windows.Forms.Label();
             this.assignmentNameLabel = new System.Windows.Forms.Label();
             this.gradeLabel = new System.Windows.Forms.Label();
@@ -77,6 +79,7 @@
             this.lineRemovalInputBox = new System.Windows.Forms.MaskedTextBox();
             this.fileNameLabelHeader = new System.Windows.Forms.Label();
             this.fileNameLabel = new System.Windows.Forms.Label();
+            this.generalToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -99,6 +102,7 @@
             this.assignmentNameLabel.TabIndex = 3;
             this.assignmentNameLabel.Text = "Assignment Name";
             this.assignmentNameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.generalToolTip.SetToolTip(this.assignmentNameLabel, "Input the name of the assingments in this set of boxes");
             // 
             // gradeLabel
             // 
@@ -109,6 +113,7 @@
             this.gradeLabel.TabIndex = 4;
             this.gradeLabel.Text = "Grade";
             this.gradeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.generalToolTip.SetToolTip(this.gradeLabel, "Input grades in this set of boxes");
             // 
             // percentOfTotalGradeLabel
             // 
@@ -119,6 +124,7 @@
             this.percentOfTotalGradeLabel.TabIndex = 5;
             this.percentOfTotalGradeLabel.Text = "Weight";
             this.percentOfTotalGradeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.generalToolTip.SetToolTip(this.percentOfTotalGradeLabel, resources.GetString("percentOfTotalGradeLabel.ToolTip"));
             // 
             // assignmentNumberInput
             // 
@@ -142,14 +148,14 @@
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.OpenFileClick);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.SaveFileClick);
             // 
@@ -196,6 +202,7 @@
             this.generateFormButton.TabIndex = 7;
             this.generateFormButton.Text = "Generate Form";
             this.generateFormButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.generalToolTip.SetToolTip(this.generateFormButton, "Click to generate the indicated number of input boxes");
             this.generateFormButton.UseVisualStyleBackColor = true;
             this.generateFormButton.Click += new System.EventHandler(this.GenerateButtonClick);
             // 
@@ -216,6 +223,8 @@
             this.calcGradeButton.Size = new System.Drawing.Size(140, 30);
             this.calcGradeButton.TabIndex = 9;
             this.calcGradeButton.Text = "Calculate Grade";
+            this.generalToolTip.SetToolTip(this.calcGradeButton, "Once assignment names, grades, and weights have been entered, click this button t" +
+        "o calculate the grade");
             this.calcGradeButton.UseVisualStyleBackColor = true;
             this.calcGradeButton.Click += new System.EventHandler(this.CalcGradeButtonClick);
             // 
@@ -227,15 +236,18 @@
             this.letterGradeLabel.Size = new System.Drawing.Size(100, 20);
             this.letterGradeLabel.TabIndex = 10;
             this.letterGradeLabel.Text = "Letter Grade";
+            this.generalToolTip.SetToolTip(this.letterGradeLabel, "Your grade represented as a letter, using the table below");
             // 
             // weightedGradeLabel
             // 
             this.weightedGradeLabel.AutoSize = true;
-            this.weightedGradeLabel.Location = new System.Drawing.Point(796, 175);
+            this.weightedGradeLabel.Location = new System.Drawing.Point(823, 175);
             this.weightedGradeLabel.Name = "weightedGradeLabel";
             this.weightedGradeLabel.Size = new System.Drawing.Size(126, 20);
             this.weightedGradeLabel.TabIndex = 11;
             this.weightedGradeLabel.Text = "Weighted Grade";
+            this.generalToolTip.SetToolTip(this.weightedGradeLabel, "Your grade for this class using the weights given. Will only be accurate if the w" +
+        "eight sum is equal to 1");
             // 
             // letterGrade
             // 
@@ -263,6 +275,7 @@
             this.unweightedAverageLabel.Size = new System.Drawing.Size(157, 20);
             this.unweightedAverageLabel.TabIndex = 15;
             this.unweightedAverageLabel.Text = "Unweighted Average";
+            this.generalToolTip.SetToolTip(this.unweightedAverageLabel, "The flat unweighted average.");
             // 
             // unweightedAverage
             // 
@@ -290,6 +303,8 @@
             this.weightedAveragePartialLabel.Size = new System.Drawing.Size(188, 20);
             this.weightedAveragePartialLabel.TabIndex = 18;
             this.weightedAveragePartialLabel.Text = "Partial Weighted Average";
+            this.generalToolTip.SetToolTip(this.weightedAveragePartialLabel, "Your grade for this class using the weights given. Will only be used if the sum o" +
+        "f the weights is less than 1\r\n");
             // 
             // gradeRangeLabel
             // 
@@ -456,16 +471,17 @@
             // weightSumLabel
             // 
             this.weightSumLabel.AutoSize = true;
-            this.weightSumLabel.Location = new System.Drawing.Point(479, 149);
+            this.weightSumLabel.Location = new System.Drawing.Point(480, 130);
             this.weightSumLabel.Name = "weightSumLabel";
             this.weightSumLabel.Size = new System.Drawing.Size(93, 20);
             this.weightSumLabel.TabIndex = 37;
             this.weightSumLabel.Text = "Weight sum";
+            this.generalToolTip.SetToolTip(this.weightSumLabel, "The sum of the grade weights. Should be either equal to or less than 1");
             // 
             // weightSum
             // 
             this.weightSum.AutoSize = true;
-            this.weightSum.Location = new System.Drawing.Point(507, 169);
+            this.weightSum.Location = new System.Drawing.Point(516, 150);
             this.weightSum.Name = "weightSum";
             this.weightSum.Size = new System.Drawing.Size(18, 20);
             this.weightSum.TabIndex = 38;
@@ -478,6 +494,8 @@
             this.AddBoxesButton.Size = new System.Drawing.Size(128, 24);
             this.AddBoxesButton.TabIndex = 39;
             this.AddBoxesButton.Text = "Add";
+            this.generalToolTip.SetToolTip(this.AddBoxesButton, "Adds the given number of input boxes to the form. Use this after generating the f" +
+        "orm");
             this.AddBoxesButton.UseVisualStyleBackColor = true;
             this.AddBoxesButton.Click += new System.EventHandler(this.AddBoxesButton_Click);
             // 
@@ -498,6 +516,7 @@
             this.removeBoxesButton.Size = new System.Drawing.Size(128, 26);
             this.removeBoxesButton.TabIndex = 41;
             this.removeBoxesButton.Text = "Remove";
+            this.generalToolTip.SetToolTip(this.removeBoxesButton, "Removes the given number of input boxes from the form");
             this.removeBoxesButton.UseVisualStyleBackColor = true;
             this.removeBoxesButton.Click += new System.EventHandler(this.RemoveLines);
             // 
@@ -519,6 +538,7 @@
             this.fileNameLabelHeader.Size = new System.Drawing.Size(86, 20);
             this.fileNameLabelHeader.TabIndex = 44;
             this.fileNameLabelHeader.Text = "Editing file:";
+            this.generalToolTip.SetToolTip(this.fileNameLabelHeader, "The current file open for editing");
             // 
             // fileNameLabel
             // 
@@ -528,6 +548,13 @@
             this.fileNameLabel.Size = new System.Drawing.Size(53, 20);
             this.fileNameLabel.TabIndex = 45;
             this.fileNameLabel.Text = "No file";
+            // 
+            // generalToolTip
+            // 
+            this.generalToolTip.AutomaticDelay = 250;
+            this.generalToolTip.AutoPopDelay = 5000000;
+            this.generalToolTip.InitialDelay = 250;
+            this.generalToolTip.ReshowDelay = 50;
             // 
             // MainForm
             // 
@@ -640,6 +667,7 @@
         private System.Windows.Forms.MaskedTextBox lineRemovalInputBox;
         private System.Windows.Forms.Label fileNameLabelHeader;
         private System.Windows.Forms.Label fileNameLabel;
+        private System.Windows.Forms.ToolTip generalToolTip;
     }
 }
 
