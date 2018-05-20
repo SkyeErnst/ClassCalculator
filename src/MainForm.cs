@@ -245,12 +245,19 @@ namespace ClassCalculater
         private void OpenFileClick(object sender, EventArgs e)
         {
             ClearFormClick(null, null);
-            MainProgram.ioManRef.ReadFromFile(ref assignments);
+            if (true == MainProgram.ioManRef.ReadFromFile(ref assignments))
+            {
+                // TODO try catch to catch when user clicks cancel
 
-            assignmentsTotal = assignments.Count;
+                assignmentsTotal = assignments.Count;
 
-            CalcGradeButtonClick(null, null);
-            OrganizeFormControls();
+                CalcGradeButtonClick(null, null);
+                OrganizeFormControls();
+            }
+            else
+            {
+                MessageBox.Show("Action has been canceled");
+            }
         }
 
         /// <summary>

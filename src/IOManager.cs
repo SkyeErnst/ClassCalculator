@@ -111,7 +111,7 @@ namespace ClassCalculater
         /// and reads the data into a list, which it then assigns to the refferenced list.
         /// </summary>
         /// <returns></returns>
-        public void ReadFromFile(ref List<AssignmentInput> list)
+        public bool ReadFromFile(ref List<AssignmentInput> list)
         {
             OpenFileDialog fileDialogue = new OpenFileDialog();
 
@@ -148,7 +148,12 @@ namespace ClassCalculater
                 }
 
                 MainProgram.mainFormRef.EditingFileName = file;
-            }  
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         /// <summary>
