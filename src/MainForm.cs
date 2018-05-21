@@ -145,11 +145,11 @@ namespace ClassCalculater
         {
             int numAssignmentsToAdd;
 
-            if(null == sender && null == e)
+            if(null == sender && null == e) // if this is an internal call
             {
                 numAssignmentsToAdd = numberOfAssignments;
             }
-            else
+            else // If this is a UI generated call
             {
                 numAssignmentsToAdd = Int32.Parse(boxesToAdd.Text);
             }
